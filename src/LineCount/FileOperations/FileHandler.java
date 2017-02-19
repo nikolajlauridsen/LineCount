@@ -12,10 +12,26 @@ public class FileHandler {
 
     private Charset charset;
 
+    /**
+     * FileHandler for reading files off the hard drive.
+     * @param charsetString String charset to read in (commonly "UTF-8")
+     */
     public FileHandler(String charsetString){
         this.charset = Charset.forName(charsetString);
     }
 
+    /**
+     * Defaults to UTF-8 encoding
+     */
+    public FileHandler(){
+        this.charset = Charset.forName("UTF-8");
+    }
+
+    /**
+     * Read a single file off the hard drive
+     * @param pathString String path to desired file
+     * @return CodeFile codefile object containing the file contents, statistics and more
+     */
     public CodeFile readFile(String pathString){
         // Create a temporary list of strings for the content
         ArrayList<String> contentList = new ArrayList<>();
@@ -37,6 +53,11 @@ public class FileHandler {
         return new CodeFile(pathString, contentList.toArray(new String[0]));
     }
 
+    /**
+     * Read multiple files off the hard drive in one go.
+     * @param pathArray String[] array of paths to files as strings
+     * @return CodeFile[] array of codefile objects containing the file contents, statistics and more
+     */
     public CodeFile[] readFiles(String[] pathArray){
         CodeFile[] fileArray = new CodeFile[pathArray.length];
 
