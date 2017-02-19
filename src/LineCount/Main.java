@@ -10,11 +10,9 @@ public class Main {
         FileHandler fileHandler = new FileHandler();
         // Filename string
         String[] fileNames = new String[3];
-        fileNames[0] = "Testfiles\\CodeFile.java";
-        fileNames[1] = "Testfiles\\FileHandler.java";
-        fileNames[2] = "Testfiles\\Main.java";
-        // fileNames[3] = "Testfiles\\test2.py";
-        // fileNames[4] = "Testfiles\\test3.py";
+        fileNames[0] = "src\\LineCount\\FileOperations\\CodeFile.java";
+        fileNames[1] = "src\\LineCount\\FileOperations\\FileHandler.java";
+        fileNames[2] = "src\\LineCount\\Main.java";
         // String array for file content
         CodeFile[] files;
         // Read the file
