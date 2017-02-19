@@ -58,21 +58,24 @@ public class CodeFile {
      * @return String[] comments as a string array
      */
     private String[] readComments(String[] file, String extension){
+        // Temporary list for adding the comments (needed since we don't know the amount of comments)
         ArrayList<String> commentList = new ArrayList<>();
 
+        // Iterate over the content string
         for (String line : file) {
-            Matcher matcher;
+            Matcher matcher;                                // Declare matcher
             if (extension.equals("java")) {
-                matcher = this.javaPattern.matcher(line);
+                matcher = this.javaPattern.matcher(line);   // If it's a java file use java matcher
             } else {
-                matcher = this.pythonPattern.matcher(line);
+                matcher = this.pythonPattern.matcher(line); // If it isn't just use python instead
             }
-            boolean match = matcher.matches();
-            if (match) {
-                commentList.add(line);
+
+            if (matcher.matches()) {    // If the line matches a comment regex
+                commentList.add(line);  // Add it to the comment list
             }
         }
 
+        // Convert the temporary list to an array and return it
         return commentList.toArray(new String[0]);
     }
 
@@ -82,14 +85,15 @@ public class CodeFile {
      * @return int amount of lines of whitespace
      */
     private int countWhitespace(String[] content){
-        int whitespace = 0;
+        int whitespace = 0;  // Whitespace counter
 
-        for (String line: content){
-            Matcher matcher = this.whiteSpacePattern.matcher(line);
-            if (matcher.matches()){
-                whitespace++;
+        for (String line: content){                                 // Iterate over the list of strings
+            Matcher matcher = this.whiteSpacePattern.matcher(line); // create whitespace matcher
+            if (matcher.matches()){                                 // If the string matches as whitespace
+                whitespace++;                                       // Add one to whitespace counter
             }
         }
+        // Return the whitespace counter
         return whitespace;
     }
 
@@ -99,11 +103,13 @@ public class CodeFile {
      * @return String file extension
      */
     private String readExtension(String path){
-        String[] extension = path.split("\\.");
-        if (extension.length > 0) {
-            return extension[extension.length - 1];
+        // The rightmost segment of a string will always be it's extension if we assume it's extension is appended to
+        // the file name IE. Main.java
+        String[] extension = path.split("\\.");  // Split the path at every .
+        if (extension.length > 0) {                 // If the string has been split
+            return extension[extension.length - 1]; // Return the rightmost segment
         } else {
-            // If no \ is found assume it's a direct path IE. path = filename
+            // If no . is found assume it's a direct path IE. path = filename
             return path;
         }
     }
