@@ -1,4 +1,4 @@
-package LineCount;
+package LineCount.FileOperations;
 
 
 import java.util.ArrayList;
@@ -82,35 +82,35 @@ public class CodeFile {
         }
     }
 
-    String[] getContent(){
+    public String[] getContent(){
         return this.content;
     }
 
-    String[] getComments(){
+    public String[] getComments(){
         return this.comments;
     }
 
-    String getPath(){
+    public String getPath(){
         return this.path;
     }
 
-    String getFileName(){
+    public String getFileName(){
         return this.fileName;
     }
 
-    String getExtension(){
+    public String getExtension(){
         return this.extension;
     }
 
-    int getLineCount(){
+    public int getLineCount(){
         return this.lineCount;
     }
 
-    int getCommentCount(){
+    public int getCommentCount(){
         return this.commentCount;
     }
 
-    int getWhiteSpace(){
+    public int getWhiteSpace(){
         return this.whiteSpace;
     }
 

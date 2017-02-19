@@ -1,4 +1,4 @@
-package LineCount;
+package LineCount.FileOperations;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,15 +8,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 
-class FileHandler {
+public class FileHandler {
 
     private Charset charset;
 
-    FileHandler(String charsetString){
+    public FileHandler(String charsetString){
         this.charset = Charset.forName(charsetString);
     }
 
-    CodeFile readFile(String pathString){
+    public CodeFile readFile(String pathString){
         // Create a temporary list of strings for the content
         ArrayList<String> contentList = new ArrayList<>();
         // Create a path object pointing to the file
@@ -37,7 +37,7 @@ class FileHandler {
         return new CodeFile(pathString, contentList.toArray(new String[0]));
     }
 
-    CodeFile[] readFiles(String[] pathArray){
+    public CodeFile[] readFiles(String[] pathArray){
         CodeFile[] fileArray = new CodeFile[pathArray.length];
 
         for (int i = 0; i < pathArray.length; i++){

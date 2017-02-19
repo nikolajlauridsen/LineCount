@@ -1,5 +1,8 @@
 package LineCount;
 
+import LineCount.FileOperations.CodeFile;
+import LineCount.FileOperations.FileHandler;
+
 public class Main {
 
     public static void main(String[] args) {
