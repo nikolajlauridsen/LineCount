@@ -18,8 +18,6 @@ public class ProjectPanel extends JPanel {
     private JButton openChooser = new JButton();
     private JFileChooser fileChooser = new JFileChooser();
     private File projectDir;
-    private JList<String> dirList = new JList<>();
-    private JScrollPane dirListScroller = new JScrollPane(dirList);
     private Path[] files;
     private ProjectSelector fileSelector = new ProjectSelector();
 

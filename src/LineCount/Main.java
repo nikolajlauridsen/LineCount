@@ -5,7 +5,6 @@ import LineCount.FileOperations.FileHandler;
 import LineCount.GUI.ProjectPanel;
 
 import javax.swing.JFrame;
-import java.io.File;
 
 public class Main {
 
