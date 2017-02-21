@@ -6,6 +6,8 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class ProjectSelector extends JPanel implements ListSelectionListener {
@@ -96,6 +98,15 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
         removedListModel.clear();
     }
 
+    public Path[] getSelectedPaths(String root){
+        Path[] selectedPaths = new Path[addedListModel.getSize()];
+        for(int i = 0; i < addedListModel.getSize(); i++){
+            Path absPath = Paths.get(root,(String) addedListModel.getElementAt(i));
+            selectedPaths[i] = absPath;
+        }
+        return selectedPaths;
+    }
+
     //This method is required by ListSelectionListener.
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
@@ -123,6 +134,9 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
             int selectedIndex = removedList.getSelectedIndex();
 
             addedListModel.addElement(removedList.getSelectedValue());
+            if (addedList.getSelectedIndex() < 0){
+                addedList.setSelectedIndex(0);
+            }
             removedListModel.remove(selectedIndex);
 
 
@@ -147,6 +161,9 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
             int index = addedList.getSelectedIndex();
 
             removedListModel.addElement(addedList.getSelectedValue());
+            if (removedList.getSelectedIndex() < 0){
+                removedList.setSelectedIndex(0);
+            }
             addedListModel.remove(index);
 
             int projectSize = addedListModel.getSize();

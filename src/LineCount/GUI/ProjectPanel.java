@@ -1,6 +1,9 @@
 package LineCount.GUI;
 
 
+import LineCount.FileOperations.CodeFile;
+import LineCount.FileOperations.FileHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,10 +19,12 @@ public class ProjectPanel extends JPanel {
     private JLabel titleLabel = new JLabel();
     private JTextField folderPath = new JTextField();
     private JButton openChooser = new JButton();
+    private JButton generateButton = new JButton();
     private JFileChooser fileChooser = new JFileChooser();
     private File projectDir;
     private Path[] files;
     private ProjectSelector projectBuilder = new ProjectSelector();
+    private FileHandler fileHandler = new FileHandler();
 
     public ProjectPanel(){
         try{
@@ -64,6 +69,43 @@ public class ProjectPanel extends JPanel {
                 }
             }
         });
+
+        generateButton = new JButton("Generate");
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                Path[] selectedPaths = projectBuilder.getSelectedPaths(folderPath.getText());
+                CodeFile[] files = fileHandler.readFiles(selectedPaths);
+                for (CodeFile file : files){
+                    System.out.println(file.getPath());
+                }
+
+                // TODO: remove this debug feature
+                int total_lines = 0;
+                int total_comments = 0;
+                int total_whitespace = 0;
+                for (CodeFile file: files){
+                    System.out.println("Path: " + file.getPath());
+                    System.out.println("Filename: " + file.getFileName());
+                    System.out.println("Extension: "  + file.getExtension());
+                    System.out.println("Line count: " + file.getLineCount());
+                    System.out.println("Comments count: " + file.getCommentCount());
+                    System.out.println("Whitespace count: " + file.getWhiteSpace());
+                    System.out.println("Lines minus comments & whitespace: " +
+                            (file.getLineCount()-file.getCommentCount()-file.getWhiteSpace()));
+                    System.out.println("\n");
+                    total_lines += file.getLineCount();
+                    total_comments += file.getCommentCount();
+                    total_whitespace += file.getWhiteSpace();
+                }
+
+                System.out.println("Total lines: " + total_lines);
+                System.out.println("Total comments: " + total_comments);
+                System.out.println("Total whitespace: " + total_whitespace);
+                System.out.println("Total lines minus comments & whitespace: " +
+                        (total_lines - total_comments - total_whitespace));
+            }
+        });
         c.gridx = 1;
         c.gridy = 1;
         this.add(openChooser, c);
@@ -72,6 +114,10 @@ public class ProjectPanel extends JPanel {
         c.gridy = 2;
         c.gridwidth = 2;
         this.add(projectBuilder, c);
+
+        c.gridy = 3;
+        c.gridwidth = 2;
+        this.add(generateButton, c);
 
     }
 

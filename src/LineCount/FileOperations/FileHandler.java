@@ -29,14 +29,12 @@ public class FileHandler {
 
     /**
      * Read a single file off the hard drive
-     * @param pathString String path to desired file
+     * @param path String path to desired file
      * @return CodeFile codefile object containing the file contents, statistics and more
      */
-    public CodeFile readFile(String pathString){
+    public CodeFile readFile(Path path){
         // Create a temporary list of strings for the content
         ArrayList<String> contentList = new ArrayList<>();
-        // Create a path object pointing to the file
-        Path path = FileSystems.getDefault().getPath(pathString);
 
         // Try creating a reader, catch IO exception
         try (BufferedReader reader = Files.newBufferedReader(path, this.charset)){
@@ -50,7 +48,7 @@ public class FileHandler {
             System.err.format("IOException: %s%n", e);
         }
         // Convert the list to a string array
-        return new CodeFile(pathString, contentList.toArray(new String[0]));
+        return new CodeFile(path.toString(), contentList.toArray(new String[0]));
     }
 
     /**
@@ -58,7 +56,7 @@ public class FileHandler {
      * @param pathArray String[] array of paths to files as strings
      * @return CodeFile[] array of codefile objects containing the file contents, statistics and more
      */
-    public CodeFile[] readFiles(String[] pathArray){
+    public CodeFile[] readFiles(Path[] pathArray){
         CodeFile[] fileArray = new CodeFile[pathArray.length];
 
         for (int i = 0; i < pathArray.length; i++){
