@@ -89,6 +89,13 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
         removedListModel.addElement(path);
     }
 
+    public void emptyLists(){
+        addedList.setSelectedIndex(-1);
+        removedList.setSelectedIndex(-1);
+        addedListModel.clear();
+        removedListModel.clear();
+    }
+
     //This method is required by ListSelectionListener.
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {

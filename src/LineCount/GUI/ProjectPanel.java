@@ -19,7 +19,7 @@ public class ProjectPanel extends JPanel {
     private JFileChooser fileChooser = new JFileChooser();
     private File projectDir;
     private Path[] files;
-    private ProjectSelector fileSelector = new ProjectSelector();
+    private ProjectSelector projectBuilder = new ProjectSelector();
 
     public ProjectPanel(){
         try{
@@ -71,15 +71,16 @@ public class ProjectPanel extends JPanel {
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 2;
-        this.add(fileSelector, c);
+        this.add(projectBuilder, c);
 
     }
 
-    private void fillDirList(){
+    public void fillDirList(){
+        projectBuilder.emptyLists();
         loadDir(folderPath.getText());
         for (Path path: this.files){
             if (path.toString().length() > 2) {
-                fileSelector.addPath(path.toString());
+                projectBuilder.addPath(path.toString());
             }
         }
 
