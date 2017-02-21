@@ -78,9 +78,10 @@ public class ProjectPanel extends JPanel {
     private void fillDirList(){
         projectBuilder.emptyLists();
         loadDir(folderPath.getText());
+        Path projectPath =  Paths.get(folderPath.getText());
         for (Path path: this.files){
             if (path.toString().length() > 2) {
-                projectBuilder.addPath(path.toString());
+                projectBuilder.addPath(projectPath.relativize(path).toString());
             }
         }
 

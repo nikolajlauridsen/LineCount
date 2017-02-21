@@ -53,11 +53,13 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
         String addString = "+";
         addButton = new JButton(addString);
         addButton.setActionCommand(addString);
+        addButton.setEnabled(false);
         addButton.addActionListener(new AddListener());
 
         String removeString = "-";
         removeButton = new JButton(removeString);
         removeButton.setActionCommand(removeString);
+        removeButton.setEnabled(false);
         removeButton.addActionListener(new RemoveListener());
 
         // Add the elements to the panel
