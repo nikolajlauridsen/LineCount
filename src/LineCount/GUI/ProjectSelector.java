@@ -13,15 +13,11 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
     private JList addedList;
     private DefaultListModel removedListModel;
     private DefaultListModel addedListModel;
-    private JScrollPane removedScrollPane;
-    private JScrollPane addedScrollPane;
 
-    private final String addString = "+";
-    private final String removeString = "-";
     private JButton addButton;
     private JButton removeButton;
 
-    public ProjectSelector(){
+     ProjectSelector(){
         super(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -37,7 +33,7 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
         removedList.setSize(listSize);
         removedList.setMaximumSize(listSize);
         removedList.setMinimumSize(listSize);
-        removedScrollPane = new JScrollPane(removedList);
+        JScrollPane removedScrollPane = new JScrollPane(removedList);
 
 
         // Create the addedList
@@ -51,13 +47,15 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
         addedList.setSize(listSize);
         addedList.setMaximumSize(listSize);
         addedList.setMinimumSize(listSize);
-        addedScrollPane = new JScrollPane(addedList);
+        JScrollPane addedScrollPane = new JScrollPane(addedList);
 
 
+        String addString = "+";
         addButton = new JButton(addString);
         addButton.setActionCommand(addString);
         addButton.addActionListener(new AddListener());
 
+        String removeString = "-";
         removeButton = new JButton(removeString);
         removeButton.setActionCommand(removeString);
         removeButton.addActionListener(new RemoveListener());
@@ -85,11 +83,11 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
 
     }
 
-    public void addPath(String path){
+    void addPath(String path){
         removedListModel.addElement(path);
     }
 
-    public void emptyLists(){
+    void emptyLists(){
         addedList.setSelectedIndex(-1);
         removedList.setSelectedIndex(-1);
         addedListModel.clear();

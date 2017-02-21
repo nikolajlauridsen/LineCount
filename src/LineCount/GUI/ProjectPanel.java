@@ -75,7 +75,7 @@ public class ProjectPanel extends JPanel {
 
     }
 
-    public void fillDirList(){
+    private void fillDirList(){
         projectBuilder.emptyLists();
         loadDir(folderPath.getText());
         for (Path path: this.files){
