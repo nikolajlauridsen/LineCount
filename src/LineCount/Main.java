@@ -2,21 +2,32 @@ package LineCount;
 
 import LineCount.FileOperations.CodeFile;
 import LineCount.FileOperations.FileHandler;
+import LineCount.GUI.ProjectPanel;
+
+import javax.swing.JFrame;
 
 public class Main {
 
     public static void main(String[] args) {
         // Create file handler object
         FileHandler fileHandler = new FileHandler();
-        // Filename string
+        // Filename strings
         String[] fileNames = new String[3];
         fileNames[0] = "src\\LineCount\\FileOperations\\CodeFile.java";
         fileNames[1] = "src\\LineCount\\FileOperations\\FileHandler.java";
         fileNames[2] = "src\\LineCount\\Main.java";
-        // String array for file content
+        // CodeFile array for file content
         CodeFile[] files;
         // Read the file
         files = fileHandler.readFiles(fileNames);
+
+        JFrame projectManager = new JFrame("Project manager");
+        projectManager.add(new ProjectPanel());
+
+        projectManager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        projectManager.setSize(500, 300);
+        projectManager.setVisible(true);
+
 
         int total_lines = 0;
         int total_comments = 0;

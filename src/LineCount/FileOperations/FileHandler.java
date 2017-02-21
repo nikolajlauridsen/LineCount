@@ -66,7 +66,7 @@ public class FileHandler {
                 CodeFile file = readFile(pathArray[i]);
                 fileArray[i] = file;
             } catch (Exception e){
-                System.out.println("An error has occurred: " + e.toString());
+                e.printStackTrace();
             }
 
         }

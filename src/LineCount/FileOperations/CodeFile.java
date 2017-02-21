@@ -22,7 +22,7 @@ public class CodeFile {
 
     // Python comments starts with # and doc strings starts/ends with """ TODO: handle doc strings
     private Pattern pythonPattern = Pattern.compile("^\\s*?#[\\s\\S]*$");
-    // Java has a lot of comments, catch the line as commment if it begins with: //, /*, /**, *, or */
+    // Java has a lot of comments, catch the line as comment if it begins with: //, /*, /**, *, or */
     private Pattern javaPattern = Pattern.compile("^\\s*?(//|/\\*[*]?|\\*[/]?)[\\s\\S]*?$");
     private Pattern whiteSpacePattern = Pattern.compile("^\\s*?$");
 
@@ -120,7 +120,7 @@ public class CodeFile {
      * @return String filename including extension
      */
     private String readFilename(String path){
-        // TODO: Make os agnostic
+        // TODO: Make os agnostic, Windoge uses \ while unix uses /
         String[] deconstructedPath = path.split("\\\\");
         if (deconstructedPath.length > 0){
             return deconstructedPath[deconstructedPath.length-1];
