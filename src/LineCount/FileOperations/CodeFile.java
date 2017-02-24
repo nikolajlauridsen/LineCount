@@ -182,4 +182,8 @@ public class CodeFile {
         return this.whiteSpace;
     }
 
+    public int getCodeCount(){
+        return this.lineCount - this.whiteSpace - this.commentCount;
+    }
+
 }

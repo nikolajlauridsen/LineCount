@@ -21,7 +21,7 @@ public class ProjectPanel extends JPanel {
     private JButton openChooser = new JButton();
     private JFileChooser folderChooser = new JFileChooser();
     private File projectDir;
-    private Path[] files;
+    private Path[] filePaths;
     private FilePicker filePicker = new FilePicker();
     private FileHandler fileHandler = new FileHandler();
 
@@ -75,6 +75,7 @@ public class ProjectPanel extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 Path[] selectedPaths = filePicker.getSelectedPaths(folderPath.getText());
                 CodeFile[] files = fileHandler.readFiles(selectedPaths);
+                new ProjectReport(files);
                 for (CodeFile file : files){
                     System.out.println(file.getPath());
                 }
@@ -124,7 +125,7 @@ public class ProjectPanel extends JPanel {
         filePicker.emptyLists();
         loadDir(folderPath.getText());
         Path projectPath =  Paths.get(folderPath.getText());
-        for (Path path: this.files){
+        for (Path path: this.filePaths){
             if (path.toString().length() > 2) {
                 filePicker.addPath(projectPath.relativize(path).toString());
             }
@@ -144,7 +145,7 @@ public class ProjectPanel extends JPanel {
             e.printStackTrace();
         }
 
-        this.files = tmpFiles.toArray(new Path[0]);
+        this.filePaths = tmpFiles.toArray(new Path[0]);
     }
 
 
