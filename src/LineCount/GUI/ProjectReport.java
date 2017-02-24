@@ -12,7 +12,7 @@ class ProjectReport extends JFrame{
     ProjectReport(CodeFile[] _files){
         this.setTitle("Project Report");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(700, 1000);
+        this.setSize(700, 500);
         this.setVisible(true);
         this.setResizable(false);
         this.files = _files;
@@ -20,9 +20,7 @@ class ProjectReport extends JFrame{
     }
 
     class ReportPanel extends JPanel{
-
-
-        TablePanel fileOverview;
+        FileTable fileOverview;
 
         ReportPanel(){
             try {init();} catch (Exception e){
@@ -33,13 +31,28 @@ class ProjectReport extends JFrame{
         private void init() throws Exception{
             this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-            fileOverview = new TablePanel(files);
+            fileOverview = new FileTable(files);
             JLabel title = new JLabel("Project report");
-            JLabel tableTitle = new JLabel("File Overview");
+
+            JLabel pathLabel = new JLabel();
+            if (files.length > 0) {
+                pathLabel.setText("Project path: " + files[0].getRootDir());
+            } else {
+                pathLabel.setText("Please choose a file in the project manager");
+            }
+
+            JLabel fileCountLabel = new JLabel("Number of files: " + files.length);
+
+            JLabel tableTitle = new JLabel("File overview");
             title.setAlignmentX(Component.CENTER_ALIGNMENT);
             fileOverview.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+            this.add(Box.createRigidArea(new Dimension(0, 5)));
             this.add(title);
+            this.add(Box.createRigidArea(new Dimension(0, 20)));
+            this.add(leftJustify(pathLabel, 10));
+            this.add(leftJustify(fileCountLabel, 10));
+            this.add(Box.createRigidArea(new Dimension(0, 20)));
             this.add(leftJustify(tableTitle, 5));
             this.add(fileOverview);
         }

@@ -5,7 +5,7 @@ import LineCount.FileOperations.CodeFile;
 import javax.swing.*;
 import java.awt.*;
 
-class TablePanel extends JPanel {
+class FileTable extends JPanel {
     private Object[] columnNames = {
             "Filename",
             "Extension",
@@ -19,7 +19,12 @@ class TablePanel extends JPanel {
     private int columns;
     private JLabel tableHeading = new JLabel("File overview");
 
-    TablePanel(CodeFile[] _files){
+    private int total_code = 0;
+    private int total_comments = 0;
+    private int total_whitespace = 0;
+    private int total_lines = 0;
+
+    FileTable(CodeFile[] _files){
         this.files = _files;
         this.columns = columnNames.length;
         try { Init(); } catch (Exception e){
@@ -32,18 +37,15 @@ class TablePanel extends JPanel {
         Object[][] data = new Object[this.files.length+1][];
 
         // Initialize totals, used for creating the final row
-        int total_code = 0;
-        int total_comments = 0;
-        int total_whitespace = 0;
-        int total_lines = 0;
+
 
         // Create row for each file
         for(int i = 0; i < this.files.length; i++){
             // Update totals
-            total_code += this.files[i].getCodeCount();
-            total_comments += this.files[i].getCommentCount();
-            total_whitespace += this.files[i].getWhiteSpace();
-            total_lines += this.files[i].getLineCount();
+            this.total_code += this.files[i].getCodeCount();
+            this.total_comments += this.files[i].getCommentCount();
+            this.total_whitespace += this.files[i].getWhiteSpace();
+            this.total_lines += this.files[i].getLineCount();
 
             // Create and add the row
             Object[] fileData = new Object[columns];
@@ -60,7 +62,7 @@ class TablePanel extends JPanel {
         Object[] total = new Object[columns];
         total[0] = "Total";
         total[1] = "N/A";
-        total[2] = "Get base path";
+        total[2] = this.files[0].getRootDir();
         total[3] = total_code;
         total[4] = total_comments;
         total[5] = total_whitespace;
@@ -73,6 +75,10 @@ class TablePanel extends JPanel {
         pane.setMaximumSize(new Dimension(700, 300));
         pane.setPreferredSize(new Dimension(690, 200));
         this.add(pane);
+
+    }
+
+    void getTotals(){
 
     }
 }

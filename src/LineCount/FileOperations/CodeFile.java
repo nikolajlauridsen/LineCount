@@ -68,7 +68,7 @@ public class CodeFile {
         // Temporary list for adding the comments (needed since we don't know the amount of comments)
         ArrayList<String> commentList = new ArrayList<>();
 
-        // Iterate over the content string
+        // Check every line to see if it's a comment
         for (String line : file) {
             Matcher matcher;                                // Declare matcher
             if (extension.equals("java")) {
@@ -94,10 +94,10 @@ public class CodeFile {
     private int countWhitespace(String[] content){
         int whitespace = 0;  // Whitespace counter
 
-        for (String line: content){                                 // Iterate over the list of strings
+        for (String line: content){
             Matcher matcher = this.whiteSpacePattern.matcher(line); // create whitespace matcher
-            if (matcher.matches()){                                 // If the string matches as whitespace
-                whitespace++;                                       // Add one to whitespace counter
+            if (matcher.matches()){
+                whitespace++;
             }
         }
         // Return the whitespace counter
@@ -112,7 +112,7 @@ public class CodeFile {
     private String readExtension(String path){
         // The rightmost segment of a string will always be it's extension if we assume it's extension is appended to
         // the file name IE. Main.java
-        String[] extension = path.split("\\.");  // Split the absPath at every .
+        String[] extension = path.split("\\.");  // Split the path at every .
         if (extension.length > 0) {                 // If the string has been split
             return extension[extension.length - 1]; // Return the rightmost segment
         } else {
@@ -197,6 +197,10 @@ public class CodeFile {
         return this.whiteSpace;
     }
 
+    /**
+     *
+     * @return int # of lines of code
+     */
     public int getCodeCount(){
         return this.lineCount - this.whiteSpace - this.commentCount;
     }
