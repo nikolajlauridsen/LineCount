@@ -1,6 +1,8 @@
 package LineCount.FileOperations;
 
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * Object representing a file containing source code
  * Retrievable values
- * String path ------- path to file
+ * String absPath ------- absPath to file
  * String fileName --- filename
  * String extension -- file extension as a string
  * String[] content -- file content as list of strings
@@ -16,7 +18,7 @@ import java.util.regex.Pattern;
  * int commentCount -- amount of comments in the file
  * int lineCount  ---- total amount of lines in the file
  * int whiteSpace ---- total amount of whitespace in the file
- * all values can be retrieved with it's get function IE. CodeFile.getPath()
+ * all values can be retrieved with it's get function IE. CodeFile.getAbsPath()
  */
 public class CodeFile {
 
@@ -26,7 +28,9 @@ public class CodeFile {
     private Pattern javaPattern = Pattern.compile("^\\s*?(//|/\\*[*]?|\\*[/]?)[\\s\\S]*?$");
     private Pattern whiteSpacePattern = Pattern.compile("^\\s*?$");
 
-    private String path;
+    private String absPath;
+    private Path root;
+    private Path relPath;
     private String fileName;
     private String extension;
     private String[] content;
@@ -37,13 +41,16 @@ public class CodeFile {
 
     /**
      * Constructor which reads the content and assigns variables
-     * @param path String path to file
+     * @param absPath String absPath to file
      * @param content String[] file content as list of strings
      */
-    CodeFile(String path, String[] content){
-        this.path = path;
-        this.fileName = readFilename(this.path);
-        this.extension = readExtension(this.path);
+    CodeFile(String absPath, String[] content, Path root){
+        // TODO: switch strings to path objects internally, too lazy atm.
+        this.absPath = absPath;
+        this.root = root;
+        this.relPath = root.relativize(Paths.get(this.absPath));
+        this.fileName = readFilename(this.absPath);
+        this.extension = readExtension(this.absPath);
         this.content = content;
         this.comments = readComments(this.content, this.extension);
         this.lineCount = this.content.length;
@@ -99,24 +106,24 @@ public class CodeFile {
 
     /**
      * Read the extension of a filepath
-     * @param path String path to file
+     * @param path String absPath to file
      * @return String file extension
      */
     private String readExtension(String path){
         // The rightmost segment of a string will always be it's extension if we assume it's extension is appended to
         // the file name IE. Main.java
-        String[] extension = path.split("\\.");  // Split the path at every .
+        String[] extension = path.split("\\.");  // Split the absPath at every .
         if (extension.length > 0) {                 // If the string has been split
             return extension[extension.length - 1]; // Return the rightmost segment
         } else {
-            // If no . is found assume it's a direct path IE. path = filename
+            // If no . is found assume it's a direct absPath IE. absPath = filename
             return path;
         }
     }
 
     /**
-     * Read the filename off a path
-     * @param path String path to file
+     * Read the filename off a absPath
+     * @param path String absPath to file
      * @return String filename including extension
      */
     private String readFilename(String path){
@@ -144,10 +151,18 @@ public class CodeFile {
     }
 
     /**
-     * @return String path to file
+     * @return String absPath to file
      */
-    public String getPath(){
-        return this.path;
+    public String getAbsPath(){
+        return this.absPath;
+    }
+
+    public String getRelPath(){
+        return this.relPath.toString();
+    }
+
+    public String getRootDir(){
+        return this.root.toString();
     }
 
     /**

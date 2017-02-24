@@ -9,11 +9,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.stream.Stream;
 
 public class ProjectPanel extends JPanel {
     private JLabel titleLabel = new JLabel();
@@ -74,10 +71,11 @@ public class ProjectPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Path[] selectedPaths = filePicker.getSelectedPaths(folderPath.getText());
-                CodeFile[] files = fileHandler.readFiles(selectedPaths);
+                Path root = Paths.get(projectDir.getPath());
+                CodeFile[] files = fileHandler.readFiles(selectedPaths, root);
                 new ProjectReport(files);
                 for (CodeFile file : files){
-                    System.out.println(file.getPath());
+                    System.out.println(file.getAbsPath());
                 }
 
                 // TODO: remove this debug feature
@@ -85,7 +83,7 @@ public class ProjectPanel extends JPanel {
                 int total_comments = 0;
                 int total_whitespace = 0;
                 for (CodeFile file: files){
-                    System.out.println("Path: " + file.getPath());
+                    System.out.println("Path: " + file.getAbsPath());
                     System.out.println("Filename: " + file.getFileName());
                     System.out.println("Extension: "  + file.getExtension());
                     System.out.println("Line count: " + file.getLineCount());
@@ -123,7 +121,7 @@ public class ProjectPanel extends JPanel {
 
     private void fillDirList(){
         filePicker.emptyLists();
-        loadDir(folderPath.getText());
+        this.filePaths = fileHandler.walkDir(folderPath.getText());
         Path projectPath =  Paths.get(folderPath.getText());
         for (Path path: this.filePaths){
             if (path.toString().length() > 2) {
@@ -132,21 +130,5 @@ public class ProjectPanel extends JPanel {
         }
 
     }
-
-    private void loadDir(String path){
-        ArrayList<Path> tmpFiles = new ArrayList<>();
-        try(Stream<Path> paths = Files.walk(Paths.get(path))) {
-            paths.forEach(filePath -> {
-                if (Files.isRegularFile(filePath)) {
-                    tmpFiles.add(filePath);
-                }
-            });
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        this.filePaths = tmpFiles.toArray(new Path[0]);
-    }
-
 
 }

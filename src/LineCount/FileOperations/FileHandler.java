@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class FileHandler {
 
@@ -31,7 +33,7 @@ public class FileHandler {
      * @param path String path to desired file
      * @return CodeFile codefile object containing the file contents, statistics and more
      */
-    public CodeFile readFile(Path path){
+    public CodeFile readFile(Path path, Path root){
         // Create a temporary list of strings for the content
         ArrayList<String> contentList = new ArrayList<>();
 
@@ -47,7 +49,7 @@ public class FileHandler {
             System.err.format("IOException: %s%n", e);
         }
         // Convert the list to a string array
-        return new CodeFile(path.toString(), contentList.toArray(new String[0]));
+        return new CodeFile(path.toString(), contentList.toArray(new String[0]), root);
     }
 
     /**
@@ -55,12 +57,12 @@ public class FileHandler {
      * @param pathArray String[] array of paths to files as strings
      * @return CodeFile[] array of codefile objects containing the file contents, statistics and more
      */
-    public CodeFile[] readFiles(Path[] pathArray){
+    public CodeFile[] readFiles(Path[] pathArray, Path root){
         CodeFile[] fileArray = new CodeFile[pathArray.length];
 
         for (int i = 0; i < pathArray.length; i++){
             try {
-                CodeFile file = readFile(pathArray[i]);
+                CodeFile file = readFile(pathArray[i], root);
                 fileArray[i] = file;
             } catch (Exception e){
                 e.printStackTrace();
@@ -69,6 +71,21 @@ public class FileHandler {
         }
 
         return fileArray;
+    }
+
+    public Path[] walkDir(String basePath){
+        ArrayList<Path> tmpFiles = new ArrayList<>();
+        try(Stream<Path> paths = Files.walk(Paths.get(basePath))) {
+            paths.forEach(filePath -> {
+                if (Files.isRegularFile(filePath)) {
+                    tmpFiles.add(filePath);
+                }
+            });
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tmpFiles.toArray(new Path[0]);
     }
 
 }

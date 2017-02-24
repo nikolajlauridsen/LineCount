@@ -3,7 +3,6 @@ package LineCount.GUI;
 import LineCount.FileOperations.CodeFile;
 
 import javax.swing.*;
-import java.awt.*;
 
 class TablePanel extends JPanel {
     private Object[] columnNames = {
@@ -20,7 +19,7 @@ class TablePanel extends JPanel {
 
     TablePanel(CodeFile[] _files){
         this.files = _files;
-        this.columns = 7;
+        this.columns = columnNames.length;
         try { Init(); } catch (Exception e){
             e.printStackTrace();
         }
@@ -49,7 +48,7 @@ class TablePanel extends JPanel {
             Object[] fileData = new Object[columns];
             fileData[0] = this.files[i].getFileName();
             fileData[1] = this.files[i].getExtension();
-            fileData[2] = this.files[i].getPath();
+            fileData[2] = this.files[i].getRelPath();
             fileData[3] = this.files[i].getCodeCount();
             fileData[4] = this.files[i].getCommentCount();
             fileData[5] = this.files[i].getWhiteSpace();
