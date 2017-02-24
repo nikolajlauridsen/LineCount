@@ -37,11 +37,21 @@ public class Report {
         nFilesString += files.length;
         String projectFolder = "\nProject folder: " + files[0].getRootDir();
 
+        String[] breakdownTitles = new String[4];
+        breakdownTitles[0] = "Code";
+        breakdownTitles[1] = "Comments";
+        breakdownTitles[2] = "Whitespace";
+        breakdownTitles[3] = "Total";
+
         String[] breakdownList = new String[4];
-        breakdownList[0] = "Code: " + total_code;
-        breakdownList[1] = "Comments: " + total_comments;
-        breakdownList[2] = "Whitespace: " + total_whitespace;
-        breakdownList[3] = "Total: " + total_lines;
+        breakdownList[0] = Integer.toString(total_code);
+        breakdownList[1] = Integer.toString(total_comments);
+        breakdownList[2] = Integer.toString(total_whitespace);
+        breakdownList[3] = Integer.toString(total_lines);
+
+        Object[][] breakdown = new Object[1][];
+        breakdown[0] = breakdownList;
+
 
         try(BufferedWriter writer = Files.newBufferedWriter(path, charset)){
             writer.write(h1(title));
@@ -49,8 +59,8 @@ public class Report {
             writer.write(projectFolder);
             writer.write("\n\n");
             writer.write(nFilesString);
-            writer.write("\n\n" + h3("Code breakdown"));
-            writer.write("\n" + generateList(breakdownList));
+            writer.write("\n\n" + h4("Code breakdown"));
+            writer.write("\n" + generateTable(breakdown, breakdownTitles));
         }
     }
 
@@ -66,6 +76,10 @@ public class Report {
         return "### " + string;
     }
 
+    private String h4(String string){
+        return "#### " + string;
+    }
+
     private String generateList(String[] items){
         String stringList = "";
         for(String item: items){
@@ -73,6 +87,34 @@ public class Report {
         }
 
         return stringList;
+    }
+
+    private String generateTable(Object[][] rows, String[] columns){
+        String stringTable = "| ";
+
+        // Create header
+        for (String column: columns){
+            stringTable += column + " | ";
+        }
+        stringTable += "\n";
+
+        // Create header devider
+        stringTable += "|";
+        for(int i = 0; i < columns.length; i++){
+            stringTable += "----|";
+        }
+        stringTable += "\n";
+
+        // Create rows
+        for (Object[] row : rows){
+            stringTable += "|";
+            for (Object column : row){
+                stringTable += " " + column + " |";
+            }
+            stringTable += "\n";
+        }
+
+        return stringTable;
     }
 
 }
