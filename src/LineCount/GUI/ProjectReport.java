@@ -3,6 +3,7 @@ package LineCount.GUI;
 import LineCount.FileOperations.CodeFile;
 
 import javax.swing.*;
+import java.awt.*;
 
 class ProjectReport extends JFrame{
 
@@ -20,7 +21,7 @@ class ProjectReport extends JFrame{
 
     class ReportPanel extends JPanel{
 
-        JLabel title = new JLabel("Project report");
+
         TablePanel fileOverview;
 
         ReportPanel(){
@@ -30,13 +31,24 @@ class ProjectReport extends JFrame{
         }
 
         private void init() throws Exception{
-            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-            this.setAlignmentX(CENTER_ALIGNMENT);
+            this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
             fileOverview = new TablePanel(files);
+            JLabel title = new JLabel("Project report");
+            JLabel tableTitle = new JLabel("File Overview");
+            title.setAlignmentX(Component.CENTER_ALIGNMENT);
+            fileOverview.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             this.add(title);
+            this.add(leftJustify(tableTitle));
             this.add(fileOverview);
+        }
+
+        private Component leftJustify(Component panel){
+            Box box = Box.createHorizontalBox();
+            box.add(panel);
+            box.add(Box.createHorizontalGlue());
+            return box;
         }
     }
 

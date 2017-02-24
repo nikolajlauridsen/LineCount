@@ -3,6 +3,7 @@ package LineCount.GUI;
 import LineCount.FileOperations.CodeFile;
 
 import javax.swing.*;
+import java.awt.*;
 
 class TablePanel extends JPanel {
     private Object[] columnNames = {
@@ -27,8 +28,6 @@ class TablePanel extends JPanel {
     }
 
     private void Init() throws Exception{
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setAlignmentX(CENTER_ALIGNMENT);
 
         Object[][] data = new Object[this.files.length+1][];
 
@@ -71,7 +70,8 @@ class TablePanel extends JPanel {
 
         JTable overview = new JTable(data, this.columnNames);
         JScrollPane pane = new JScrollPane(overview);
-        this.add(tableHeading);
+        pane.setMaximumSize(new Dimension(700, 300));
+        pane.setPreferredSize(new Dimension(690, 200));
         this.add(pane);
 
     }
