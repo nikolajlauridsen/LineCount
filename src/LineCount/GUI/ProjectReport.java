@@ -4,10 +4,9 @@ import LineCount.FileOperations.CodeFile;
 
 import javax.swing.*;
 
-public class ProjectReport extends JFrame{
+class ProjectReport extends JFrame{
 
     private CodeFile[] files;
-    private TablePanel table;
 
     ProjectReport(CodeFile[] _files){
         this.setTitle("Project Report");
@@ -16,8 +15,29 @@ public class ProjectReport extends JFrame{
         this.setVisible(true);
         this.setResizable(false);
         this.files = _files;
-        table = new TablePanel(this.files);
-        this.add(table);
+        this.add(new ReportPanel());
+    }
+
+    class ReportPanel extends JPanel{
+
+        JLabel title = new JLabel("Project report");
+        TablePanel fileOverview;
+
+        ReportPanel(){
+            try {init();} catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        private void init() throws Exception{
+            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+            this.setAlignmentX(CENTER_ALIGNMENT);
+
+            fileOverview = new TablePanel(files);
+
+            this.add(title);
+            this.add(fileOverview);
+        }
     }
 
 }

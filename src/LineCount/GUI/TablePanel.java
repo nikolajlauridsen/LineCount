@@ -16,6 +16,7 @@ class TablePanel extends JPanel {
     };
     private CodeFile[] files;
     private int columns;
+    private JLabel tableHeading = new JLabel("File overview");
 
     TablePanel(CodeFile[] _files){
         this.files = _files;
@@ -27,6 +28,7 @@ class TablePanel extends JPanel {
 
     private void Init() throws Exception{
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setAlignmentX(CENTER_ALIGNMENT);
 
         Object[][] data = new Object[this.files.length+1][];
 
@@ -69,6 +71,7 @@ class TablePanel extends JPanel {
 
         JTable overview = new JTable(data, this.columnNames);
         JScrollPane pane = new JScrollPane(overview);
+        this.add(tableHeading);
         this.add(pane);
 
     }
