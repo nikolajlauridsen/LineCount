@@ -19,11 +19,10 @@ public class ProjectPanel extends JPanel {
     private JLabel titleLabel = new JLabel();
     private JTextField folderPath = new JTextField();
     private JButton openChooser = new JButton();
-    private JButton generateButton = new JButton();
-    private JFileChooser fileChooser = new JFileChooser();
+    private JFileChooser folderChooser = new JFileChooser();
     private File projectDir;
     private Path[] files;
-    private ProjectSelector projectBuilder = new ProjectSelector();
+    private FilePicker filePicker = new FilePicker();
     private FileHandler fileHandler = new FileHandler();
 
     public ProjectPanel(){
@@ -52,16 +51,16 @@ public class ProjectPanel extends JPanel {
         this.add(folderPath, c);
 
 
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         openChooser.setText("Choose dir");
         openChooser.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (actionEvent.getSource() == openChooser){
-                    int returnVal = fileChooser.showOpenDialog(ProjectPanel.this);
+                    int returnVal = folderChooser.showOpenDialog(ProjectPanel.this);
 
                     if(returnVal == JFileChooser.APPROVE_OPTION){
-                        projectDir = fileChooser.getSelectedFile();
+                        projectDir = folderChooser.getSelectedFile();
                         System.out.println(projectDir.toString());
                         folderPath.setText(projectDir.getPath());
                         fillDirList();
@@ -70,11 +69,11 @@ public class ProjectPanel extends JPanel {
             }
         });
 
-        generateButton = new JButton("Generate");
+        JButton generateButton = new JButton("Generate");
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Path[] selectedPaths = projectBuilder.getSelectedPaths(folderPath.getText());
+                Path[] selectedPaths = filePicker.getSelectedPaths(folderPath.getText());
                 CodeFile[] files = fileHandler.readFiles(selectedPaths);
                 for (CodeFile file : files){
                     System.out.println(file.getPath());
@@ -113,7 +112,7 @@ public class ProjectPanel extends JPanel {
         c.gridx = 0;
         c.gridy = 2;
         c.gridwidth = 2;
-        this.add(projectBuilder, c);
+        this.add(filePicker, c);
 
         c.gridy = 3;
         c.gridwidth = 2;
@@ -122,12 +121,12 @@ public class ProjectPanel extends JPanel {
     }
 
     private void fillDirList(){
-        projectBuilder.emptyLists();
+        filePicker.emptyLists();
         loadDir(folderPath.getText());
         Path projectPath =  Paths.get(folderPath.getText());
         for (Path path: this.files){
             if (path.toString().length() > 2) {
-                projectBuilder.addPath(projectPath.relativize(path).toString());
+                filePicker.addPath(projectPath.relativize(path).toString());
             }
         }
 

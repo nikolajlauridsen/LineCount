@@ -11,7 +11,8 @@ public class Main {
         projectManager.add(new ProjectPanel());
 
         projectManager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        projectManager.setSize(720, 300);
+        projectManager.setSize(650, 300);
+        projectManager.setResizable(false);
         projectManager.setVisible(true);
     }
 }

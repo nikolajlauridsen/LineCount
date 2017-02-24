@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-public class ProjectSelector extends JPanel implements ListSelectionListener {
+public class FilePicker extends JPanel implements ListSelectionListener {
     private JList removedList;
     private JList addedList;
     private DefaultListModel removedListModel;
@@ -19,7 +19,7 @@ public class ProjectSelector extends JPanel implements ListSelectionListener {
     private JButton addButton;
     private JButton removeButton;
 
-     ProjectSelector(){
+     FilePicker(){
         super(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
