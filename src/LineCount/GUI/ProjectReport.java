@@ -40,12 +40,20 @@ class ProjectReport extends JFrame{
             fileOverview.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             this.add(title);
-            this.add(leftJustify(tableTitle));
+            this.add(leftJustify(tableTitle, 5));
             this.add(fileOverview);
         }
 
         private Component leftJustify(Component panel){
             Box box = Box.createHorizontalBox();
+            box.add(panel);
+            box.add(Box.createHorizontalGlue());
+            return box;
+        }
+
+        private Component leftJustify(Component panel, int padding){
+            Box box = Box.createHorizontalBox();
+            box.add(Box.createRigidArea(new Dimension(padding, 0)));
             box.add(panel);
             box.add(Box.createHorizontalGlue());
             return box;
