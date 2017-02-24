@@ -1,9 +1,14 @@
 package LineCount.GUI;
 
 import LineCount.FileOperations.CodeFile;
+import LineCount.FileOperations.Report;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 class ProjectReport extends JFrame{
 
@@ -47,6 +52,20 @@ class ProjectReport extends JFrame{
             title.setAlignmentX(Component.CENTER_ALIGNMENT);
             fileOverview.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+            JButton saveMD = new JButton("Save .md");
+
+            saveMD.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    Report report = new Report(files);
+                    try {
+                        report.saveMarkDownReport(Paths.get(files[0].getRootDir(), "report.md"));
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+
             this.add(Box.createRigidArea(new Dimension(0, 5)));
             this.add(title);
             this.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -55,6 +74,7 @@ class ProjectReport extends JFrame{
             this.add(Box.createRigidArea(new Dimension(0, 20)));
             this.add(leftJustify(tableTitle, 5));
             this.add(fileOverview);
+            this.add(saveMD);
         }
 
         private Component leftJustify(Component panel){
