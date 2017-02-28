@@ -74,34 +74,6 @@ public class ProjectPanel extends JPanel {
                 Path root = Paths.get(projectDir.getPath());
                 CodeFile[] files = fileHandler.readFiles(selectedPaths, root);
                 new ProjectReport(files);
-                for (CodeFile file : files){
-                    System.out.println(file.getAbsPath());
-                }
-
-                // TODO: remove this debug feature
-                int total_lines = 0;
-                int total_comments = 0;
-                int total_whitespace = 0;
-                for (CodeFile file: files){
-                    System.out.println("Path: " + file.getAbsPath());
-                    System.out.println("Filename: " + file.getFileName());
-                    System.out.println("Extension: "  + file.getExtension());
-                    System.out.println("Line count: " + file.getLineCount());
-                    System.out.println("Comments count: " + file.getCommentCount());
-                    System.out.println("Whitespace count: " + file.getWhiteSpace());
-                    System.out.println("Lines minus comments & whitespace: " +
-                            (file.getLineCount()-file.getCommentCount()-file.getWhiteSpace()));
-                    System.out.println("\n");
-                    total_lines += file.getLineCount();
-                    total_comments += file.getCommentCount();
-                    total_whitespace += file.getWhiteSpace();
-                }
-
-                System.out.println("Total lines: " + total_lines);
-                System.out.println("Total comments: " + total_comments);
-                System.out.println("Total whitespace: " + total_whitespace);
-                System.out.println("Total lines minus comments & whitespace: " +
-                        (total_lines - total_comments - total_whitespace));
             }
         });
         c.gridx = 1;
