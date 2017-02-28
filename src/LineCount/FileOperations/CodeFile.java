@@ -8,17 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Object representing a file containing source code
- * Retrievable values
- * String absPath ------- absPath to file
- * String fileName --- filename
- * String extension -- file extension as a string
- * String[] content -- file content as list of strings
- * String[] comments - code comments in the files
- * int commentCount -- amount of comments in the file
- * int lineCount  ---- total amount of lines in the file
- * int whiteSpace ---- total amount of whitespace in the file
- * all values can be retrieved with it's get function IE. CodeFile.getAbsPath()
+ * Object representing a file containing source code, and statistics about said code
  */
 public class CodeFile {
 
@@ -137,6 +127,7 @@ public class CodeFile {
     }
 
     /**
+     * Get the content of the file as a list of strings, each string is a single line
      * @return String[] content of the file
      */
     public String[] getContent(){
@@ -144,6 +135,7 @@ public class CodeFile {
     }
 
     /**
+     * Get all the comments as an array of strings, each string is a single comment
      * @return String[] comments in the file
      */
     public String[] getComments(){
@@ -151,12 +143,17 @@ public class CodeFile {
     }
 
     /**
+     * Get the absolute path to the file
      * @return String absPath to file
      */
     public String getAbsPath(){
         return this.absPath;
     }
 
+    /**
+     * Get the relative path of the file from the root directiory
+     * @return String relative path to the file
+     */
     public String getRelPath(){
         return this.relPath.toString();
     }
@@ -172,6 +169,10 @@ public class CodeFile {
         return this.fileName;
     }
 
+    /**
+     * Return the extension of the file as a string (without the .)
+     * @return String extension of the file
+     */
     public String getExtension(){
         return this.extension;
     }

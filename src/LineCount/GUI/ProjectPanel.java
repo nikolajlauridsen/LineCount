@@ -29,6 +29,10 @@ public class ProjectPanel extends JPanel {
         }
     }
 
+    /**
+     * Initialize the GUI
+     * @throws Exception
+     */
     private void Init() throws Exception{
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
