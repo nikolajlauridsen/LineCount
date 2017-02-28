@@ -1,7 +1,6 @@
 package LineCount.GUI;
 
 
-import LineCount.FileOperations.CodeFile;
 import LineCount.FileOperations.FileHandler;
 
 import javax.swing.*;
@@ -72,8 +71,7 @@ public class ProjectPanel extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 Path[] selectedPaths = filePicker.getSelectedPaths(folderPath.getText());
                 Path root = Paths.get(projectDir.getPath());
-                CodeFile[] files = fileHandler.readFiles(selectedPaths, root);
-                new ProjectReport(files);
+                new ProjectReport(selectedPaths, root);
             }
         });
         c.gridx = 1;

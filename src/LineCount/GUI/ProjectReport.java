@@ -1,6 +1,7 @@
 package LineCount.GUI;
 
 import LineCount.FileOperations.CodeFile;
+import LineCount.FileOperations.FileHandler;
 import LineCount.FileOperations.Report;
 
 import javax.swing.*;
@@ -8,19 +9,21 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 class ProjectReport extends JFrame{
 
     private CodeFile[] files;
+    private FileHandler fileHandler = new FileHandler();
 
-    ProjectReport(CodeFile[] _files){
+    ProjectReport(Path[] _files, Path root){
         this.setTitle("Project Report");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(700, 500);
         this.setVisible(true);
         this.setResizable(false);
-        this.files = _files;
+        this.files = fileHandler.readFiles(_files, root);
         this.add(new ReportPanel());
     }
 
