@@ -33,7 +33,7 @@ public class ProjectPanel extends JPanel {
      * @throws Exception
      */
     private void Init() throws Exception{
-        // Set layout to GtidBag and create constraints
+        // Set layout to GridBag and create constraints
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
@@ -71,6 +71,7 @@ public class ProjectPanel extends JPanel {
                         System.out.println(projectDir.toString());
                         // Set the folderfield text
                         folderField.setText(projectDir.toString());
+                        // Fil the dir list now that projectDir has been updated
                         fillDirList();
                     }
                 }

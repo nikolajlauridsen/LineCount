@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import static LineCount.Utils.MdHelp.*;
 
 public class Report {
 
     private CodeFile[] files;
-    private Path root;
 
     private String title = "Project Report";
     private String tableTitle = "File Overview";
@@ -60,6 +60,41 @@ public class Report {
 
         Object[][] breakdown = new Object[1][];
         breakdown[0] = breakdownList;
+        // the fileBreakdown for the table needs to be one longer than files
+        // due to the total column which is appended to the end
+        String[] columnNames = {
+                "Filename",
+                "Extension",
+                "Path",
+                "Code",
+                "Comments",
+                "Whitespace",
+                "Total"
+        };
+        Object[][] fileBreakdown = new Object[this.files.length+1][];
+
+        // TODO: It might be sensible to create a function creating these column/rows arrays
+        for (int i = 0; i < this.files.length; i++){
+            String[] row = new String[columnNames.length];
+            row[0] = this.files[i].getFileName();
+            row[1] = this.files[i].getExtension();
+            row[2] = this.files[i].getRelPath();
+            row[3] = Integer.toString(this.files[i].getCodeCount());
+            row[4] = Integer.toString(this.files[i].getCommentCount());
+            row[5] = Integer.toString(this.files[i].getWhiteSpace());
+            row[6] = Integer.toString(this.files[i].getLineCount());
+            fileBreakdown[i] = row;
+
+        }
+        String[] totalRow = new String[columnNames.length];
+        totalRow[0] = "Total";
+        totalRow[1] = "N/A";
+        totalRow[2] = this.files[0].getRootDir();
+        totalRow[3] = Integer.toString(total_code);
+        totalRow[4] = Integer.toString(total_comments);
+        totalRow[5] = Integer.toString(total_whitespace);
+        totalRow[6] = Integer.toString(total_lines);
+        fileBreakdown[this.files.length] = totalRow;
 
 
         try(BufferedWriter writer = Files.newBufferedWriter(path, charset)){
@@ -68,95 +103,14 @@ public class Report {
             writer.write(projectFolder);
             writer.write("\n\n");
             writer.write(nFilesString);
-            writer.write("\n\n" + h4("Code breakdown"));
+            writer.write("\n\n" + h3("Code breakdown"));
             writer.write("\n" + generateTable(breakdown, breakdownTitles));
+            writer.write("\n\n");
+            writer.write(h3("File overview"));
+            writer.write("\n");
+            writer.write(generateTable(fileBreakdown, columnNames));
         }
     }
 
-    /**
-     * Turn a string into a markdown h1 heading
-     * @param string String to be a header
-     * @return Header string
-     */
-    private String h1(String string){
-        return "# " + string;
-    }
-
-    /**
-     * Turn a string into a markdown h2 heading
-     * @param string String to be a header
-     * @return Header string
-     */
-    private String h2(String string){
-        return "## " + string;
-    }
-
-    /**
-     * Turn a string into a markdown h3 heading
-     * @param string String to be a header
-     * @return Header string
-     */
-    private String h3(String string){
-        return "### " + string;
-    }
-
-    /**
-     * Turn a string into a markdown h4 heading
-     * @param string String to be a header
-     * @return Header string
-     */
-    private String h4(String string){
-        return "#### " + string;
-    }
-
-    /**
-     * Generate a list in the markdown format
-     * @param items String[] items to be added to the list
-     * @return Markdown list as a string
-     */
-    private String generateList(String[] items){
-        String stringList = "";
-        for(String item: items){
-            stringList += "* " + item + "\n";
-        }
-
-        return stringList;
-    }
-
-    /**
-     * Generate a table in the markdown
-     * @param rows Two dimensional array of the contents
-     *             (See it as a array of rows, which happens to be an array as well)
-     * @param columns String[] containing the column titles, should be as long as the arrays of rows
-     *                (the column row should be same size as the rest of the rows, suprise)
-     * @return Markdown table as a string
-     */
-    private String generateTable(Object[][] rows, String[] columns){
-        String stringTable = "| ";
-
-        // Create header
-        for (String column: columns){
-            stringTable += column + " | ";
-        }
-        stringTable += "\n";
-
-        // Create header devider
-        stringTable += "|";
-        for(int i = 0; i < columns.length; i++){
-            stringTable += "----|";
-        }
-        stringTable += "\n";
-
-        // Create rows
-        for (Object[] row : rows){
-            stringTable += "|";
-            for (Object column : row){
-                stringTable += " " + column + " |";
-            }
-            stringTable += "\n";
-        }
-
-        return stringTable;
-    }
 
 }
