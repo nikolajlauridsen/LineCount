@@ -36,9 +36,6 @@ class FileTable extends JPanel {
 
         Object[][] data = new Object[this.files.length+1][];
 
-        // Initialize totals, used for creating the final row
-
-
         // Create row for each file
         for(int i = 0; i < this.files.length; i++){
             // Update totals

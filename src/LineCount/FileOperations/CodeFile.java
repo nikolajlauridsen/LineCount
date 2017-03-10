@@ -3,7 +3,6 @@ package LineCount.FileOperations;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,10 +23,9 @@ public class CodeFile {
     private String fileName;
     private String extension;
     private String[] content;
-    private String[] comments;
-    private int commentCount;
+    private int commentCount = 0;
     private int lineCount;
-    private int whiteSpace;
+    private int whiteSpace = 0;
 
     /**
      * Constructor which reads the content and assigns variables
@@ -36,62 +34,65 @@ public class CodeFile {
      */
     CodeFile(String absPath, String[] content, Path root){
         // TODO: switch strings to path objects internally, too lazy atm.
+        // Path info
         this.absPath = absPath;
         this.root = root;
         this.relPath = root.relativize(Paths.get(this.absPath));
         this.fileName = readFilename(this.absPath);
         this.extension = readExtension(this.absPath);
+        // content and statistics
         this.content = content;
-        this.comments = readComments(this.content, this.extension);
         this.lineCount = this.content.length;
-        this.commentCount = this.comments.length;
-        this.whiteSpace = countWhitespace(this.content);
+        this.analyzeContent();
     }
 
     /**
-     * Read through the content of a file, takes extension to choose regex pattern
-     * @param file String[] contents of the file as a string array
-     * @param extension String file extension as a string (omit the ".")
-     * @return String[] comments as a string array
+     * Test whether a string matches the comment regex and increment comment count if it does
+     * @param line String to be tested
+     * @return Bool whether line is a comment
      */
-    private String[] readComments(String[] file, String extension){
-        // Temporary list for adding the comments (needed since we don't know the amount of comments)
-        ArrayList<String> commentList = new ArrayList<>();
-
-        // Check every line to see if it's a comment
-        for (String line : file) {
-            Matcher matcher;                                // Declare matcher
-            if (extension.equals("java")) {
-                matcher = this.javaPattern.matcher(line);   // If it's a java file use java matcher
-            } else {
-                matcher = this.pythonPattern.matcher(line); // If it isn't just use python instead
-            }
-
-            if (matcher.matches()) {    // If the line matches a comment regex
-                commentList.add(line);  // Add it to the comment list
-            }
+    private Boolean testComment(String line){
+        Matcher matcher;
+        if(extension.equals("java")){
+            matcher = this.javaPattern.matcher(line);
+        } else {
+            matcher = this.pythonPattern.matcher(line);
         }
 
-        // Convert the temporary list to an array and return it
-        return commentList.toArray(new String[0]);
+        if (matcher.matches()) {
+            this.commentCount++;
+            return true;
+        } else{
+            return false;
+        }
     }
 
     /**
-     * Count the amount of whitespace lines in the code file
-     * @param content String[] content as a string array
-     * @return int amount of lines of whitespace
+     * Test whether a string matches the whitespace regex and increment whitespace if it does
+     * @param line String to be tested
+     * @return Bool whether the line is whitespace
      */
-    private int countWhitespace(String[] content){
-        int whitespace = 0;  // Whitespace counter
+    private Boolean testWhitespace(String line){
+        Matcher matcher = this.whiteSpacePattern.matcher(line);
+        if(matcher.matches()){
+            this.whiteSpace++;
+            return true;
+        } else{
+            return false;
+        }
+    }
 
-        for (String line: content){
-            Matcher matcher = this.whiteSpacePattern.matcher(line); // create whitespace matcher
-            if (matcher.matches()){
-                whitespace++;
+    /**
+     * Count the amount of comments and whitespaces in the file.
+     */
+    private void analyzeContent(){
+        for(String line: content){
+            // Test whether each line is a comment, if it isn't test whether it's whitespace
+            // updates commentCount and whitespace
+            if (!testComment(line)){
+                testWhitespace(line);
             }
         }
-        // Return the whitespace counter
-        return whitespace;
     }
 
     /**
@@ -132,14 +133,6 @@ public class CodeFile {
      */
     public String[] getContent(){
         return this.content;
-    }
-
-    /**
-     * Get all the comments as an array of strings, each string is a single comment
-     * @return String[] comments in the file
-     */
-    public String[] getComments(){
-        return this.comments;
     }
 
     /**
