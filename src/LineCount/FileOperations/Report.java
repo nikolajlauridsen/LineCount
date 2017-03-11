@@ -58,7 +58,7 @@ public class Report {
         breakdownList[2] = Integer.toString(total_whitespace);
         breakdownList[3] = Integer.toString(total_lines);
 
-        Object[][] breakdown = new Object[1][];
+        String[][] breakdown = new String[1][];
         breakdown[0] = breakdownList;
         // the fileBreakdown for the table needs to be one longer than files
         // due to the total column which is appended to the end
@@ -71,7 +71,7 @@ public class Report {
                 "Whitespace",
                 "Total"
         };
-        Object[][] fileBreakdown = new Object[this.files.length+1][];
+        String[][] fileBreakdown = new String[this.files.length+1][];
 
         // TODO: It might be sensible to create a function creating these column/rows arrays
         for (int i = 0; i < this.files.length; i++){
