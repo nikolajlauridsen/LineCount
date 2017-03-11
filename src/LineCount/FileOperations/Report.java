@@ -1,5 +1,7 @@
 package LineCount.FileOperations;
 
+import LineCount.Utils.MdHelp;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -60,9 +62,9 @@ public class Report {
 
         String[][] breakdown = new String[1][];
         breakdown[0] = breakdownList;
-        // the fileBreakdown for the table needs to be one longer than files
+        // the filesRows for the table needs to be one longer than files
         // due to the total column which is appended to the end
-        String[] columnNames = {
+        String[] filesColumns = {
                 "Filename",
                 "Extension",
                 "Path",
@@ -71,11 +73,11 @@ public class Report {
                 "Whitespace",
                 "Total"
         };
-        String[][] fileBreakdown = new String[this.files.length+1][];
+        String[][] filesRows = new String[this.files.length+1][];
 
         // TODO: It might be sensible to create a function creating these column/rows arrays
         for (int i = 0; i < this.files.length; i++){
-            String[] row = new String[columnNames.length];
+            String[] row = new String[filesColumns.length];
             row[0] = this.files[i].getFileName();
             row[1] = this.files[i].getExtension();
             row[2] = this.files[i].getRelPath();
@@ -83,10 +85,10 @@ public class Report {
             row[4] = Integer.toString(this.files[i].getCommentCount());
             row[5] = Integer.toString(this.files[i].getWhiteSpace());
             row[6] = Integer.toString(this.files[i].getLineCount());
-            fileBreakdown[i] = row;
+            filesRows[i] = row;
 
         }
-        String[] totalRow = new String[columnNames.length];
+        String[] totalRow = new String[filesColumns.length];
         totalRow[0] = "Total";
         totalRow[1] = "N/A";
         totalRow[2] = this.files[0].getRootDir();
@@ -94,22 +96,22 @@ public class Report {
         totalRow[4] = Integer.toString(total_comments);
         totalRow[5] = Integer.toString(total_whitespace);
         totalRow[6] = Integer.toString(total_lines);
-        fileBreakdown[this.files.length] = totalRow;
+        filesRows[this.files.length] = totalRow;
 
+        TextFile report = new TextFile();
 
-        try(BufferedWriter writer = Files.newBufferedWriter(path, charset)){
-            writer.write(h1(title));
-            writer.write("\n" + h2("Project Overview"));
-            writer.write(projectFolder);
-            writer.write("\n\n");
-            writer.write(nFilesString);
-            writer.write("\n\n" + h3("Code breakdown"));
-            writer.write("\n" + generateTable(breakdown, breakdownTitles));
-            writer.write("\n\n");
-            writer.write(h3("File overview"));
-            writer.write("\n");
-            writer.write(generateTable(fileBreakdown, columnNames));
-        }
+        report.addLine(h1(title));
+        report.addLine(h2("Project Overview"));
+        report.addLine(projectFolder);
+        report.addLine("\n");
+        report.addLine(nFilesString);
+        report.addLine("\n" + h3("Code breakdown"));
+        for(String line: MdHelp.generateTable(breakdown, breakdownTitles)) report.addLine(line);
+        report.addLine("\n");
+        report.addLine(h3("File overview"));
+        for(String line: generateTable(filesRows, filesColumns)) report.addLine(line);
+
+        report.saveFile(path);
     }
 
 

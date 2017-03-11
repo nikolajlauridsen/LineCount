@@ -1,4 +1,6 @@
 package LineCount.Utils;
+import java.util.ArrayList;
+
 import static LineCount.Utils.StringHelp.*;
 
 /**
@@ -63,9 +65,9 @@ public interface MdHelp {
      *             (See it as a array of rows, which happens to be an array as well)
      * @param columns String[] containing the column titles, should be as long as the arrays of rows
      *                (the column row should be same size as the rest of the rows, suprise)
-     * @return Markdown table as a string
+     * @return Markdown table as a string array
      */
-    static String generateTable(String[][] rows, String[] columns){
+    static String[] generateTable(String[][] rows, String[] columns){
         int[] columnWidths = new int[columns.length];
         // Find the widest row in each column and assign
         // it's width to that
@@ -78,33 +80,36 @@ public interface MdHelp {
             }
         }
 
+        ArrayList<String> table = new ArrayList<>();
+        String header, devider, rowString;
+
         // Create header
-        String stringTable = "|";
+        header = "|";
         for (int i = 0; i < columns.length; i++){
-            stringTable += addPadding(columns[i], columnWidths[i]+2) + "|";
+            header += addPadding(columns[i], columnWidths[i]+2) + "|";
         }
-        stringTable += "\n";
+        table.add(header);
 
         // Create header devider
-        stringTable += "|";
+        devider = "|";
         for(int i = 0; i < columns.length; i++){
             for(int n = 0; n < columnWidths[i]+2; n++){
-                stringTable += "-";
+                devider += "-";
             }
-            stringTable += "|";
+            devider += "|";
         }
-        stringTable += "\n";
+        table.add(devider);
 
         // Create rows
         for (String[] row : rows){
-            stringTable += "|";
+            rowString = "|";
             for (int i = 0; i < row.length; i++){
-                stringTable += addPadding(row[i], columnWidths[i]+2) + "|";
+                rowString += addPadding(row[i], columnWidths[i]+2) + "|";
             }
-            stringTable += "\n";
+            table.add(rowString);
         }
 
-        return stringTable;
+        return table.toArray(new String[0]);
     }
 
 }
