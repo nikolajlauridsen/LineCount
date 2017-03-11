@@ -2,10 +2,7 @@ package LineCount.FileOperations;
 
 import LineCount.Utils.MdHelp;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import static LineCount.Utils.MdHelp.*;
 
@@ -43,7 +40,6 @@ public class Report {
      * @throws IOException
      */
     public void saveMarkDownReport(Path path) throws IOException {
-        Charset charset = Charset.forName("UTF-8");
 
         nFilesString += files.length;
         String projectFolder = "\nProject folder: " + files[0].getRootDir();
