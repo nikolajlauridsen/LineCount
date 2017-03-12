@@ -69,6 +69,20 @@ class ProjectReport extends JFrame{
                 }
             });
 
+            JButton saveTXT = new JButton("Save .txt");
+
+            saveTXT.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    Report report = new Report(files);
+                    try{
+                        report.saveTxtReport(Paths.get(files[0].getRootDir(), "report.txt"));
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+                }
+            });
+
             this.add(Box.createRigidArea(new Dimension(0, 5)));
             this.add(title);
             this.add(Box.createRigidArea(new Dimension(0, 20)));
@@ -78,6 +92,7 @@ class ProjectReport extends JFrame{
             this.add(leftJustify(tableTitle, 5));
             this.add(fileOverview);
             this.add(saveMD);
+            this.add(saveTXT);
         }
 
         private Component leftJustify(Component panel, int padding){

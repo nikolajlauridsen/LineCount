@@ -27,4 +27,15 @@ public interface StringHelp {
         }
         return paddedString;
     }
+
+    static String getDevider(int[] widths){
+        String devider = "|";
+        for(int i = 0; i < widths.length; i++){
+            for(int n = 0; n < widths[i]+2; n++){
+                devider += "-";
+            }
+            devider += "|";
+        }
+        return devider;
+    }
 }
