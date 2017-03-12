@@ -13,7 +13,7 @@ public class ReportFile {
 
     private CodeFile[] files;
 
-    private String title = "Project ReportFile";
+    private String title = "Project File";
     private String overviewTitle = "Project Overview";
     private String tallyTableTitle = "Code Tally";
     private String fileTableTitle = "File Overview";
