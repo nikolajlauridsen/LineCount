@@ -10,7 +10,7 @@ public class Main {
         JFrame projectManager = new JFrame("Project manager");
         projectManager.add(new ProjectPanel());
 
-        projectManager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        projectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         projectManager.setSize(650, 300);
         projectManager.setResizable(false);
         projectManager.setVisible(true);

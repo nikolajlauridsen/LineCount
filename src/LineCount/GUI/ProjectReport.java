@@ -70,7 +70,7 @@ class ProjectReport extends JFrame{
                 public void actionPerformed(ActionEvent actionEvent) {
                     ReportFile reportFile = new ReportFile(files);
                     try {
-                        reportFile.saveMarkDownReport(Paths.get(files[0].getRootDir(), "reportFile.md"));
+                        reportFile.saveMarkDownReport(Paths.get(files[0].getRootDir(), "ProjectReport.md"));
                     } catch (IOException e){
                         e.printStackTrace();
                     }
@@ -84,7 +84,7 @@ class ProjectReport extends JFrame{
                 public void actionPerformed(ActionEvent actionEvent) {
                     ReportFile reportFile = new ReportFile(files);
                     try{
-                        reportFile.saveTxtReport(Paths.get(files[0].getRootDir(), "reportFile.txt"));
+                        reportFile.saveTxtReport(Paths.get(files[0].getRootDir(), "ProjectReport.txt"));
                     } catch (IOException e){
                         e.printStackTrace();
                     }

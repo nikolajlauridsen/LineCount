@@ -5,6 +5,8 @@ import LineCount.Utils.TxtHelp;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * A project report file, can be save as either .txt file or .md
@@ -13,7 +15,10 @@ public class ReportFile {
 
     private CodeFile[] files;
 
-    private String title = "Project File";
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private  String timeStamp;
+
+    private String title = "Saved Project Report";
     private String overviewTitle = "Project Overview";
     private String tallyTableTitle = "Code Tally";
     private String fileTableTitle = "File Overview";
@@ -58,6 +63,7 @@ public class ReportFile {
         }
 
         // Generate strings displaying project folder and amount of files
+        this.timeStamp = "Report saved: " + dateFormat.format(new Date().getTime());
         this.projectFolder = "Project folder: " + files[0].getRootDir();
         nFilesString += files.length;
 
@@ -113,6 +119,7 @@ public class ReportFile {
         // Add report items to the TextFile object
         mdReport.addLine(MdHelp.h1(this.title));
         mdReport.addLine(MdHelp.h2(overviewTitle));
+        mdReport.addLine(this.timeStamp);
         mdReport.addLine("\n");
         mdReport.addLine(this.projectFolder);
         mdReport.addLine("\n");
@@ -140,6 +147,7 @@ public class ReportFile {
         // Add its contents
         txtReport.addLine(this.title);
         txtReport.addLine("");
+        txtReport.addLine(this.timeStamp);
         txtReport.addLine(this.projectFolder);
         txtReport.addLine(this.nFilesString);
         txtReport.addLine("\n");

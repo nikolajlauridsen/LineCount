@@ -9,6 +9,8 @@ import static LineCount.Utils.StringHelp.repeat;
 public interface TxtHelp {
 
     static String[] generateTable(String[][] rows, String[] columns){
+        Character cornerChar = '+';
+
         int[] columnWidths = new int[columns.length];
         // Find the widest row in each column and assign
         // it's width to that
@@ -30,7 +32,7 @@ public interface TxtHelp {
             header += addPadding(columns[i], columnWidths[i]+2) + "|";
         }
         int tableWidth = header.length();
-        table.add("*" + repeat("-", tableWidth-2) + "*");
+        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);
         table.add(header);
 
         // Create rows
@@ -42,7 +44,7 @@ public interface TxtHelp {
             table.add(getDevider(columnWidths));
             table.add(rowString);
         }
-        table.add("*" + repeat("-", tableWidth-2) + "*");
+        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);
 
         return table.toArray(new String[0]);
     }

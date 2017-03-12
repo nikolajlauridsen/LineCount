@@ -10,6 +10,7 @@ public interface StringHelp {
      */
     static String repeat(String str, int count){
         if(count <= 0) {return "";}
+        // Every char is initiated as \0 (all bits flipped to zero)
         return new String(new char[count]).replace("\0", str);
     }
 
