@@ -6,6 +6,9 @@ import LineCount.Utils.TxtHelp;
 import java.io.IOException;
 import java.nio.file.Path;
 
+/**
+ * A project report file, can be save as either .txt file or .md
+ */
 public class Report {
 
     private CodeFile[] files;
@@ -125,9 +128,16 @@ public class Report {
         mdReport.saveFile(path);
     }
 
+    /**
+     * Save the report as a plaintext file
+     * @param path desire path for the resulting file, should have a .txt exension
+     * @throws IOException
+     */
     public void saveTxtReport(Path path) throws IOException{
+        // Create a generic text file
         TextFile txtReport = new TextFile();
 
+        // Add its contents
         txtReport.addLine(this.title);
         txtReport.addLine("");
         txtReport.addLine(this.projectFolder);
@@ -139,6 +149,7 @@ public class Report {
         txtReport.addLine(this.fileTableTitle);
         for(String line: TxtHelp.generateTable(this.filesRows, this.filesColumns)) txtReport.addLine(line);
 
+        // Save it
         txtReport.saveFile(path);
     }
 

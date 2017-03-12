@@ -91,14 +91,7 @@ public interface MdHelp {
         table.add(header);
 
         // Create header devider
-        devider = "|";
-        for(int i = 0; i < columns.length; i++){
-            for(int n = 0; n < columnWidths[i]+2; n++){
-                devider += "-";
-            }
-            devider += "|";
-        }
-        table.add(devider);
+        table.add(StringHelp.getDevider(columnWidths));
 
         // Create rows
         for (String[] row : rows){

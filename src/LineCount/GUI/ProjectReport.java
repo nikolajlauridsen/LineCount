@@ -12,11 +12,19 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * The Project report frame, holds a jpanel displaying statistics about the code project
+ */
 class ProjectReport extends JFrame{
 
     private CodeFile[] files;
     private FileHandler fileHandler = new FileHandler();
 
+    /**
+     *
+     * @param _files Path array of paths for project files
+     * @param root Path object of the root directory of the project
+     */
     ProjectReport(Path[] _files, Path root){
         this.setTitle("Project Report");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
