@@ -2,7 +2,7 @@ package LineCount.GUI;
 
 import LineCount.FileOperations.CodeFile;
 import LineCount.FileOperations.FileHandler;
-import LineCount.FileOperations.Report;
+import LineCount.FileOperations.ReportFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,9 +68,9 @@ class ProjectReport extends JFrame{
             saveMD.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Report report = new Report(files);
+                    ReportFile reportFile = new ReportFile(files);
                     try {
-                        report.saveMarkDownReport(Paths.get(files[0].getRootDir(), "report.md"));
+                        reportFile.saveMarkDownReport(Paths.get(files[0].getRootDir(), "reportFile.md"));
                     } catch (IOException e){
                         e.printStackTrace();
                     }
@@ -82,9 +82,9 @@ class ProjectReport extends JFrame{
             saveTXT.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    Report report = new Report(files);
+                    ReportFile reportFile = new ReportFile(files);
                     try{
-                        report.saveTxtReport(Paths.get(files[0].getRootDir(), "report.txt"));
+                        reportFile.saveTxtReport(Paths.get(files[0].getRootDir(), "reportFile.txt"));
                     } catch (IOException e){
                         e.printStackTrace();
                     }

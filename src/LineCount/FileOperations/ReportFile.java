@@ -9,11 +9,11 @@ import java.nio.file.Path;
 /**
  * A project report file, can be save as either .txt file or .md
  */
-public class Report {
+public class ReportFile {
 
     private CodeFile[] files;
 
-    private String title = "Project Report";
+    private String title = "Project ReportFile";
     private String overviewTitle = "Project Overview";
     private String tallyTableTitle = "Code Tally";
     private String fileTableTitle = "File Overview";
@@ -42,7 +42,7 @@ public class Report {
      * A report object representing a report to be saved to the harddrive
      * @param _files an array of codefiles to generate the report on.
      */
-    public Report(CodeFile[] _files){
+    public ReportFile(CodeFile[] _files){
         this.files = _files;
 
         // Calculate totals for the entire project
