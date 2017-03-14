@@ -8,4 +8,8 @@ Made in cofee... I mean Java
 ## Roadmap
 - [x] Filter out uninmportant files
 - [x] Save code reports
-- [ ] Add config with regex for searching different languages
+- [ ] Improve codefile parsing
+- [ ] Add config with regex for parsing more languages
+- [ ] Make the GUI pretty (add padding)
+- [ ] Add menu for adding user defined regexes top the config for languages not included
+- [ ] Create menu for ignoring files outside gitignore (maybe create a seperate LineCountIgnore file)
