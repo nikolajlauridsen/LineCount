@@ -1,4 +1,6 @@
-package LineCount.FileOperations;
+package LineCount.FileOperations.Utils;
+
+import LineCount.FileOperations.Files.TextFile;
 
 import java.io.IOException;
 import java.nio.file.Path;

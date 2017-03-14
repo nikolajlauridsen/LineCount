@@ -1,4 +1,4 @@
-package LineCount.FileOperations;
+package LineCount.FileOperations.Files;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

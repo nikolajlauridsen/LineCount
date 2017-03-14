@@ -1,4 +1,4 @@
-package LineCount.FileOperations;
+package LineCount.FileOperations.Files;
 
 
 import java.nio.file.Path;
@@ -32,7 +32,7 @@ public class CodeFile {
      * @param absPath String absPath to file
      * @param content String[] file content as list of strings
      */
-    CodeFile(String absPath, String[] content, Path root){
+    public CodeFile(String absPath, String[] content, Path root){
         // TODO: switch strings to path objects internally, too lazy atm.
         // Path info
         this.absPath = absPath;

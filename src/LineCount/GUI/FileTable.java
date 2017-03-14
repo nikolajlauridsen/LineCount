@@ -1,6 +1,6 @@
 package LineCount.GUI;
 
-import LineCount.FileOperations.CodeFile;
+import LineCount.FileOperations.Files.CodeFile;
 
 import javax.swing.*;
 import java.awt.*;

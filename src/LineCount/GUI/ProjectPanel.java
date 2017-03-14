@@ -1,8 +1,8 @@
 package LineCount.GUI;
 
 
-import LineCount.FileOperations.FileFilter;
-import LineCount.FileOperations.FileHandler;
+import LineCount.FileOperations.Utils.FileFilter;
+import LineCount.FileOperations.Utils.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;

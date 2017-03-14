@@ -1,4 +1,4 @@
-package LineCount.FileOperations;
+package LineCount.FileOperations.Files;
 
 import LineCount.Utils.MdHelp;
 import LineCount.Utils.TxtHelp;

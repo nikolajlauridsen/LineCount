@@ -1,4 +1,6 @@
-package LineCount.FileOperations;
+package LineCount.FileOperations.Utils;
+
+import LineCount.FileOperations.Files.CodeFile;
 
 import java.io.BufferedReader;
 import java.io.IOException;
