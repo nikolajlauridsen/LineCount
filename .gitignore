@@ -1,3 +1,7 @@
 *.class
 .idea/*
 Testfiles/*
+Documentation/*
+out/*
+*.iml
+*.MF
