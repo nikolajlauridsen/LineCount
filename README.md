@@ -1,7 +1,7 @@
 # LineCount
 #### How many lines is that?
 
-Ever wondered how many lines of your �ber new code codebase is? LineCount will tell ya'
+Ever wondered how many lines of your über new code codebase is? LineCount will tell ya'
 
 Made in cofee... I mean Java
 
@@ -11,5 +11,6 @@ Made in cofee... I mean Java
 - [ ] Improve codefile parsing
 - [ ] Add config with regex for parsing more languages
 - [ ] Make the GUI pretty (add padding)
-- [ ] Add menu for adding user defined regexes top the config for languages not included
+- [ ] Add menu for adding user defined regexes to the config for languages not included
 - [ ] Create menu for ignoring files outside gitignore (maybe create a seperate LineCountIgnore file)
+- [ ] Add percentages to the project report
