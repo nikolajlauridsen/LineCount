@@ -1,12 +1,14 @@
 package LineCount.GUI;
 
 
+import LineCount.FileOperations.FileFilter;
 import LineCount.FileOperations.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -112,7 +114,16 @@ public class ProjectPanel extends JPanel {
     private void fillDirList(){
         filePicker.emptyLists();    // Empty the lists
         // Refresh the filePaths array  with the items from the selected folder
-        this.filePaths = fileHandler.walkDir(folderField.getText());
+        // Create file filter
+        Path ignorefile = this.projectDir.resolve(".gitignore");
+        FileFilter ignoreFiles = new FileFilter();
+        try {
+            ignoreFiles.ParseIgnoreFile(ignorefile);
+        } catch (IOException e){
+            System.out.println("gitignore not found");
+        }
+
+        this.filePaths = fileHandler.walkDir(folderField.getText(), ignoreFiles);
         // Add each path to the filePicker if it's longer than 2 characters
         for (Path path: this.filePaths){
             if (path.toString().length() > 2) {

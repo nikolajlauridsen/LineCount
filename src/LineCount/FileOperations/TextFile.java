@@ -1,5 +1,6 @@
 package LineCount.FileOperations;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -30,4 +31,15 @@ public class TextFile {
     public void addLine(String line){
         this.content.add(line);
     }
+
+    public void read(Path file) throws IOException{
+        try (BufferedReader reader = Files.newBufferedReader(file, charset)){
+            String line = null;
+            while ((line = reader.readLine()) != null){
+                this.content.add(line);
+            }
+        }
+    }
+
+    public String[] getContent(){ return this.content.toArray(new String[0]);}
 }

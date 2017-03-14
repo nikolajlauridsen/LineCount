@@ -7,8 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class FileHandler {
@@ -81,14 +79,25 @@ public class FileHandler {
         try(Stream<Path> paths = Files.walk(Paths.get(basePath))) {
             paths.forEach(filePath -> {
                 if (Files.isRegularFile(filePath)) {
-                    Pattern ignorePattern = Pattern.compile("^[\\s\\S]*\\.git\\\\[\\s\\S]*$");
-                    Matcher matcher = ignorePattern.matcher(filePath.toString());
-                    if(matcher.matches()){
-                        System.out.println("Found a match: " + filePath.toString());
-                    } else {
-                        System.out.println("Added: " + filePath.toString());
-                        tmpFiles.add(filePath);
-                    }
+                    tmpFiles.add(filePath);
+                }
+            });
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return tmpFiles.toArray(new Path[0]);
+    }
+
+    public Path[] walkDir(String basePath, FileFilter filter){
+        ArrayList<Path> tmpFiles = new ArrayList<>();
+
+        try(Stream<Path> paths = Files.walk(Paths.get(basePath))) {
+            paths.forEach(filePath -> {
+                if (Files.isRegularFile(filePath) && !filter.testFile(filePath)) {
+                    tmpFiles.add(filePath);
+                } else {
+                    System.out.println("File filtered out" + filePath.toString());
                 }
             });
         } catch (Exception e){
