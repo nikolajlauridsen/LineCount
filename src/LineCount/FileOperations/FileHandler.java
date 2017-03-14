@@ -89,12 +89,12 @@ public class FileHandler {
         return tmpFiles.toArray(new Path[0]);
     }
 
-    public Path[] walkDir(String basePath, FileFilter filter){
+    public Path[] walkDir(String basePath, FileFilter fileFilter){
         ArrayList<Path> tmpFiles = new ArrayList<>();
 
         try(Stream<Path> paths = Files.walk(Paths.get(basePath))) {
             paths.forEach(filePath -> {
-                if (Files.isRegularFile(filePath) && !filter.testFile(filePath)) {
+                if (Files.isRegularFile(filePath) && !fileFilter.testFile(filePath)) {
                     tmpFiles.add(filePath);
                 } else {
                     System.out.println("File filtered out" + filePath.toString());
