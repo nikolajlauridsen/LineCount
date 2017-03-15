@@ -2,7 +2,6 @@ package LineCount.FileOperations.Files;
 
 
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,12 +16,10 @@ public class CodeFile {
     private Pattern javaPattern = Pattern.compile("^\\s*?(//|/\\*[*]?|\\*[/]?)[\\s\\S]*?$");
     private Pattern whiteSpacePattern = Pattern.compile("^\\s*?$");
 
-    private String absPath;
+    private Path absPath;
     private Path root;
-    private Path relPath;
-    private String fileName;
-    private String extension;
     private String[] content;
+
     private int commentCount = 0;
     private int lineCount;
     private int whiteSpace = 0;
@@ -32,14 +29,11 @@ public class CodeFile {
      * @param absPath String absPath to file
      * @param content String[] file content as list of strings
      */
-    public CodeFile(String absPath, String[] content, Path root){
+    public CodeFile(Path absPath, String[] content, Path root){
         // TODO: switch strings to path objects internally, too lazy atm.
         // Path info
         this.absPath = absPath;
         this.root = root;
-        this.relPath = root.relativize(Paths.get(this.absPath));
-        this.fileName = readFilename(this.absPath);
-        this.extension = readExtension(this.absPath);
         // content and statistics
         this.content = content;
         this.lineCount = this.content.length;
@@ -53,7 +47,7 @@ public class CodeFile {
      */
     private Boolean testComment(String line){
         Matcher matcher;
-        if(extension.equals("java")){
+        if(readExtension(this.absPath.toString()).equals("java")){
             matcher = this.javaPattern.matcher(line);
         } else {
             matcher = this.pythonPattern.matcher(line);
@@ -140,7 +134,7 @@ public class CodeFile {
      * @return String absPath to file
      */
     public String getAbsPath(){
-        return this.absPath;
+        return this.absPath.toString();
     }
 
     /**
@@ -148,7 +142,7 @@ public class CodeFile {
      * @return String relative path to the file
      */
     public String getRelPath(){
-        return this.relPath.toString();
+        return root.relativize(this.absPath).toString();
     }
 
     public String getRootDir(){
@@ -159,7 +153,7 @@ public class CodeFile {
      * @return String name of file including extension
      */
     public String getFileName(){
-        return this.fileName;
+        return readFilename(this.absPath.toString());
     }
 
     /**
@@ -167,7 +161,7 @@ public class CodeFile {
      * @return String extension of the file
      */
     public String getExtension(){
-        return this.extension;
+        return readExtension(this.absPath.toString());
     }
 
     /**
