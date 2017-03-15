@@ -5,3 +5,19 @@
 !LineCount.FileOperations.Utils.FileParserModel
    commentRegex: ^\s*?#[\s\S]*$
    typeExtension: py
+---
+!LineCount.FileOperations.Utils.FileParserModel
+   commentRegex: ^\s*?#[\s\S]*$
+   typeExtension: pyw
+---
+!LineCount.FileOperations.Utils.FileParserModel
+   commentRegex: ^\s*?/\*[\s\S]*$
+   typeExtension: css
+---
+!LineCount.FileOperations.Utils.FileParserModel
+   commentRegex: ^\s*?\<\!\-\-[\s\S]*$
+   typeExtension: html
+---
+!LineCount.FileOperations.Utils.FileParserModel
+   commentRegex: ^\s*?//[\s\S]*$
+   typeExtension: js
