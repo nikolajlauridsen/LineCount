@@ -1,21 +1,16 @@
 package LineCount.FileOperations.Files;
 
 
+import LineCount.FileOperations.Utils.FileParser;
+
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Object representing a file containing source code, and statistics about said code
  */
 public class CodeFile extends TextFile{
-
-    // Python comments starts with # and doc strings starts/ends with """ TODO: handle doc strings
-    private Pattern pythonPattern = Pattern.compile("^\\s*?#[\\s\\S]*$");
-    // Java has a lot of comments, catch the line as comment if it begins with: //, /*, /**, *, or */
-    private Pattern javaPattern = Pattern.compile("^\\s*?(//|/\\*[*]?|\\*[/]?)[\\s\\S]*?$");
-    private Pattern whiteSpacePattern = Pattern.compile("^\\s*?$");
+    private FileParser parser = new FileParser();
 
     private Path absPath;
     private Path root;
@@ -43,43 +38,6 @@ public class CodeFile extends TextFile{
             e.printStackTrace();
         }
 
-        this.analyzeContent();
-    }
-
-    /**
-     * Test whether a string matches the comment regex and increment comment count if it does
-     * @param line String to be tested
-     * @return Bool whether line is a comment
-     */
-    private Boolean testComment(String line){
-        Matcher matcher;
-        if(readExtension(this.absPath.toString()).equals("java")){
-            matcher = this.javaPattern.matcher(line);
-        } else {
-            matcher = this.pythonPattern.matcher(line);
-        }
-
-        if (matcher.matches()) {
-            this.commentCount++;
-            return true;
-        } else{
-            return false;
-        }
-    }
-
-    /**
-     * Test whether a string matches the whitespace regex and increment whitespace if it does
-     * @param line String to be tested
-     * @return Bool whether the line is whitespace
-     */
-    private Boolean testWhitespace(String line){
-        Matcher matcher = this.whiteSpacePattern.matcher(line);
-        if(matcher.matches()){
-            this.whiteSpace++;
-            return true;
-        } else{
-            return false;
-        }
     }
 
     /**
@@ -92,8 +50,10 @@ public class CodeFile extends TextFile{
         for(String line: content){
             // Test whether each line is a comment, if it isn't test whether it's whitespace
             // updates commentCount and whitespace
-            if (!testComment(line)){
-                testWhitespace(line);
+            if (this.parser.testComment(line)){
+                this.commentCount++;
+            } else if(this.parser.testWhitespace(line)){
+                this.whiteSpace++;
             }
         }
     }
@@ -128,6 +88,13 @@ public class CodeFile extends TextFile{
         } else {
             return "No filename found";
         }
+    }
+
+
+    public void setParser(FileParser _parser){
+        this.parser = _parser;
+        this.analyzeContent();
+        System.out.println("Parser set: " + this.parser.getType());
     }
 
     /**

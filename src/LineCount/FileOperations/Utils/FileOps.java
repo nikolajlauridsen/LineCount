@@ -20,10 +20,11 @@ public interface FileOps {
      */
     static CodeFile[] getCodeFiles(Path[] pathArray, Path root){
         CodeFile[] fileArray = new CodeFile[pathArray.length];
-
+        FileParser[] parsers = readParsers("fileparsers.yml");
         for (int i = 0; i < pathArray.length; i++){
             try {
                 CodeFile file = new CodeFile(pathArray[i], root);
+                file.setParser(chooseParser(parsers, file.getExtension()));
                 fileArray[i] = file;
             } catch (Exception e){
                 e.printStackTrace();
@@ -92,6 +93,18 @@ public interface FileOps {
         }
 
         return parsers.toArray(new FileParser[0]);
+    }
+
+    static FileParser chooseParser(FileParser[] parsers, String extension){
+        for(FileParser parser: parsers){
+            if(parser.getType().equals(extension) ){
+                return parser;
+            }
+        }
+
+        // If no fileparser is found return a default
+        return new FileParser();
+
     }
 
 }

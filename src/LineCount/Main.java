@@ -8,7 +8,6 @@ import javax.swing.JFrame;
 public class Main {
 
     public static void main(String[] args) {
-        FileOps.readParsers("fileparsers.yml");
         JFrame projectManager = new JFrame("Project manager");
         projectManager.add(new ProjectPanel());
 
