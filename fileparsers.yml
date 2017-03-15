@@ -1,0 +1,7 @@
+!LineCount.FileOperations.Utils.FileParserModel
+   commentRegex: ^\s*?(//|/\*[*]?|\*[/]?)[\s\S]*?$
+   typeExtension: java
+---
+!LineCount.FileOperations.Utils.FileParserModel
+   commentRegex: ^\s*?#[\s\S]*$
+   typeExtension: py

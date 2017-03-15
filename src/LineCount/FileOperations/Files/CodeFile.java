@@ -34,6 +34,8 @@ public class CodeFile extends TextFile{
         this.absPath = absPath;
         this.root = root;
 
+        // TODO: Add FileParser depending on file extension here
+
         // content and statistics
         try{
             read(absPath);

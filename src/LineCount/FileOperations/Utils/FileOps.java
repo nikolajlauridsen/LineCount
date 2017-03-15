@@ -1,7 +1,10 @@
 package LineCount.FileOperations.Utils;
 
 import LineCount.FileOperations.Files.CodeFile;
+import com.esotericsoftware.yamlbeans.YamlReader;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -63,6 +66,32 @@ public interface FileOps {
         }
 
         return tmpFiles.toArray(new Path[0]);
+    }
+
+    /**
+     * Read file parses from a yaml file
+     * @param path String path to file
+     */
+    static FileParser[] readParsers(String path) {
+        // Create
+        ArrayList<FileParser> parsers = new ArrayList<>();
+        try {
+            YamlReader reader = new YamlReader(new FileReader(path));
+            while (true){
+                FileParserModel model = reader.read(FileParserModel.class);
+                if (model == null){
+                    break;
+                }
+
+                System.out.println(model.typeExtension);
+                System.out.println(model.commentRegex);
+                parsers.add(new FileParser(model));
+            }
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return parsers.toArray(new FileParser[0]);
     }
 
 }
