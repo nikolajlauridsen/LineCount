@@ -1,6 +1,7 @@
 package LineCount.FileOperations.Files;
 
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -8,7 +9,7 @@ import java.util.regex.Pattern;
 /**
  * Object representing a file containing source code, and statistics about said code
  */
-public class CodeFile {
+public class CodeFile extends TextFile{
 
     // Python comments starts with # and doc strings starts/ends with """ TODO: handle doc strings
     private Pattern pythonPattern = Pattern.compile("^\\s*?#[\\s\\S]*$");
@@ -18,7 +19,6 @@ public class CodeFile {
 
     private Path absPath;
     private Path root;
-    private String[] content;
 
     private int commentCount = 0;
     private int lineCount;
@@ -26,17 +26,21 @@ public class CodeFile {
 
     /**
      * Constructor which reads the content and assigns variables
-     * @param absPath String absPath to file
-     * @param content String[] file content as list of strings
+     * @param absPath absolute path to the file
+     * @param root path to codeproject root folder
      */
-    public CodeFile(Path absPath, String[] content, Path root){
-        // TODO: switch strings to path objects internally, too lazy atm.
+    public CodeFile(Path absPath, Path root){
         // Path info
         this.absPath = absPath;
         this.root = root;
+
         // content and statistics
-        this.content = content;
-        this.lineCount = this.content.length;
+        try{
+            read(absPath);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
         this.analyzeContent();
     }
 
@@ -80,6 +84,9 @@ public class CodeFile {
      * Count the amount of comments and whitespaces in the file.
      */
     private void analyzeContent(){
+        String[] content = getContent();
+        this.lineCount = content.length;
+
         for(String line: content){
             // Test whether each line is a comment, if it isn't test whether it's whitespace
             // updates commentCount and whitespace
@@ -119,14 +126,6 @@ public class CodeFile {
         } else {
             return "No filename found";
         }
-    }
-
-    /**
-     * Get the content of the file as a list of strings, each string is a single line
-     * @return String[] content of the file
-     */
-    public String[] getContent(){
-        return this.content;
     }
 
     /**

@@ -2,7 +2,6 @@ package LineCount.GUI;
 
 
 import LineCount.FileOperations.Utils.FileFilter;
-import LineCount.FileOperations.Utils.FileHandler;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static LineCount.FileOperations.Utils.FileOps.walkDir;
+
 public class ProjectPanel extends JPanel {
     private JLabel titleLabel = new JLabel();
     private JTextField folderField = new JTextField();
@@ -20,7 +21,6 @@ public class ProjectPanel extends JPanel {
     private Path projectDir;
     private Path[] filePaths;
     private FilePicker filePicker = new FilePicker();
-    private FileHandler fileHandler = new FileHandler();
 
     public ProjectPanel(){
         try{
@@ -123,7 +123,7 @@ public class ProjectPanel extends JPanel {
             System.out.println("gitignore not found");
         }
 
-        this.filePaths = fileHandler.walkDir(folderField.getText(), ignoreFiles);
+        this.filePaths = walkDir(folderField.getText(), ignoreFiles);
         // Add each path to the filePicker if it's longer than 2 characters
         for (Path path: this.filePaths){
             if (path.toString().length() > 2) {

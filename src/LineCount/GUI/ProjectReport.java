@@ -1,7 +1,6 @@
 package LineCount.GUI;
 
 import LineCount.FileOperations.Files.CodeFile;
-import LineCount.FileOperations.Utils.FileHandler;
 import LineCount.FileOperations.Files.ReportFile;
 
 import javax.swing.*;
@@ -12,13 +11,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import static LineCount.FileOperations.Utils.FileOps.getCodeFiles;
+
 /**
  * The Project report frame, holds a jpanel displaying statistics about the code project
  */
 class ProjectReport extends JFrame{
 
     private CodeFile[] files;
-    private FileHandler fileHandler = new FileHandler();
 
     /**
      *
@@ -31,7 +31,9 @@ class ProjectReport extends JFrame{
         this.setSize(700, 500);
         this.setVisible(true);
         this.setResizable(false);
-        this.files = fileHandler.readFiles(_files, root);
+
+        this.files = getCodeFiles(_files, root);
+
         this.add(new ReportPanel());
     }
 
