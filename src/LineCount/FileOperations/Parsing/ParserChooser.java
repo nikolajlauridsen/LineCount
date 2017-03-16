@@ -32,14 +32,19 @@ public class ParserChooser {
         try {
             YamlReader reader = new YamlReader(new FileReader(path));
             while (true) {
-                FileParserModel model = reader.read(FileParserModel.class);
-                if (model == null) {
+                try {
+                    FileParserModel model = reader.read(FileParserModel.class);
+                    if (model == null) {
+                        break;
+                    }
+
+                    System.out.println(model.typeExtension);
+                    System.out.println(model.commentRegex);
+                    parsers.add(new FileParser(model));
+                } catch (YamlReader.YamlReaderException e){
+                    System.out.println("Invalid yaml file");
                     break;
                 }
-
-                System.out.println(model.typeExtension);
-                System.out.println(model.commentRegex);
-                parsers.add(new FileParser(model));
             }
         } catch (IOException e) {
             e.printStackTrace();
