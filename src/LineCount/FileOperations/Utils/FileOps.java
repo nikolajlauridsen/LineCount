@@ -31,6 +31,11 @@ public interface FileOps {
         return fileArray;
     }
 
+    /**
+     * Walk a directory, top down. returning all paths in the directory and all sub directories
+     * @param basePath String path to folder to walk
+     * @return Path[] array of paths in the folder
+     */
     static Path[] walkDir(String basePath){
         ArrayList<Path> tmpFiles = new ArrayList<>();
 
@@ -47,6 +52,12 @@ public interface FileOps {
         return tmpFiles.toArray(new Path[0]);
     }
 
+    /**
+     * Walk a directory, top down, filtering out undesired files with a FileFilter
+     * @param basePath String path to folder to walk
+     * @param fileFilter FileFilter to filter out files with
+     * @return Path[] array of paths in the folder not filtered out
+     */
     static Path[] walkDir(String basePath, FileFilter fileFilter){
         ArrayList<Path> tmpFiles = new ArrayList<>();
 
