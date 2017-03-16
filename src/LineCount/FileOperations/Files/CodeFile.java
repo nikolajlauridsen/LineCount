@@ -1,7 +1,8 @@
 package LineCount.FileOperations.Files;
 
 
-import LineCount.FileOperations.Utils.FileParser;
+import LineCount.FileOperations.Parsing.FileParser;
+import LineCount.FileOperations.Parsing.ParserChooser;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -10,7 +11,7 @@ import java.nio.file.Path;
  * Object representing a file containing source code, and statistics about said code
  */
 public class CodeFile extends TextFile{
-    private FileParser parser = new FileParser();
+    private FileParser parser;
 
     private Path absPath;
     private Path root;
@@ -24,10 +25,11 @@ public class CodeFile extends TextFile{
      * @param absPath absolute path to the file
      * @param root path to codeproject root folder
      */
-    public CodeFile(Path absPath, Path root){
+    public CodeFile(Path absPath, Path root, ParserChooser parsers){
         // Path info
         this.absPath = absPath;
         this.root = root;
+        this.parser = parsers.getParser(this.getExtension());
 
         // TODO: Add FileParser depending on file extension here
 
@@ -37,6 +39,8 @@ public class CodeFile extends TextFile{
         } catch (IOException e){
             e.printStackTrace();
         }
+
+        this.analyzeContent();
 
     }
 
@@ -91,11 +95,6 @@ public class CodeFile extends TextFile{
     }
 
 
-    public void setParser(FileParser _parser){
-        this.parser = _parser;
-        this.analyzeContent();
-        System.out.println("Parser set: " + this.parser.getType());
-    }
 
     /**
      * Get the absolute path to the file

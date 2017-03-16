@@ -1,4 +1,4 @@
-package LineCount.FileOperations.Utils;
+package LineCount.FileOperations.Parsing;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

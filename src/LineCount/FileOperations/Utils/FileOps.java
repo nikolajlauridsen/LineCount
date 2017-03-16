@@ -1,10 +1,8 @@
 package LineCount.FileOperations.Utils;
 
 import LineCount.FileOperations.Files.CodeFile;
-import com.esotericsoftware.yamlbeans.YamlReader;
+import LineCount.FileOperations.Parsing.ParserChooser;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -18,13 +16,11 @@ public interface FileOps {
      * @param pathArray String[] array of paths to files as strings
      * @return CodeFile[] array of codefile objects containing the file contents, statistics and more
      */
-    static CodeFile[] getCodeFiles(Path[] pathArray, Path root){
+    static CodeFile[] getCodeFiles(Path[] pathArray, Path root, ParserChooser parsers){
         CodeFile[] fileArray = new CodeFile[pathArray.length];
-        FileParser[] parsers = readParsers("fileparsers.yml");
         for (int i = 0; i < pathArray.length; i++){
             try {
-                CodeFile file = new CodeFile(pathArray[i], root);
-                file.setParser(chooseParser(parsers, file.getExtension()));
+                CodeFile file = new CodeFile(pathArray[i], root, parsers);
                 fileArray[i] = file;
             } catch (Exception e){
                 e.printStackTrace();
@@ -67,44 +63,6 @@ public interface FileOps {
         }
 
         return tmpFiles.toArray(new Path[0]);
-    }
-
-    /**
-     * Read file parses from a yaml file
-     * @param path String path to file
-     */
-    static FileParser[] readParsers(String path) {
-        // Create
-        ArrayList<FileParser> parsers = new ArrayList<>();
-        try {
-            YamlReader reader = new YamlReader(new FileReader(path));
-            while (true){
-                FileParserModel model = reader.read(FileParserModel.class);
-                if (model == null){
-                    break;
-                }
-
-                System.out.println(model.typeExtension);
-                System.out.println(model.commentRegex);
-                parsers.add(new FileParser(model));
-            }
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-        return parsers.toArray(new FileParser[0]);
-    }
-
-    static FileParser chooseParser(FileParser[] parsers, String extension){
-        for(FileParser parser: parsers){
-            if(parser.getType().equals(extension) ){
-                return parser;
-            }
-        }
-
-        // If no fileparser is found return a default
-        return new FileParser();
-
     }
 
 }

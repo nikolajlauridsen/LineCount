@@ -1,4 +1,4 @@
-package LineCount.FileOperations.Utils;
+package LineCount.FileOperations.Parsing;
 
 /**
  * Model needed for loading parser from yaml

@@ -2,6 +2,7 @@ package LineCount.GUI;
 
 import LineCount.FileOperations.Files.CodeFile;
 import LineCount.FileOperations.Files.ReportFile;
+import LineCount.FileOperations.Parsing.ParserChooser;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,14 +26,14 @@ class ProjectReport extends JFrame{
      * @param _files Path array of paths for project files
      * @param root Path object of the root directory of the project
      */
-    ProjectReport(Path[] _files, Path root){
+    ProjectReport(Path[] _files, Path root, ParserChooser parsers){
         this.setTitle("Project Report");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(700, 500);
         this.setVisible(true);
         this.setResizable(false);
 
-        this.files = getCodeFiles(_files, root);
+        this.files = getCodeFiles(_files, root, parsers);
 
         this.add(new ReportPanel());
     }

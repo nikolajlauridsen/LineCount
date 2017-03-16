@@ -1,6 +1,7 @@
 package LineCount.GUI;
 
 
+import LineCount.FileOperations.Parsing.ParserChooser;
 import LineCount.FileOperations.Utils.FileFilter;
 
 import javax.swing.*;
@@ -21,8 +22,11 @@ public class ProjectPanel extends JPanel {
     private Path projectDir;
     private Path[] filePaths;
     private FilePicker filePicker = new FilePicker();
+    private ParserChooser parsers;
 
     public ProjectPanel(){
+
+        this.parsers = new ParserChooser("fileparsers.yml");
         try{
             Init();
         } catch (Exception e){
@@ -85,8 +89,9 @@ public class ProjectPanel extends JPanel {
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
                 Path[] selectedPaths = filePicker.getSelectedPaths(folderField.getText());
-                new ProjectReport(selectedPaths, projectDir);
+                new ProjectReport(selectedPaths, projectDir, parsers);
             }
         });
         c.gridx = 1;
