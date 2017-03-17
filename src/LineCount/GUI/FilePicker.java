@@ -20,22 +20,20 @@ public class FilePicker extends JPanel implements ListSelectionListener {
     private JButton removeButton;
 
      FilePicker(){
-        super(new GridBagLayout());
+        this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         removedListModel = new DefaultListModel();
 
-        Dimension listSize = new Dimension(100, 100);
+        Dimension listSize = new Dimension(400, 300);
         // Create the removedList and put it in a scroll pane
         removedList = new JList(removedListModel);
         removedList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         removedList.setSelectedIndex(-1);
         removedList.setLayoutOrientation(JList.VERTICAL);
         removedList.addListSelectionListener(this);
-        removedList.setSize(listSize);
-        removedList.setMaximumSize(listSize);
-        removedList.setMinimumSize(listSize);
         JScrollPane removedScrollPane = new JScrollPane(removedList);
+        removedScrollPane.setPreferredSize(listSize);
 
 
         // Create the addedList
@@ -46,10 +44,8 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         addedList.setSelectedIndex(-1);
         addedList.setLayoutOrientation(JList.VERTICAL);
         addedList.addListSelectionListener(this);
-        addedList.setSize(listSize);
-        addedList.setMaximumSize(listSize);
-        addedList.setMinimumSize(listSize);
         JScrollPane addedScrollPane = new JScrollPane(addedList);
+        addedScrollPane.setPreferredSize(listSize);
 
 
         String addString = "+";
@@ -73,14 +69,14 @@ public class FilePicker extends JPanel implements ListSelectionListener {
 
         // + and - buttons
         c.gridheight = 1;
-        c.gridx = 2;
+        c.gridx = 1;
         this.add(addButton, c);
         c.gridy = 1;
         this.add(removeButton, c);
 
         // added files
         c.gridheight = 2;
-        c.gridx = 3;
+        c.gridx = 2;
         c.gridy = 0;
         this.add(addedScrollPane, c);
 

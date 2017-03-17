@@ -1,6 +1,5 @@
 package LineCount;
 
-import LineCount.FileOperations.Utils.FileOps;
 import LineCount.GUI.ProjectPanel;
 
 import javax.swing.JFrame;
@@ -12,8 +11,8 @@ public class Main {
         projectManager.add(new ProjectPanel());
 
         projectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        projectManager.setSize(650, 300);
-        projectManager.setResizable(false);
+        projectManager.setSize(900, 450);
+        projectManager.setResizable(true);
         projectManager.setVisible(true);
     }
 }
