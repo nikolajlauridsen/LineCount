@@ -37,7 +37,7 @@ public class TextFile {
      */
     public void saveFile (Path path) throws IOException{
         try(BufferedWriter writer = Files.newBufferedWriter(path, this.charset)){
-            for (String line: content.toArray(new String[0])){
+            for (String line: this.getContent()){
                 writer.write(line+"\n");
             }
         }
