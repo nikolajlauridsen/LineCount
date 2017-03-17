@@ -1,23 +1,23 @@
 !LineCount.FileOperations.Parsing.FileParserModel
-   commentRegex: ^\s*?(//|/\*[*]?|\*[/]?)[\s\S]*?$
+   commentRegex: (//|/\*[*]?|\*[/]?)
    typeExtension: java
 ---
 !LineCount.FileOperations.Parsing.FileParserModel
-   commentRegex: ^\s*?#[\s\S]*$
+   commentRegex: \#
    typeExtension: py
 ---
 !LineCount.FileOperations.Parsing.FileParserModel
-   commentRegex: ^\s*?#[\s\S]*$
+   commentRegex: \#
    typeExtension: pyw
 ---
 !LineCount.FileOperations.Parsing.FileParserModel
-   commentRegex: ^\s*?/\*[\s\S]*$
+   commentRegex: /\*
    typeExtension: css
 ---
 !LineCount.FileOperations.Parsing.FileParserModel
-   commentRegex: ^\s*?\<\!\-\-[\s\S]*$
+   commentRegex: \<\!\-\-
    typeExtension: html
 ---
 !LineCount.FileOperations.Parsing.FileParserModel
-   commentRegex: ^\s*?//[\s\S]*$
+   commentRegex: //
    typeExtension: js

@@ -13,7 +13,9 @@ public class FileParser {
      * @param model to build FileParser from
      */
     public FileParser(FileParserModel model){
-        this.commentPattern = Pattern.compile(model.commentRegex);
+        String commentRegex = "^\\s*?" + model.commentRegex + "[\\s\\S]*?$";
+        System.out.println("Regex set: " + commentRegex);
+        this.commentPattern = Pattern.compile(commentRegex);
         this.typeExtension = model.typeExtension;
     }
 
