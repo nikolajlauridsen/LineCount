@@ -49,14 +49,16 @@ public class ProjectPanel extends JPanel {
         c.gridy = 0;
         c.gridwidth = 2;
         this.add(titleLabel, c);
+        c.gridy = 1;
+        this.add(Box.createRigidArea(new Dimension(0, 5)), c);
 
         // Then folderfield
         c.gridwidth = 1;
         folderField.setText("Choose folder");
         folderField.setEditable(false);
-        folderField.setColumns(35);
+        folderField.setColumns(68);
         c.gridx = 0;
-        c.gridy = 1;
+        c.gridy = 2;
         this.add(folderField, c);
 
 
@@ -95,17 +97,19 @@ public class ProjectPanel extends JPanel {
             }
         });
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 2;
         this.add(openChooser, c);
 
         // Add file picker (configured when object is initialized)
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy = 3;
         c.gridwidth = 2;
         this.add(filePicker, c);
 
+        c.gridy = 4;
+        this.add(Box.createRigidArea(new Dimension(0, 5)), c);
         // Same goes for the generate button
-        c.gridy = 3;
+        c.gridy = 5;
         c.gridwidth = 2;
         this.add(generateButton, c);
 
