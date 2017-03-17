@@ -12,7 +12,9 @@ import java.nio.file.Paths;
 
 public class FilePicker extends JPanel implements ListSelectionListener {
     private JList removedList;
+    private JLabel removedTitle = new JLabel("Files");
     private JList addedList;
+    private JLabel addedTitle = new JLabel("Added files");
     private DefaultListModel removedListModel;
     private DefaultListModel addedListModel;
 
@@ -20,67 +22,77 @@ public class FilePicker extends JPanel implements ListSelectionListener {
     private JButton removeButton;
 
      FilePicker(){
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+         this.setLayout(new GridBagLayout());
+         GridBagConstraints c = new GridBagConstraints();
 
-        removedListModel = new DefaultListModel();
+         removedListModel = new DefaultListModel();
 
-        Dimension listSize = new Dimension(400, 300);
-        // Create the removedList and put it in a scroll pane
-        removedList = new JList(removedListModel);
-        removedList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        removedList.setSelectedIndex(-1);
-        removedList.setLayoutOrientation(JList.VERTICAL);
-        removedList.addListSelectionListener(this);
-        JScrollPane removedScrollPane = new JScrollPane(removedList);
-        removedScrollPane.setPreferredSize(listSize);
-
-
-        // Create the addedList
-        // Create the removedList and put it in a scroll pane
-        addedListModel = new DefaultListModel();
-        addedList = new JList(addedListModel);
-        addedList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        addedList.setSelectedIndex(-1);
-        addedList.setLayoutOrientation(JList.VERTICAL);
-        addedList.addListSelectionListener(this);
-        JScrollPane addedScrollPane = new JScrollPane(addedList);
-        addedScrollPane.setPreferredSize(listSize);
+         Dimension listSize = new Dimension(400, 300);
+         // Create the removedList and put it in a scroll pane
+         removedList = new JList(removedListModel);
+         removedList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+         removedList.setSelectedIndex(-1);
+         removedList.setLayoutOrientation(JList.VERTICAL);
+         removedList.addListSelectionListener(this);
+         JScrollPane removedScrollPane = new JScrollPane(removedList);
+         removedScrollPane.setPreferredSize(listSize);
 
 
-        String addString = "+";
-        addButton = new JButton(addString);
-        addButton.setActionCommand(addString);
-        addButton.setEnabled(false);
-        addButton.addActionListener(new AddListener());
+         // Create the addedList
+         // Create the removedList and put it in a scroll pane
+         addedListModel = new DefaultListModel();
+         addedList = new JList(addedListModel);
+         addedList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+         addedList.setSelectedIndex(-1);
+         addedList.setLayoutOrientation(JList.VERTICAL);
+         addedList.addListSelectionListener(this);
+         JScrollPane addedScrollPane = new JScrollPane(addedList);
+         addedScrollPane.setPreferredSize(listSize);
 
-        String removeString = "-";
-        removeButton = new JButton(removeString);
-        removeButton.setActionCommand(removeString);
-        removeButton.setEnabled(false);
-        removeButton.addActionListener(new RemoveListener());
 
-        // Add the elements to the panel
-        // removed files
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridheight = 2;
-        this.add(removedScrollPane, c);
+         String addString = "+";
+         addButton = new JButton(addString);
+         addButton.setActionCommand(addString);
+         addButton.setEnabled(false);
+         addButton.addActionListener(new AddListener());
 
-        // + and - buttons
-        c.gridheight = 1;
-        c.gridx = 1;
-        this.add(addButton, c);
-        c.gridy = 1;
-        this.add(removeButton, c);
+         String removeString = "-";
+         removeButton = new JButton(removeString);
+         removeButton.setActionCommand(removeString);
+         removeButton.setEnabled(false);
+         removeButton.addActionListener(new RemoveListener());
+
+         // Add the elements to the panel
+         // removed files
+         c.gridx = 0;
+         c.gridy = 0;
+         this.add(removedTitle, c);
+         c.gridy = 1;
+         this.add(removedScrollPane, c);
+
+         // + and - buttons
+         Box buttonBox = Box.createVerticalBox();
+         buttonBox.add(Box.createVerticalGlue());
+         buttonBox.add(addButton);
+         buttonBox.add(Box.createRigidArea(new Dimension(0, 20)));
+         buttonBox.add(removeButton);
+         buttonBox.add(Box.createVerticalGlue());
+         c.gridy = 0;
+         c.gridx = 1;
+         c.gridheight = 2;
+         this.add(Box.createRigidArea(new Dimension(5, 0)));
+         c.gridx = 2;
+         this.add(buttonBox, c);
+         c.gridx = 3;
+         this.add(Box.createRigidArea(new Dimension(5, 0)));
 
         // added files
-        c.gridheight = 2;
-        c.gridx = 2;
-        c.gridy = 0;
-        this.add(addedScrollPane, c);
-
-
+         c.gridheight = 1;
+         c.gridx = 4;
+         c.gridy = 0;
+         this.add(addedTitle, c);
+         c.gridy = 1;
+         this.add(addedScrollPane, c);
     }
 
     void addPath(String path){
