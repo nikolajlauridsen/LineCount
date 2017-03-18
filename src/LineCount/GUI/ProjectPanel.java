@@ -124,15 +124,15 @@ public class ProjectPanel extends JPanel {
         filePicker.emptyLists();    // Empty the lists
         // Refresh the filePaths array  with the items from the selected folder
         // Create file filter
-        Path ignorefile = this.projectDir.resolve(".gitignore");
-        FileFilter ignoreFiles = new FileFilter();
+        Path ignoreFile = this.projectDir.resolve(".gitignore");
+        FileFilter fileFilter = new FileFilter();
         try {
-            ignoreFiles.ParseIgnoreFile(ignorefile);
+            fileFilter.ParseIgnoreFile(ignoreFile);
         } catch (IOException e){
             System.out.println("gitignore not found");
         }
 
-        this.filePaths = walkDir(folderField.getText(), ignoreFiles);
+        this.filePaths = walkDir(folderField.getText(), fileFilter);
         // Add each path to the filePicker if it's longer than 2 characters
         for (Path path: this.filePaths){
             if (path.toString().length() > 2) {

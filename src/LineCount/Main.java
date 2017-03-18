@@ -12,7 +12,7 @@ public class Main {
 
         projectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         projectManager.setSize(900, 450);
-        projectManager.setResizable(true);
+        projectManager.setResizable(false);
         projectManager.setVisible(true);
     }
 }
