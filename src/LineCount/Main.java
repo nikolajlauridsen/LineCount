@@ -1,6 +1,6 @@
 package LineCount;
 
-import LineCount.GUI.ProjectPanel;
+import LineCount.GUI.ProjectManager;
 
 import javax.swing.JFrame;
 
@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
         JFrame projectManager = new JFrame("Project manager");
-        projectManager.add(new ProjectPanel());
+        projectManager.add(new ProjectManager());
 
         projectManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         projectManager.setSize(900, 450);

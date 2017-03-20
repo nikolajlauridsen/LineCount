@@ -31,8 +31,6 @@ public class CodeFile extends TextFile{
         this.root = root;
         this.parser = parsers.getParser(this.getExtension());
 
-        // TODO: Add FileParser depending on file extension here
-
         // content and statistics
         try{
             read(absPath);
@@ -40,6 +38,7 @@ public class CodeFile extends TextFile{
             e.printStackTrace();
         }
 
+        // Fill out commentCount, lineCount and whiteSpace
         this.analyzeContent();
 
     }
@@ -93,8 +92,6 @@ public class CodeFile extends TextFile{
             return "No filename found";
         }
     }
-
-
 
     /**
      * Get the absolute path to the file

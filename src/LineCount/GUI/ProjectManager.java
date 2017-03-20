@@ -14,7 +14,7 @@ import java.nio.file.Paths;
 
 import static LineCount.FileOperations.Utils.FileOps.walkDir;
 
-public class ProjectPanel extends JPanel {
+public class ProjectManager extends JPanel {
     private JLabel titleLabel = new JLabel();
     private JTextField folderField = new JTextField();
     private JButton openChooser = new JButton();
@@ -24,7 +24,7 @@ public class ProjectPanel extends JPanel {
     private FilePicker filePicker = new FilePicker();
     private ParserChooser parsers;
 
-    public ProjectPanel(){
+    public ProjectManager(){
 
         this.parsers = new ParserChooser("fileparsers.yml");
         try{
@@ -70,7 +70,7 @@ public class ProjectPanel extends JPanel {
             public void actionPerformed(ActionEvent actionEvent) {
                 if (actionEvent.getSource() == openChooser){
                     // returnVal is used to check if a folder is actually chosen
-                    int returnVal = folderChooser.showOpenDialog(ProjectPanel.this);
+                    int returnVal = folderChooser.showOpenDialog(ProjectManager.this);
 
                     // If there indeed has been a selection
                     if(returnVal == JFileChooser.APPROVE_OPTION){
@@ -107,7 +107,7 @@ public class ProjectPanel extends JPanel {
         this.add(filePicker, c);
 
         c.gridy = 4;
-        this.add(Box.createRigidArea(new Dimension(0, 5)), c);
+        this.add(Box.createRigidArea(new Dimension(0, 10)), c);
         // Same goes for the generate button
         c.gridy = 5;
         c.gridwidth = 2;
