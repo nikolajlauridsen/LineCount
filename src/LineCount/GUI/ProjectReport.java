@@ -23,17 +23,17 @@ class ProjectReport extends JFrame{
 
     /**
      *
-     * @param _files Path array of paths for project files
+     * @param files Path array of paths for project files
      * @param root Path object of the root directory of the project
      */
-    ProjectReport(Path[] _files, Path root, ParserChooser parsers){
+    ProjectReport(Path[] files, Path root, ParserChooser parsers){
         this.setTitle("Project Report");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(700, 500);
         this.setVisible(true);
         this.setResizable(false);
 
-        this.files = getCodeFiles(_files, root, parsers);
+        this.files = getCodeFiles(files, root, parsers);
 
         this.add(new ReportPanel());
     }
@@ -93,6 +93,10 @@ class ProjectReport extends JFrame{
                     }
                 }
             });
+
+            // Set alignment on the buttons
+            saveMD.setAlignmentX(Component.CENTER_ALIGNMENT);
+            saveTXT.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             this.add(Box.createRigidArea(new Dimension(0, 5)));
             this.add(title);
