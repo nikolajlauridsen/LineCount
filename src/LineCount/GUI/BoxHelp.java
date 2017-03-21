@@ -3,7 +3,7 @@ package LineCount.GUI;
 import javax.swing.*;
 import java.awt.*;
 
-public interface BoxHelp {
+interface BoxHelp {
 
     static Component leftJustify(Component panel, int padding){
         Box box = Box.createHorizontalBox();
@@ -20,4 +20,5 @@ public interface BoxHelp {
         box.add(Box.createRigidArea(new Dimension(padding, 0)));
         return box;
     }
+
 }

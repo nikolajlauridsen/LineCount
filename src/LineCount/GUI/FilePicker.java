@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-public class FilePicker extends JPanel implements ListSelectionListener {
+class FilePicker extends JPanel implements ListSelectionListener {
     private JList removedList;
     private JLabel removedTitle = new JLabel("Files");
     private JList addedList;

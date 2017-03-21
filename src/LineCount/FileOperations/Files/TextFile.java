@@ -50,7 +50,7 @@ public class TextFile {
      */
     public void load(Path file) throws IOException{
         try (BufferedReader reader = Files.newBufferedReader(file, charset)){
-            String line = null;
+            String line;
             while ((line = reader.readLine()) != null){
                 this.content.add(line);
             }

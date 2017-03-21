@@ -121,12 +121,4 @@ public class FileFilter{
         this.filter.add(Pattern.compile(parseGlob(glob)));
     }
 
-    /**
-     * Add a regex to the filterlist, this is required if
-     * anything more complex than a glob * is needed
-     * @param regex Pattern regex pattern to be added
-     */
-    public void addRegex(Pattern regex){
-        this.filter.add(regex);
-    }
 }

@@ -36,14 +36,6 @@ public interface MdHelp {
         return "### " + string;
     }
 
-    /**
-     * Turn a string into a markdown h4 heading
-     * @param string String to be a header
-     * @return Header string
-     */
-    static String h4(String string){
-        return "#### " + string;
-    }
 
     /**
      * Generate a list in the markdown format
@@ -81,7 +73,7 @@ public interface MdHelp {
         }
 
         ArrayList<String> table = new ArrayList<>();
-        String header, devider, rowString;
+        String header, rowString;
 
         // Create header
         header = "|";

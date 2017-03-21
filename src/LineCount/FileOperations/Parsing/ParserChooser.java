@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ParserChooser {
-    FileParser[] parsers;
+    private FileParser[] parsers;
 
 
     /**
@@ -57,6 +57,7 @@ public class ParserChooser {
                     System.out.println(model.commentRegex);
                     parsers.add(new FileParser(model));
                 } catch (YamlReader.YamlReaderException e){
+                    // TODO: Add dialog windows displaying error
                     System.out.println("Invalid yaml file");
                 }
             }

@@ -31,26 +31,6 @@ public interface FileOps {
         return fileArray;
     }
 
-    /**
-     * Walk a directory, top down. returning all paths in the directory and all sub directories
-     * @param basePath String path to folder to walk
-     * @return Path[] array of paths in the folder
-     */
-    static Path[] walkDir(String basePath){
-        ArrayList<Path> tmpFiles = new ArrayList<>();
-
-        try(Stream<Path> paths = Files.walk(Paths.get(basePath))) {
-            paths.forEach(filePath -> {
-                if (Files.isRegularFile(filePath)) {
-                    tmpFiles.add(filePath);
-                }
-            });
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return tmpFiles.toArray(new Path[0]);
-    }
 
     /**
      * Walk a directory, top down, filtering out undesired files with a FileFilter

@@ -17,7 +17,6 @@ class FileTable extends JPanel {
     };
     private CodeFile[] files;
     private int columns;
-    private JLabel tableHeading = new JLabel("File overview");
 
     private int total_code = 0;
     private int total_comments = 0;
@@ -74,7 +73,4 @@ class FileTable extends JPanel {
 
     }
 
-    void getTotals(){
-
-    }
 }
