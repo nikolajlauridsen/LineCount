@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static LineCount.FileOperations.Utils.FileOps.walkDir;
+import static LineCount.GUI.BoxHelp.padX;
 
 public class ProjectManager extends JPanel {
     private JLabel titleLabel = new JLabel();
@@ -40,8 +41,7 @@ public class ProjectManager extends JPanel {
      */
     private void Init() throws Exception{
         // Set layout to GridBag and create constraints
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Create choose dir and generate button
         folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -80,39 +80,31 @@ public class ProjectManager extends JPanel {
 
         // Configure and add the title
         titleLabel.setText("Project Manager");
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 5;
-        this.add(titleLabel, c);
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(titleLabel);
 
-        c.gridy = 1;
-        this.add(Box.createRigidArea(new Dimension(0, 5)), c);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
 
         // Add file picker (configured when object is initialized)
-        c.gridy = 2;
-        this.add(filePicker, c);
+        this.add(filePicker);
 
-        c.gridy = 3;
-        this.add(Box.createRigidArea(new Dimension(0, 10)), c);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // Then folderfield
         folderField.setText("Choose folder");
         folderField.setEditable(false);
-        folderField.setColumns(77);
-        c.gridy = 4;
-        this.add(folderField, c);
+        this.add(padX(folderField, 17));
 
-        c.gridy = 5;
-        this.add(Box.createRigidArea(new Dimension(0, 10)), c);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.add(Box.createHorizontalGlue());
         panel.add(openChooser);
-        panel.add(Box.createRigidArea(new Dimension(20, 0)));
+        panel.add(Box.createRigidArea(new Dimension(30, 0)));
         panel.add(generateButton);
         panel.add(Box.createHorizontalGlue());
-        this.add(panel, c);
+        this.add(panel);
 
     }
 

@@ -13,6 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static LineCount.FileOperations.Utils.FileOps.getCodeFiles;
+import static LineCount.GUI.BoxHelp.leftJustify;
 
 /**
  * The Project report frame, holds a jpanel displaying statistics about the code project
@@ -109,13 +110,6 @@ class ProjectReport extends JFrame{
             this.add(saveTXT);
         }
 
-        private Component leftJustify(Component panel, int padding){
-            Box box = Box.createHorizontalBox();
-            box.add(Box.createRigidArea(new Dimension(padding, 0)));
-            box.add(panel);
-            box.add(Box.createHorizontalGlue());
-            return box;
-        }
     }
 
 }
