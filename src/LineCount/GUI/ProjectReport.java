@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static LineCount.FileOperations.Utils.FileOps.getCodeFiles;
-import static LineCount.GUI.BoxHelp.leftJustify;
+import static LineCount.GUI.BoxHelp.*;
 
 /**
  * The Project report frame, holds a jpanel displaying statistics about the code project
@@ -32,7 +32,6 @@ class ProjectReport extends JFrame{
         this.setSize(700, 500);
         this.setVisible(true);
         this.setResizable(false);
-
         this.files = getCodeFiles(files, root, parsers);
 
         this.add(new ReportPanel());
@@ -40,6 +39,8 @@ class ProjectReport extends JFrame{
 
     class ReportPanel extends JPanel{
         FileTable fileOverview;
+        private String[] saveOptions = {"Markdown", "Plaintext"};
+        private JComboBox saveChooser;
 
         ReportPanel(){
             try {init();} catch (Exception e){
@@ -50,6 +51,8 @@ class ProjectReport extends JFrame{
         private void init() throws Exception{
             this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
+            this.saveChooser = new JComboBox(saveOptions);
+            this.saveChooser.setMaximumSize( this.saveChooser.getPreferredSize() );
             fileOverview = new FileTable(files);
             JLabel title = new JLabel("Project report");
 
@@ -66,28 +69,19 @@ class ProjectReport extends JFrame{
             title.setAlignmentX(Component.CENTER_ALIGNMENT);
             fileOverview.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-            JButton saveMD = new JButton("Save .md");
+            JButton save = new JButton("Save");
 
-            saveMD.addActionListener(new ActionListener() {
+            save.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     ReportFile reportFile = new ReportFile(files);
                     try {
-                        reportFile.saveMarkDownReport(Paths.get(files[0].getRootDir(), "ProjectReport.md"));
-                    } catch (IOException e){
-                        e.printStackTrace();
-                    }
-                }
-            });
+                        if (saveChooser.getSelectedIndex() == 0){
+                            reportFile.saveMarkDownReport(Paths.get(files[0].getRootDir(), "ProjectReport.md"));
+                        } else {
+                            reportFile.saveTxtReport(Paths.get(files[0].getRootDir(), "ProjectReport.txt"));
+                        }
 
-            JButton saveTXT = new JButton("Save .txt");
-
-            saveTXT.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    ReportFile reportFile = new ReportFile(files);
-                    try{
-                        reportFile.saveTxtReport(Paths.get(files[0].getRootDir(), "ProjectReport.txt"));
                     } catch (IOException e){
                         e.printStackTrace();
                     }
@@ -95,8 +89,10 @@ class ProjectReport extends JFrame{
             });
 
             // Set alignment on the buttons
-            saveMD.setAlignmentX(Component.CENTER_ALIGNMENT);
-            saveTXT.setAlignmentX(Component.CENTER_ALIGNMENT);
+            save.setAlignmentX(Component.CENTER_ALIGNMENT);
+            Box buttonBox = Box.createHorizontalBox();
+            buttonBox.add(save);
+            buttonBox.add(padX(this.saveChooser, 20));
 
             this.add(Box.createRigidArea(new Dimension(0, 5)));
             this.add(title);
@@ -106,8 +102,8 @@ class ProjectReport extends JFrame{
             this.add(Box.createRigidArea(new Dimension(0, 20)));
             this.add(leftJustify(tableTitle, 5));
             this.add(fileOverview);
-            this.add(saveMD);
-            this.add(saveTXT);
+            this.add(buttonBox);
+            this.add(Box.createRigidArea(new Dimension(0, 10)));
         }
 
     }
