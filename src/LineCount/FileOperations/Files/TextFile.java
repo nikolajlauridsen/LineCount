@@ -35,10 +35,24 @@ public class TextFile {
      * @param path desired save location
      * @throws IOException if desired save location is invalid
      */
-    public void saveFile (Path path) throws IOException{
+    public void save(Path path) throws IOException{
         try(BufferedWriter writer = Files.newBufferedWriter(path, this.charset)){
             for (String line: this.getContent()){
                 writer.write(line+"\n");
+            }
+        }
+    }
+
+    /**
+     * Read the contents of a file into the TextFile content
+     * @param file Path to the file
+     * @throws IOException throws exception for non existent files, invalid files and so on
+     */
+    public void load(Path file) throws IOException{
+        try (BufferedReader reader = Files.newBufferedReader(file, charset)){
+            String line = null;
+            while ((line = reader.readLine()) != null){
+                this.content.add(line);
             }
         }
     }
@@ -51,19 +65,6 @@ public class TextFile {
         this.content.add(line);
     }
 
-    /**
-     * Read the contents of a file into the TextFile content
-     * @param file Path to the file
-     * @throws IOException throws exception for non existent files, invalid files and so on
-     */
-    public void read(Path file) throws IOException{
-        try (BufferedReader reader = Files.newBufferedReader(file, charset)){
-            String line = null;
-            while ((line = reader.readLine()) != null){
-                this.content.add(line);
-            }
-        }
-    }
 
     /**
      * Return the content of the file as a string array

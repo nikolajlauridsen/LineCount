@@ -132,7 +132,7 @@ public class ReportFile {
         for(String line: MdHelp.generateTable(this.filesRows, this.filesColumns)) mdReport.addLine(line);
 
         // Save it
-        mdReport.saveFile(path);
+        mdReport.save(path);
     }
 
     /**
@@ -158,7 +158,7 @@ public class ReportFile {
         for(String line: TxtHelp.generateTable(this.filesRows, this.filesColumns)) txtReport.addLine(line);
 
         // Save it
-        txtReport.saveFile(path);
+        txtReport.save(path);
     }
 
 

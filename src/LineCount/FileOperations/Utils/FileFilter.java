@@ -40,7 +40,7 @@ public class FileFilter{
     public void ParseIgnoreFile(Path ignoreFile) throws IOException{
         // Read the gitignore file
         TextFile gitIgnore = new TextFile();
-        gitIgnore.read(ignoreFile);
+        gitIgnore.load(ignoreFile);
 
         // Iterate over the gitignore content
         for (String line: gitIgnore.getContent()){

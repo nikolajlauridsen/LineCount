@@ -33,7 +33,7 @@ public class CodeFile extends TextFile{
 
         // content and statistics
         try{
-            read(absPath);
+            load(absPath);
         } catch (IOException e){
             e.printStackTrace();
         }
