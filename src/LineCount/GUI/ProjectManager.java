@@ -43,26 +43,7 @@ public class ProjectManager extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        // Configure and add the title
-        titleLabel.setText("Project Manager");
-        c.gridx = 0;
-        c.gridy = 0;
-        c.gridwidth = 2;
-        this.add(titleLabel, c);
-        c.gridy = 1;
-        this.add(Box.createRigidArea(new Dimension(0, 5)), c);
-
-        // Then folderfield
-        c.gridwidth = 1;
-        folderField.setText("Choose folder");
-        folderField.setEditable(false);
-        folderField.setColumns(68);
-        c.gridx = 0;
-        c.gridy = 2;
-        this.add(folderField, c);
-
-
-        // Then the actual file chooser
+        // Create choose dir and generate button
         folderChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         openChooser.setText("Choose dir");
         openChooser.addActionListener(new ActionListener() {
@@ -96,22 +77,42 @@ public class ProjectManager extends JPanel {
                 new ProjectReport(selectedPaths, projectDir, parsers);
             }
         });
-        c.gridx = 1;
-        c.gridy = 2;
-        this.add(openChooser, c);
+
+        // Configure and add the title
+        titleLabel.setText("Project Manager");
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 5;
+        this.add(titleLabel, c);
+
+        c.gridy = 1;
+        this.add(Box.createRigidArea(new Dimension(0, 5)), c);
 
         // Add file picker (configured when object is initialized)
-        c.gridx = 0;
-        c.gridy = 3;
-        c.gridwidth = 2;
+        c.gridy = 2;
         this.add(filePicker, c);
 
-        c.gridy = 4;
+        c.gridy = 3;
         this.add(Box.createRigidArea(new Dimension(0, 10)), c);
-        // Same goes for the generate button
+
+        // Then folderfield
+        folderField.setText("Choose folder");
+        folderField.setEditable(false);
+        folderField.setColumns(77);
+        c.gridy = 4;
+        this.add(folderField, c);
+
         c.gridy = 5;
-        c.gridwidth = 2;
-        this.add(generateButton, c);
+        this.add(Box.createRigidArea(new Dimension(0, 10)), c);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
+        panel.add(Box.createHorizontalGlue());
+        panel.add(openChooser);
+        panel.add(Box.createRigidArea(new Dimension(20, 0)));
+        panel.add(generateButton);
+        panel.add(Box.createHorizontalGlue());
+        this.add(panel, c);
 
     }
 

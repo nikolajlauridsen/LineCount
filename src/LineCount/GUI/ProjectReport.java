@@ -22,7 +22,6 @@ class ProjectReport extends JFrame{
     private CodeFile[] files;
 
     /**
-     *
      * @param files Path array of paths for project files
      * @param root Path object of the root directory of the project
      */
