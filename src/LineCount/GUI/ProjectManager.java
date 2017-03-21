@@ -105,6 +105,7 @@ public class ProjectManager extends JPanel {
         panel.add(generateButton);
         panel.add(Box.createHorizontalGlue());
         this.add(panel);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
 
     }
 
