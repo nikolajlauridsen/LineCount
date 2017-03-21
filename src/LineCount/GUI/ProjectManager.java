@@ -81,6 +81,7 @@ public class ProjectManager extends JPanel {
         // Configure and add the title
         titleLabel.setText("Project Manager");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
         this.add(titleLabel);
 
         this.add(Box.createRigidArea(new Dimension(0, 5)));
@@ -97,6 +98,7 @@ public class ProjectManager extends JPanel {
 
         this.add(Box.createRigidArea(new Dimension(0, 10)));
 
+        // Create panel for buttons
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         panel.add(Box.createHorizontalGlue());
@@ -104,6 +106,7 @@ public class ProjectManager extends JPanel {
         panel.add(Box.createRigidArea(new Dimension(30, 0)));
         panel.add(generateButton);
         panel.add(Box.createHorizontalGlue());
+
         this.add(panel);
         this.add(Box.createRigidArea(new Dimension(0, 10)));
 

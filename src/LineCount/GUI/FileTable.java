@@ -69,7 +69,7 @@ class FileTable extends JPanel {
 
         JTable overview = new JTable(data, this.columnNames);
         JScrollPane pane = new JScrollPane(overview);
-        pane.setPreferredSize(new Dimension(690, 350));
+        pane.setPreferredSize(new Dimension(690, 300));
         this.add(pane);
 
     }
