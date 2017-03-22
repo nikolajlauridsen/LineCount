@@ -55,6 +55,7 @@ class ProjectReport extends JFrame{
             this.saveChooser.setMaximumSize( this.saveChooser.getPreferredSize() );
             fileOverview = new FileTable(files);
             JLabel title = new JLabel("Project report");
+            title.setFont(new Font(title.getFont().getFontName(), Font.PLAIN, 16));
 
             JLabel pathLabel = new JLabel();
             if (files.length > 0) {
@@ -94,7 +95,7 @@ class ProjectReport extends JFrame{
             buttonBox.add(save);
             buttonBox.add(padX(this.saveChooser, 20));
 
-            this.add(Box.createRigidArea(new Dimension(0, 5)));
+            this.add(Box.createRigidArea(new Dimension(0, 10)));
             this.add(title);
             this.add(Box.createRigidArea(new Dimension(0, 20)));
             this.add(leftJustify(pathLabel, 10));

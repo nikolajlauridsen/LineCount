@@ -80,6 +80,7 @@ public class ProjectManager extends JPanel {
 
         // Configure and add the title
         titleLabel.setText("Project Manager");
+        titleLabel.setFont(new Font(titleLabel.getFont().getFontName(), Font.PLAIN, 16));
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(Box.createRigidArea(new Dimension(0, 10)));
         this.add(titleLabel);
