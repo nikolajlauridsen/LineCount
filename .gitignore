@@ -5,3 +5,6 @@ Documentation/*
 out/*
 *.iml
 *.MF
+*/ProjectReport.txt
+*/ProjectReport.md
+*.jar
