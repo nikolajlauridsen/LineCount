@@ -13,47 +13,48 @@ Made in cofee... I mean Java
 - [x] Make the GUI pretty (add padding)
 - [ ] Add menu for adding user defined regexes to the config for languages not included
 - [ ] Create menu for ignoring files outside gitignore (maybe create a seperate LineCountIgnore file)
-- [ ] Add percentages to the project report
+- [x] Add percentages to the project report
 
 
 # Testing to see if md output works with Github
 
 # Saved Project Report
 ## Project Overview
-Report saved: 21/03/2017
+Report saved: 24/03/2017
 
 
 Project folder: D:\Github\LineCount
 
 
-Number of Files: 18
+Number of Files: 19
 
 
 ### Code Tally
 | Code | Comments | Whitespace | Total |
 |------|----------|------------|-------|
-| 975  |   339    |    237     | 1551  |
+| 977  |   327    |    240     | 1544  |
 
 
 ## File Overview
-|       Filename       | Extension |                           Path                            | Code | Comments | Whitespace | Total |
-|----------------------|-----------|-----------------------------------------------------------|------|----------|------------|-------|
-|    CodeFile.java     |   java    |     src\LineCount\FileOperations\Files\CodeFile.java      |  78  |    58    |     24     |  160  |
-|   ReportFile.java    |   java    |    src\LineCount\FileOperations\Files\ReportFile.java     | 111  |    32    |     22     |  165  |
-|    TextFile.java     |   java    |     src\LineCount\FileOperations\Files\TextFile.java      |  37  |    28    |     8      |  73   |
-|   FileParser.java    |   java    |   src\LineCount\FileOperations\Parsing\FileParser.java    |  40  |    21    |     11     |  72   |
-| FileParserModel.java |   java    | src\LineCount\FileOperations\Parsing\FileParserModel.java |  5   |    3     |     1      |   9   |
-|  ParserChooser.java  |   java    |  src\LineCount\FileOperations\Parsing\ParserChooser.java  |  41  |    18    |     11     |  70   |
-|   FileFilter.java    |   java    |    src\LineCount\FileOperations\Utils\FileFilter.java     |  62  |    54    |     16     |  132  |
-|     FileOps.java     |   java    |      src\LineCount\FileOperations\Utils\FileOps.java      |  50  |    16    |     13     |  79   |
-|     BoxHelp.java     |   java    |              src\LineCount\GUI\BoxHelp.java               |  19  |    0     |     4      |  23   |
-|   FilePicker.java    |   java    |             src\LineCount\GUI\FilePicker.java             | 146  |    11    |     35     |  192  |
-|    FileTable.java    |   java    |             src\LineCount\GUI\FileTable.java              |  62  |    5     |     13     |  80   |
-| ProjectManager.java  |   java    |           src\LineCount\GUI\ProjectManager.java           |  93  |    24    |     25     |  142  |
-|  ProjectReport.java  |   java    |           src\LineCount\GUI\ProjectReport.java            |  82  |    8     |     21     |  111  |
-|      Main.java       |   java    |                  src\LineCount\Main.java                  |  13  |    0     |     5      |  18   |
-|     MdHelp.java      |   java    |              src\LineCount\Utils\MdHelp.java              |  51  |    42    |     15     |  108  |
-|   StringHelp.java    |   java    |            src\LineCount\Utils\StringHelp.java            |  24  |    15    |     3      |  42   |
-|     TxtHelp.java     |   java    |             src\LineCount\Utils\TxtHelp.java              |  38  |    4     |     10     |  52   |
-|   fileparsers.yml    |    yml    |                      fileparsers.yml                      |  23  |    0     |     0      |  23   |
-|        Total         |    N/A    |                    D:\Github\LineCount                    | 975  |   339    |    237     | 1551  |
+|       Filename       | Extension |                           Path                            |    Code     |  Comments   | Whitespace  | Total |
+|----------------------|-----------|-----------------------------------------------------------|-------------|-------------|-------------|-------|
+|    CodeFile.java     |   java    |     src\LineCount\FileOperations\Files\CodeFile.java      | 78 (48,8%)  | 58 (36,3%)  | 24 (15,0%)  |  160  |
+|   ReportFile.java    |   java    |    src\LineCount\FileOperations\Files\ReportFile.java     | 112 (67,1%) | 32 (19,2%)  | 23 (13,8%)  |  167  |
+|    TextFile.java     |   java    |     src\LineCount\FileOperations\Files\TextFile.java      | 37 (50,0%)  | 28 (37,8%)  |  9 (12,2%)  |  74   |
+|   FileParser.java    |   java    |   src\LineCount\FileOperations\Parsing\FileParser.java    | 40 (55,6%)  | 21 (29,2%)  | 11 (15,3%)  |  72   |
+| FileParserModel.java |   java    | src\LineCount\FileOperations\Parsing\FileParserModel.java |  5 (55,6%)  |  3 (33,3%)  |  1 (11,1%)  |   9   |
+|  ParserChooser.java  |   java    |  src\LineCount\FileOperations\Parsing\ParserChooser.java  | 41 (58,6%)  | 18 (25,7%)  | 11 (15,7%)  |  70   |
+|   FileFilter.java    |   java    |    src\LineCount\FileOperations\Utils\FileFilter.java     | 59 (47,6%)  | 49 (39,5%)  | 16 (12,9%)  |  124  |
+|     FileOps.java     |   java    |      src\LineCount\FileOperations\Utils\FileOps.java      | 37 (62,7%)  | 11 (18,6%)  | 11 (18,6%)  |  59   |
+|     BoxHelp.java     |   java    |              src\LineCount\GUI\BoxHelp.java               | 19 (79,2%)  |  0 (0,0%)   |  5 (20,8%)  |  24   |
+|   FilePicker.java    |   java    |             src\LineCount\GUI\FilePicker.java             | 146 (76,0%) |  11 (5,7%)  | 35 (18,2%)  |  192  |
+|    FileTable.java    |   java    |             src\LineCount\GUI\FileTable.java              | 65 (78,3%)  |  5 (6,0%)   | 13 (15,7%)  |  83   |
+| ProjectManager.java  |   java    |           src\LineCount\GUI\ProjectManager.java           | 106 (67,9%) | 24 (15,4%)  | 26 (16,7%)  |  156  |
+|  ProjectReport.java  |   java    |           src\LineCount\GUI\ProjectReport.java            | 85 (73,9%)  |  8 (7,0%)   | 22 (19,1%)  |  115  |
+|      Main.java       |   java    |                  src\LineCount\Main.java                  |  7 (70,0%)  |  0 (0,0%)   |  3 (30,0%)  |  10   |
+|     Config.java      |   java    |              src\LineCount\Utils\Config.java              |  4 (50,0%)  |  3 (37,5%)  |  1 (12,5%)  |   8   |
+|     MdHelp.java      |   java    |              src\LineCount\Utils\MdHelp.java              | 48 (48,0%)  | 37 (37,0%)  | 15 (15,0%)  |  100  |
+|   StringHelp.java    |   java    |            src\LineCount\Utils\StringHelp.java            | 27 (58,7%)  | 15 (32,6%)  |  4 (8,7%)   |  46   |
+|     TxtHelp.java     |   java    |             src\LineCount\Utils\TxtHelp.java              | 38 (73,1%)  |  4 (7,7%)   | 10 (19,2%)  |  52   |
+|   fileparsers.yml    |    yml    |                      fileparsers.yml                      | 23 (100,0%) |  0 (0,0%)   |  0 (0,0%)   |  23   |
+|        Total         |    N/A    |                    D:\Github\LineCount                    | 977 (63,3%) | 327 (21,2%) | 240 (15,5%) | 1544  |

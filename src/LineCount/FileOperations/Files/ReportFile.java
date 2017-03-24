@@ -8,6 +8,8 @@ import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static LineCount.Utils.StringHelp.getPercentageString;
+
 /**
  * A project report file, can be save as either .txt file or .md
  */
@@ -70,9 +72,9 @@ public class ReportFile {
         // Create row for single rowed project overview table
         this.tallyRows = new String[1][];
         String[] breakdownList = new String[4];
-        breakdownList[0] = Integer.toString(total_code);
-        breakdownList[1] = Integer.toString(total_comments);
-        breakdownList[2] = Integer.toString(total_whitespace);
+        breakdownList[0] = getPercentageString(total_code, total_lines);
+        breakdownList[1] = getPercentageString(total_comments, total_lines);
+        breakdownList[2] = getPercentageString(total_whitespace, total_lines);
         breakdownList[3] = Integer.toString(total_lines);
         this.tallyRows[0] = breakdownList;
 
@@ -87,9 +89,9 @@ public class ReportFile {
             row[0] = this.files[i].getFileName();
             row[1] = this.files[i].getExtension();
             row[2] = this.files[i].getRelPath();
-            row[3] = Integer.toString(this.files[i].getCodeCount());
-            row[4] = Integer.toString(this.files[i].getCommentCount());
-            row[5] = Integer.toString(this.files[i].getWhiteSpace());
+            row[3] = getPercentageString(this.files[i].getCodeCount(), this.files[i].getLineCount());
+            row[4] = getPercentageString(this.files[i].getCommentCount(), this.files[i].getLineCount());
+            row[5] = getPercentageString(this.files[i].getWhiteSpace(), this.files[i].getLineCount());
             row[6] = Integer.toString(this.files[i].getLineCount());
             this.filesRows[i] = row;
 
@@ -100,9 +102,9 @@ public class ReportFile {
         totalRow[0] = "Total";
         totalRow[1] = "N/A";
         totalRow[2] = this.files[0].getRootDir();
-        totalRow[3] = Integer.toString(total_code);
-        totalRow[4] = Integer.toString(total_comments);
-        totalRow[5] = Integer.toString(total_whitespace);
+        totalRow[3] = getPercentageString(total_code, total_lines);
+        totalRow[4] = getPercentageString(total_comments, total_lines);
+        totalRow[5] = getPercentageString(total_whitespace, total_lines);
         totalRow[6] = Integer.toString(total_lines);
         this.filesRows[this.files.length] = totalRow;
     }
