@@ -48,9 +48,9 @@ class FileTable extends JPanel {
             fileData[0] = this.files[i].getFileName();
             fileData[1] = this.files[i].getExtension();
             fileData[2] = this.files[i].getRelPath();
-            fileData[3] = this.files[i].getCodeCount();
-            fileData[4] = this.files[i].getCommentCount();
-            fileData[5] = this.files[i].getWhiteSpace();
+            fileData[3] = String.format("%d (%.1f%%)", this.files[i].getCodeCount(), this.files[i].getCodePercentile());
+            fileData[4] = String.format("%d (%.1f%%)", this.files[i].getCommentCount(), this.files[i].getCommentPercentile());
+            fileData[5] = String.format("%d (%.1f%%)", this.files[i].getWhiteSpace(), this.files[i].getWhitespacePercentile());
             fileData[6] = this.files[i].getLineCount();
             data[i] = fileData;
         }
@@ -59,9 +59,9 @@ class FileTable extends JPanel {
         total[0] = "Total";
         total[1] = "N/A";
         total[2] = this.files[0].getRootDir();
-        total[3] = total_code;
-        total[4] = total_comments;
-        total[5] = total_whitespace;
+        total[3] = String.format("%d (%.1f%%)", total_code, ((double)total_code/(double)total_lines)*100);
+        total[4] = String.format("%d (%.1f%%)", total_comments, ((double)total_comments/(double)total_lines)*100);
+        total[5] = String.format("%d (%.1f%%)", total_whitespace, ((double)total_whitespace/(double)total_lines)*100);
         total[6] = total_lines;
         // Append the total to the end of the data array
         data[this.files.length] = total;
