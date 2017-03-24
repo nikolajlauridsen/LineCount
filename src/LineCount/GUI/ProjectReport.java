@@ -3,6 +3,7 @@ package LineCount.GUI;
 import LineCount.FileOperations.Files.CodeFile;
 import LineCount.FileOperations.Files.ReportFile;
 import LineCount.FileOperations.Parsing.ParserChooser;
+import LineCount.Utils.Config;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +36,7 @@ class ProjectReport extends JFrame{
         this.files = getCodeFiles(files, root, parsers);
 
         this.add(new ReportPanel());
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("list.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(Config.IMAGE_NAME)));
     }
 
 

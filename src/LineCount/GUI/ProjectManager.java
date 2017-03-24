@@ -2,6 +2,7 @@ package LineCount.GUI;
 
 import LineCount.FileOperations.Parsing.ParserChooser;
 import LineCount.FileOperations.Utils.FileFilter;
+import LineCount.Utils.Config;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ public class ProjectManager extends JFrame{
         this.setSize(900, 465);
         this.setResizable(false);
         this.setVisible(true);
-        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("list.png")));
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(Config.IMAGE_NAME)));
     }
 
     class ProjectPanel extends JPanel {
