@@ -6,6 +6,9 @@ import static LineCount.Utils.StringHelp.getPercentageString;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * A table displaying data from an array of CodeFiles
+ */
 class FileTable extends JPanel {
     private Object[] columnNames = {
             "Filename",
@@ -24,14 +27,22 @@ class FileTable extends JPanel {
     private int total_whitespace = 0;
     private int total_lines = 0;
 
-    FileTable(CodeFile[] _files){
-        this.files = _files;
+    /**
+     * Create a panel containing a table
+     * @param files CodeFiles to generate table for
+     */
+    FileTable(CodeFile[] files){
+        this.files = files;
         this.columns = columnNames.length;
         try { Init(); } catch (Exception e){
             e.printStackTrace();
         }
     }
 
+    /**
+     * Initialize the GUI
+     * @throws Exception if CodeFile[] is empty or a row doesn't match the length of column names
+     */
     private void Init() throws Exception{
 
         Object[][] data = new Object[this.files.length+1][];

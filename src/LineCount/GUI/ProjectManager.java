@@ -15,8 +15,14 @@ import java.nio.file.Paths;
 import static LineCount.FileOperations.Utils.FileOps.walkDir;
 import static LineCount.GUI.BoxHelp.padX;
 
+/**
+ * GUI window for choosing files to be counted and then creating a report window
+ */
 public class ProjectManager extends JFrame{
 
+    /**
+     * JFrame containing only a ProjectPanel
+     */
     public ProjectManager(){
         this.setTitle("Project Manager");
         this.add(new ProjectPanel());
@@ -27,6 +33,9 @@ public class ProjectManager extends JFrame{
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(Config.IMAGE_NAME)));
     }
 
+    /**
+     * Panel containing all elements in the project manager
+     */
     class ProjectPanel extends JPanel {
         private JLabel titleLabel = new JLabel();
         private JTextField folderField = new JTextField();
@@ -37,6 +46,9 @@ public class ProjectManager extends JFrame{
         private FilePicker filePicker = new FilePicker();
         private ParserChooser parsers;
 
+        /**
+         * Expects fileparsers.yml to be available
+         */
         ProjectPanel(){
             this.parsers = new ParserChooser("fileparsers.yml");
             try{
@@ -48,7 +60,7 @@ public class ProjectManager extends JFrame{
 
         /**
          * Initialize the GUI
-         * @throws Exception
+         * @throws Exception Mostly permission errors from reading paths
          */
         private void Init() throws Exception{
             // Set layout to GridBag and create constraints
