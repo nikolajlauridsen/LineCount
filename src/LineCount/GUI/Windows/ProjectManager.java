@@ -1,7 +1,8 @@
-package LineCount.GUI;
+package LineCount.GUI.Windows;
 
 import LineCount.FileOperations.Parsing.ParserChooser;
 import LineCount.FileOperations.Utils.FileFilter;
+import LineCount.GUI.Elements.FilePicker;
 import LineCount.Utils.Config;
 
 import javax.swing.*;
@@ -74,7 +75,7 @@ public class ProjectManager extends JFrame{
                 public void actionPerformed(ActionEvent actionEvent) {
                     if (actionEvent.getSource() == openChooser){
                         // returnVal is used to check if a folder is actually chosen
-                        int returnVal = folderChooser.showOpenDialog(LineCount.GUI.ProjectManager.ProjectPanel.this);
+                        int returnVal = folderChooser.showOpenDialog(ProjectManager.ProjectPanel.this);
 
                         // If there indeed has been a selection
                         if(returnVal == JFileChooser.APPROVE_OPTION){

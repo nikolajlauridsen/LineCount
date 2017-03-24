@@ -1,6 +1,6 @@
 package LineCount;
 
-import LineCount.GUI.ProjectManager;
+import LineCount.GUI.Windows.ProjectManager;
 
 public class Main {
 

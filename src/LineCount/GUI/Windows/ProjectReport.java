@@ -1,8 +1,9 @@
-package LineCount.GUI;
+package LineCount.GUI.Windows;
 
 import LineCount.FileOperations.Files.CodeFile;
 import LineCount.FileOperations.Files.ReportFile;
 import LineCount.FileOperations.Parsing.ParserChooser;
+import LineCount.GUI.Elements.FileTable;
 import LineCount.Utils.Config;
 
 import javax.swing.*;

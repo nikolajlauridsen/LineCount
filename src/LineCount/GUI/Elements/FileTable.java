@@ -1,4 +1,4 @@
-package LineCount.GUI;
+package LineCount.GUI.Elements;
 
 import LineCount.FileOperations.Files.CodeFile;
 import static LineCount.Utils.StringHelp.getPercentageString;
@@ -9,7 +9,7 @@ import java.awt.*;
 /**
  * A table displaying data from an array of CodeFiles
  */
-class FileTable extends JPanel {
+public class FileTable extends JPanel {
     private Object[] columnNames = {
             "Filename",
             "Extension",
@@ -31,7 +31,7 @@ class FileTable extends JPanel {
      * Create a panel containing a table
      * @param files CodeFiles to generate table for
      */
-    FileTable(CodeFile[] files){
+    public FileTable(CodeFile[] files){
         this.files = files;
         this.columns = columnNames.length;
         try { Init(); } catch (Exception e){

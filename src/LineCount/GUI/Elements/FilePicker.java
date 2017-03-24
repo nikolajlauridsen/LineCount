@@ -1,4 +1,4 @@
-package LineCount.GUI;
+package LineCount.GUI.Elements;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -10,7 +10,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
-class FilePicker extends JPanel implements ListSelectionListener {
+public class FilePicker extends JPanel implements ListSelectionListener {
     private JList removedList;
     private JLabel removedTitle = new JLabel("Files");
     private JList addedList;
@@ -21,7 +21,7 @@ class FilePicker extends JPanel implements ListSelectionListener {
     private JButton addButton;
     private JButton removeButton;
 
-     FilePicker(){
+     public FilePicker(){
          this.setLayout(new GridBagLayout());
          GridBagConstraints c = new GridBagConstraints();
 
@@ -95,11 +95,11 @@ class FilePicker extends JPanel implements ListSelectionListener {
          this.add(addedScrollPane, c);
     }
 
-    void addPath(String path){
+    public void addPath(String path){
         removedListModel.addElement(path);
     }
 
-    void emptyLists(){
+    public void emptyLists(){
         addedList.setSelectedIndex(-1);
         removedList.setSelectedIndex(-1);
         addedListModel.clear();

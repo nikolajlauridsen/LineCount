@@ -3,7 +3,7 @@ package LineCount.GUI;
 import javax.swing.*;
 import java.awt.*;
 
-interface BoxHelp {
+public interface BoxHelp {
 
     /**
      * Pull a component to the left side
