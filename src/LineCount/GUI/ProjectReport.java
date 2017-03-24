@@ -35,6 +35,12 @@ class ProjectReport extends JFrame{
         this.files = getCodeFiles(files, root, parsers);
 
         this.add(new ReportPanel());
+        ImageIcon img = new ImageIcon(getIcon());
+        this.setIconImage(img.getImage());
+    }
+
+    public  Image getIcon(){
+        return Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("list.png"));
     }
 
     class ReportPanel extends JPanel{
