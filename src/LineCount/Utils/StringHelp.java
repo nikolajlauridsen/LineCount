@@ -39,4 +39,8 @@ public interface StringHelp {
         }
         return devider;
     }
+
+    static String getPercentageString(int part, int total){
+        return String.format("%d (%.1f%%)", part, ((double)part/(double)total)*100);
+    }
 }

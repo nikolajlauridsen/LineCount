@@ -143,30 +143,6 @@ public class CodeFile extends TextFile{
     }
 
     /**
-     * Get the percentile of comments in the CodeFile
-     * @return Double percent of comments in the file
-     */
-    public double getCommentPercentile(){
-        return ((double) this.commentCount/ (double) this.lineCount)*100;
-    }
-
-    /**
-     * Get the percentile of code in the CodeFile
-     * @return Double percent of code lines
-     */
-    public double getCodePercentile(){
-        return ((double) this.getCodeCount() / (double) this.lineCount) * 100;
-    }
-
-    /**
-     * Get the percent of whitespace in the CodeFile
-     * @return Double percent of whitespace lines
-     */
-    public double getWhitespacePercentile(){
-        return ((double) this.whiteSpace / (double) this.lineCount) * 100;
-    }
-
-    /**
      * @return int amount of whitespace
      */
     public int getWhiteSpace(){
