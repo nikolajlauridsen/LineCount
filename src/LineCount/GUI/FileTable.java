@@ -66,7 +66,13 @@ class FileTable extends JPanel {
         // Append the total to the end of the data array
         data[this.files.length] = total;
 
-        JTable overview = new JTable(data, this.columnNames);
+        JTable overview = new JTable(data, this.columnNames){
+            @Override
+            public boolean isCellEditable(int i, int i1) {
+                return false; //This disables table editing
+            }
+        };
+
         JScrollPane pane = new JScrollPane(overview);
         pane.setPreferredSize(new Dimension(690, 300));
         this.add(pane);
