@@ -26,13 +26,13 @@ Report saved: 24/03/2017
 Project folder: D:\Github\LineCount
 
 
-Number of Files: 19
+Number of Files: 18
 
 
 ### Code Tally
-| Code | Comments | Whitespace | Total |
-|------|----------|------------|-------|
-| 977  |   327    |    240     | 1544  |
+|    Code     |  Comments   | Whitespace  | Total |
+|-------------|-------------|-------------|-------|
+| 971 (63,3%) | 327 (21,3%) | 237 (15,4%) | 1535  |
 
 
 ## File Overview
@@ -54,7 +54,6 @@ Number of Files: 19
 |      Main.java       |   java    |                  src\LineCount\Main.java                  |  7 (70,0%)  |  0 (0,0%)   |  3 (30,0%)  |  10   |
 |     Config.java      |   java    |              src\LineCount\Utils\Config.java              |  4 (50,0%)  |  3 (37,5%)  |  1 (12,5%)  |   8   |
 |     MdHelp.java      |   java    |              src\LineCount\Utils\MdHelp.java              | 48 (48,0%)  | 37 (37,0%)  | 15 (15,0%)  |  100  |
-|   StringHelp.java    |   java    |            src\LineCount\Utils\StringHelp.java            | 27 (58,7%)  | 15 (32,6%)  |  4 (8,7%)   |  46   |
-|     TxtHelp.java     |   java    |             src\LineCount\Utils\TxtHelp.java              | 38 (73,1%)  |  4 (7,7%)   | 10 (19,2%)  |  52   |
+|   StringHelp.java    |   java    |            src\LineCount\Utils\StringHelp.java            | 59 (66,3%)  | 19 (21,3%)  | 11 (12,4%)  |  89   |
 |   fileparsers.yml    |    yml    |                      fileparsers.yml                      | 23 (100,0%) |  0 (0,0%)   |  0 (0,0%)   |  23   |
-|        Total         |    N/A    |                    D:\Github\LineCount                    | 977 (63,3%) | 327 (21,2%) | 240 (15,5%) | 1544  |
+|        Total         |    N/A    |                    D:\Github\LineCount                    | 971 (63,3%) | 327 (21,3%) | 237 (15,4%) | 1535  |

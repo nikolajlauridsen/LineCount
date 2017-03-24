@@ -1,7 +1,7 @@
 package LineCount.FileOperations.Files;
 
 import LineCount.Utils.MdHelp;
-import LineCount.Utils.TxtHelp;
+import LineCount.Utils.StringHelp;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -154,10 +154,10 @@ public class ReportFile {
         txtReport.addLine(this.nFilesString);
         txtReport.addLine("\n");
         txtReport.addLine(this.tallyTableTitle);
-        for(String line: TxtHelp.generateTable(this.tallyRows, this.tallyTitles)) txtReport.addLine(line);
+        for(String line: StringHelp.generateTable(this.tallyRows, this.tallyTitles)) txtReport.addLine(line);
         txtReport.addLine("\n");
         txtReport.addLine(this.fileTableTitle);
-        for(String line: TxtHelp.generateTable(this.filesRows, this.filesColumns)) txtReport.addLine(line);
+        for(String line: StringHelp.generateTable(this.filesRows, this.filesColumns)) txtReport.addLine(line);
 
         // Save it
         txtReport.save(path);

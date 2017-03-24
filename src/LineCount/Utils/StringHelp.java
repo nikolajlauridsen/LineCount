@@ -1,5 +1,7 @@
 package LineCount.Utils;
 
+import java.util.ArrayList;
+
 public interface StringHelp {
     /**
      * repeat a string
@@ -42,5 +44,46 @@ public interface StringHelp {
 
     static String getPercentageString(int part, int total){
         return String.format("%d (%.1f%%)", part, ((double)part/(double)total)*100);
+    }
+
+    static String[] generateTable(String[][] rows, String[] columns){
+        Character cornerChar = '+';
+
+        int[] columnWidths = new int[columns.length];
+        // Find the widest row in each column and assign
+        // it's width to that
+        for(int i = 0; i < columns.length; i++){
+            columnWidths[i] = columns[i].length();
+            for(String[] row: rows){
+                if (row[i].length() > columnWidths[i]){
+                    columnWidths[i] = row[i].length();
+                }
+            }
+        }
+
+        ArrayList<String> table = new ArrayList<>();
+        String header, rowString;
+
+        // Create header
+        header = "|";
+        for (int i = 0; i < columns.length; i++){
+            header += addPadding(columns[i], columnWidths[i]+2) + "|";
+        }
+        int tableWidth = header.length();
+        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);
+        table.add(header);
+
+        // Create rows
+        for (String[] row : rows){
+            rowString = "|";
+            for (int i = 0; i < row.length; i++){
+                rowString += addPadding(row[i], columnWidths[i]+2) + "|";
+            }
+            table.add(getDevider(columnWidths));
+            table.add(rowString);
+        }
+        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);
+
+        return table.toArray(new String[0]);
     }
 }
