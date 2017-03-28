@@ -30,6 +30,21 @@ public class TextFile {
         this.charset = Charset.forName("UTF-8");
     }
 
+
+    /**
+     * Initiate a TextFile from a file on the disk, the file will immediately try to
+     * read the file on the disk into it's content.
+     * Defaults to the UTF-8 encoding since it'll do for most use cases
+     * If UTF-8 isn't viable, use the charset constructor and load manually
+     * @param file Path to the file on disk to be read
+     * @throws IOException Since it reads from drive it might throw IOException
+     */
+    public TextFile(Path file) throws IOException{
+        this.charset = Charset.forName("UTF-8");
+        this.load(file);
+    }
+
+
     /**
      * Save the file to disk
      * @param path desired save location

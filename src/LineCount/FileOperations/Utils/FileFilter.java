@@ -19,7 +19,8 @@ public class FileFilter{
 
     private final Character ast = '*';
     private final Character folderChar = '/';
-    private final Character[] escaped = {'.', '-', '+', '[', ']', '(', ')'};
+    private final Character[] escaped = {'.', '-', '+', '[', ']', '(', ')', '\\'};
+    private Pattern ignorePattern = Pattern.compile("^[\\s]*[#]?");
 
     /**
      * No arguments.
@@ -39,16 +40,21 @@ public class FileFilter{
      */
     public void ParseIgnoreFile(Path ignoreFile) throws IOException{
         // Read the gitignore file
-        TextFile gitIgnore = new TextFile();
-        gitIgnore.load(ignoreFile);
+        TextFile gitIgnore = new TextFile(ignoreFile);
 
         // Iterate over the gitignore content
         for (String line: gitIgnore.getContent()){
-            // Parse each glob converting into a regex pattern
-            String pattern = parseGlob(line);
-            System.out.println("Regex generated: " + pattern);
-            // Compile & add to filter list
-            filter.add(Pattern.compile(pattern));
+            try{
+                // Parse each glob converting into a regex pattern
+                String pattern = parseGlob(line);
+                System.out.println("Regex generated: " + pattern);
+                // Compile & add to filter list
+                filter.add(Pattern.compile(pattern));
+            } catch (CommentError e){
+                System.out.println("Comment found/empty line, skipping");
+                continue;
+            }
+
         }
     }
 
@@ -75,9 +81,14 @@ public class FileFilter{
      * @param glob String glob to be parsed
      * @return String regex string
      */
-    private String parseGlob(String glob){
-        StringBuilder builder = new StringBuilder();
+    private String parseGlob(String glob) throws CommentError{
+        // If the glob is either empty or a comment trow a commentError
+        Matcher whitespace = this.ignorePattern.matcher(glob);
+        if (whitespace.matches()){
+            throw new CommentError("Glob is either a comment or a empty line");
+        }
 
+        StringBuilder builder = new StringBuilder();
         // Add the beginning
         // note that any root directory is ignored
         builder.append("^[\\s\\S]*");
@@ -103,7 +114,8 @@ public class FileFilter{
                 // If the char is a special char in regex it needs to be escaped with a \
                 builder.append("\\");
                 builder.append(c);
-            } else{
+            }
+            else{
                 builder.append(c);
             }
 
@@ -116,8 +128,9 @@ public class FileFilter{
     /**
      * Add a glob to the filter list
      * @param glob String glob to be added (EX: 'out/*')
+     * @throws CommentError if the globs is a comment or just whitespace
      */
-    public void addGlob(String glob){
+    public void addGlob(String glob) throws CommentError{
         this.filter.add(Pattern.compile(parseGlob(glob)));
     }
 

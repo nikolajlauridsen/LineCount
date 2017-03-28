@@ -21,3 +21,7 @@
 !LineCount.FileOperations.Parsing.FileParserModel
    commentRegex: //
    typeExtension: js
+---
+!LineCount.FileOperations.Parsing.FileParserModel
+   commentRegex: //
+   typeExtension: cs
