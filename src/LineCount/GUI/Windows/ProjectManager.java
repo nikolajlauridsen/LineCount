@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static LineCount.FileOperations.Utils.FileOps.walkDir;
+import static LineCount.FileOperations.Utils.FileHelp.walkDir;
 import static LineCount.GUI.BoxHelp.padX;
 
 /**

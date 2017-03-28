@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
-public interface FileOps {
+public interface FileHelp {
 
     /**
      * Read multiple files off the hard drive in one go.
