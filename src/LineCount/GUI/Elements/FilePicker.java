@@ -10,6 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 
+/**
+ * A filepicker for selecting a number of files from a list of files
+ */
 public class FilePicker extends JPanel implements ListSelectionListener {
     private JList removedList;
     private JLabel removedTitle = new JLabel("Files");
@@ -21,6 +24,9 @@ public class FilePicker extends JPanel implements ListSelectionListener {
     private JButton addButton;
     private JButton removeButton;
 
+    /**
+     * Creates an empty FilePicker.
+     */
      public FilePicker(){
          this.setLayout(new GridBagLayout());
          GridBagConstraints c = new GridBagConstraints();
@@ -95,10 +101,18 @@ public class FilePicker extends JPanel implements ListSelectionListener {
          this.add(addedScrollPane, c);
     }
 
+    /**
+     * Add a file to selectable files
+     * @param path to file
+     */
     public void addPath(String path){
         removedListModel.addElement(path);
     }
 
+    /**
+     * Clear out both the selectable files list and the selected files list,
+     * effectively resetting the FilePicker
+     */
     public void emptyLists(){
         addedList.setSelectedIndex(-1);
         removedList.setSelectedIndex(-1);
@@ -106,6 +120,12 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         removedListModel.clear();
     }
 
+    /**
+     * Get all paths the user has selected, uses a common root, to resolve the
+     * relative paths
+     * @param root root folder the files originate from
+     * @return Array of file Paths
+     */
     public Path[] getSelectedPaths(String root){
         Path[] selectedPaths = new Path[addedListModel.getSize()];
         for(int i = 0; i < addedListModel.getSize(); i++){
@@ -115,7 +135,12 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         return selectedPaths;
     }
 
-    //This method is required by ListSelectionListener.
+
+    /**
+     * Required method for ListSelectionListener, determines what to do when a change
+     * occurs in the list
+     * @param e
+     */
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
 
@@ -136,6 +161,9 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         }
     }
 
+    /**
+     * Listens to the + button (the add button)
+     */
     class AddListener implements ActionListener{
         // Required by ActionListener
         public void actionPerformed(ActionEvent e){
@@ -164,6 +192,9 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         }
     }
 
+    /**
+     * Listens to the - button (the remove button)
+     */
     class RemoveListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
             int index = addedList.getSelectedIndex();
