@@ -56,8 +56,8 @@ class ProjectReport extends JFrame{
         private JComboBox formatPicker;
 
         /**
-         * Call the initializer method with a try with resources statement
-         * thus making sure not to leave any orphaned GUI elements.
+         * Call the initializer method in a try block
+         * since errors might occur
          */
         ReportPanel(){
             try {init();} catch (Exception e){
