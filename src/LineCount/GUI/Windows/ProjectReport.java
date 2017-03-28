@@ -37,12 +37,16 @@ class ProjectReport extends JFrame{
         this.setTitle("Project Report");
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(700, 500);
-        this.setVisible(true);
         this.setResizable(false);
+        // Read files from frame constructor since passing the arguments to ProjectReport
+        // only to pass hem on to ProjectPanel seems backwards, also this way the frame is
+        // hidden until everything is done processing
         this.files = getCodeFiles(files, root, parsers);
 
         this.add(new ReportPanel());
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(Config.IMAGE_NAME)));
+        // Hide the frame till the very end
+        this.setVisible(true);
     }
 
 
@@ -51,12 +55,11 @@ class ProjectReport extends JFrame{
      * for the ProjectReport window
      */
     class ReportPanel extends JPanel{
-        FileTable fileTable;
         private String[] saveOptions = {"Markdown", "Plaintext"};
         private JComboBox formatPicker;
 
         /**
-         * Call the initializer method in a try block
+         * Calls the initializer method in a try block
          * since errors might occur
          */
         ReportPanel(){
@@ -94,7 +97,7 @@ class ProjectReport extends JFrame{
 
             // Create a FileTable to display the files
             JLabel tableTitle = new JLabel("File overview");
-            fileTable = new FileTable(files);
+            FileTable fileTable = new FileTable(files);
             fileTable.setAlignmentX(Component.CENTER_ALIGNMENT);
 
             // Save button
@@ -107,22 +110,26 @@ class ProjectReport extends JFrame{
             // We don't want the comboBox to stretch, it looks hideous
             this.formatPicker.setMaximumSize( this.formatPicker.getPreferredSize() );
 
-            // Button box holding both buttons so they can be side by side
+            // Button box holding both button and comboBox so they can be side by side
             Box buttonBox = Box.createHorizontalBox();
             buttonBox.add(save);
             buttonBox.add(padX(this.formatPicker, 20));
 
             // ------- Add objects to parent panel ------
-            this.add(Box.createRigidArea(new Dimension(0, 10)));
+            // and some padding as well to make it nice (RigidArea)
+            Dimension smallPadding = new Dimension(0, 10);
+            Dimension largePadding = new Dimension(0, 20);
+
+            this.add(Box.createRigidArea(smallPadding));
             this.add(title);
-            this.add(Box.createRigidArea(new Dimension(0, 20)));
+            this.add(Box.createRigidArea(largePadding));
             this.add(leftJustify(pathLabel, 10));
             this.add(leftJustify(fileCountLabel, 10));
-            this.add(Box.createRigidArea(new Dimension(0, 20)));
+            this.add(Box.createRigidArea(largePadding));
             this.add(leftJustify(tableTitle, 5));
             this.add(fileTable);
             this.add(buttonBox);
-            this.add(Box.createRigidArea(new Dimension(0, 10)));
+            this.add(Box.createRigidArea(smallPadding));
         }
 
         /**
