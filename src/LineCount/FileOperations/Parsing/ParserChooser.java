@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * A container object for parsers, can read FileParsers from fileparsers.yml from the harddrive
  */
 public class ParserChooser {
-    private FileParser[] parsers;
+    private final FileParser[] parsers;
 
 
     /**

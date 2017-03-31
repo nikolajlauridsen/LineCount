@@ -16,26 +16,26 @@ import static LineCount.Utils.StringHelp.getPercentageString;
  */
 public class ReportFile {
 
-    private CodeFile[] files;
+    private final CodeFile[] files;
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private  String timeStamp;
+    private final String timeStamp;
 
-    private String title = "Saved Project Report";
-    private String overviewTitle = "Project Overview";
-    private String tallyTableTitle = "Code Tally";
-    private String fileTableTitle = "File Overview";
+    private final String title = "Saved Project Report";
+    private final String overviewTitle = "Project Overview";
+    private final String tallyTableTitle = "Code Tally";
+    private final String fileTableTitle = "File Overview";
     private String nFilesString = "Number of Files: ";
-    private String projectFolder;
-    private String[][] tallyRows;
-    private String[][] filesRows;
-    private String[] tallyTitles = {
+    private final String projectFolder;
+    private final String[][] tallyRows;
+    private final String[][] filesRows;
+    private final String[] tallyTitles = {
             "Code",
             "Comments",
             "Whitespace",
             "Total"
     };
-    private String[] filesColumns = {
+    private final String[] filesColumns = {
             "Filename",
             "Extension",
             "Path",

@@ -14,15 +14,15 @@ import java.nio.file.Paths;
  * A filepicker for selecting a number of files from a list of files
  */
 public class FilePicker extends JPanel implements ListSelectionListener {
-    private JList removedList;
-    private JLabel removedTitle = new JLabel("Files");
-    private JList addedList;
-    private JLabel addedTitle = new JLabel("Added files");
-    private DefaultListModel removedListModel;
-    private DefaultListModel addedListModel;
+    private final JList removedList;
+    private final JLabel removedTitle = new JLabel("Files");
+    private final JList addedList;
+    private final JLabel addedTitle = new JLabel("Added files");
+    private final DefaultListModel removedListModel;
+    private final DefaultListModel addedListModel;
 
-    private JButton addButton;
-    private JButton removeButton;
+    private final JButton addButton;
+    private final JButton removeButton;
 
 
     /**

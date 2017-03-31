@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
  */
 public class FileParser {
     private Pattern commentPattern;
-    private Pattern whitespacePattern = Pattern.compile("^\\s*?$");
-    private String typeExtension;
+    private final Pattern whitespacePattern = Pattern.compile("^\\s*?$");
+    private final String typeExtension;
 
     /**
      * Create a FileParser from a model

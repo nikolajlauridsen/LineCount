@@ -38,32 +38,27 @@ public class ProjectManager extends JFrame{
      * Panel containing all elements in the project manager
      */
     class ProjectPanel extends JPanel {
-        private JLabel titleLabel = new JLabel();
-        private JTextField folderField = new JTextField();
-        private JButton openChooser = new JButton();
-        private JFileChooser folderChooser = new JFileChooser();
+        private final JLabel titleLabel = new JLabel();
+        private final JTextField folderField = new JTextField();
+        private final JButton openChooser = new JButton();
+        private final JFileChooser folderChooser = new JFileChooser();
         private Path projectDir;
         private Path[] filePaths;
-        private FilePicker filePicker = new FilePicker();
-        private ParserChooser parsers;
+        private final FilePicker filePicker = new FilePicker();
+        private final ParserChooser parsers;
 
         /**
          * Expects fileparsers.yml to be available
          */
         ProjectPanel(){
             this.parsers = new ParserChooser("fileparsers.yml");
-            try{
-                Init();
-            } catch (Exception e){
-                e.printStackTrace();
-            }
+            Init();
         }
 
         /**
          * Initialize the GUI
-         * @throws Exception Mostly permission errors from reading paths
          */
-        private void Init() throws Exception{
+        private void Init() {
             // Set layout to GridBag and create constraints
             this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

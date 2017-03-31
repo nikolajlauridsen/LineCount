@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * An object representing a generic text file
  */
 public class TextFile {
-    private ArrayList<String> content = new ArrayList<>();
-    private Charset charset;
+    private final ArrayList<String> content = new ArrayList<>();
+    private final Charset charset;
 
     /**
      * Create a texfile object with a specific charset

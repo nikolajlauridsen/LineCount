@@ -15,12 +15,12 @@ import java.util.regex.Pattern;
  * a glob read from a gitignore file
  */
 public class FileFilter{
-    private ArrayList<Pattern> filter = new ArrayList<>();
+    private final ArrayList<Pattern> filter = new ArrayList<>();
 
     private final Character ast = '*';
     private final Character folderChar = '/';
     private final Character[] escaped = {'.', '-', '+', '[', ']', '(', ')', '\\'};
-    private Pattern ignorePattern = Pattern.compile("^[\\s]*[#]?");
+    private final Pattern ignorePattern = Pattern.compile("^[\\s]*[#]?");
 
     /**
      * No arguments.
@@ -52,7 +52,6 @@ public class FileFilter{
                 filter.add(Pattern.compile(pattern));
             } catch (CommentError e){
                 System.out.println("Comment found/empty line, skipping");
-                continue;
             }
 
         }

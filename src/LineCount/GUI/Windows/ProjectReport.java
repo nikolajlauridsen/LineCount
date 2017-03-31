@@ -22,7 +22,7 @@ import static LineCount.GUI.BoxHelp.*;
  */
 class ProjectReport extends JFrame{
 
-    private CodeFile[] files;
+    private final CodeFile[] files;
 
     /**
      * Constructor for the ProjectReport Frame (aka window)
@@ -55,7 +55,7 @@ class ProjectReport extends JFrame{
      * for the ProjectReport window
      */
     class ReportPanel extends JPanel{
-        private String[] saveOptions = {"Markdown", "Plaintext"};
+        private final String[] saveOptions = {"Markdown", "Plaintext"};
         private JComboBox formatPicker;
 
         /**

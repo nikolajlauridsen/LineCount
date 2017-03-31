@@ -11,10 +11,10 @@ import java.nio.file.Path;
  * Object representing a file containing source code, and statistics about said code
  */
 public class CodeFile extends TextFile{
-    private FileParser parser;
+    private final FileParser parser;
 
-    private Path absPath;
-    private Path root;
+    private final Path absPath;
+    private final Path root;
 
     private int commentCount = 0;
     private int lineCount;

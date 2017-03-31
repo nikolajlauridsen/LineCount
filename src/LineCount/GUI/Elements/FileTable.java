@@ -10,7 +10,7 @@ import java.awt.*;
  * A table displaying data from an array of CodeFiles
  */
 public class FileTable extends JPanel {
-    private Object[] columnNames = {
+    private final Object[] columnNames = {
             "Filename",
             "Extension",
             "Path",
@@ -20,8 +20,8 @@ public class FileTable extends JPanel {
             "Total"
     };
 
-    private CodeFile[] files;
-    private int columns;
+    private final CodeFile[] files;
+    private final int columns;
 
     private int total_code = 0;
     private int total_comments = 0;
@@ -37,19 +37,13 @@ public class FileTable extends JPanel {
         this.files = files;
         this.columns = columnNames.length;
 
-        // Run the initializer
-        try {
-            Init();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        Init();
     }
 
     /**
      * Initialize the GUI
-     * @throws Exception if CodeFile[] is empty or a row doesn't match the length of column names
      */
-    private void Init() throws Exception{
+    private void Init() {
 
         Object[][] data = new Object[this.files.length+1][];
 
