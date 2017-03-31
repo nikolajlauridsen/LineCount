@@ -124,13 +124,17 @@ public class ReportFile {
         mdReport.addLine(MdHelp.h2(overviewTitle));
         mdReport.addLine(this.timeStamp);
         mdReport.addLine("\n");
+
         mdReport.addLine(this.projectFolder);
         mdReport.addLine("\n");
+
         mdReport.addLine(this.nFilesString);
         mdReport.addLine("\n");
+
         mdReport.addLine(MdHelp.h3(this.tallyTableTitle));
         for(String line: MdHelp.generateTable(this.tallyRows, this.tallyTitles)) mdReport.addLine(line);
         mdReport.addLine("\n");
+
         mdReport.addLine(MdHelp.h2(this.fileTableTitle));
         for(String line: MdHelp.generateTable(this.filesRows, this.filesColumns)) mdReport.addLine(line);
 

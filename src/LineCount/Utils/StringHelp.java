@@ -65,9 +65,9 @@ public interface StringHelp {
 
 
     /**
-     * Generate a string table, displaying various
-     * @param rows Two dimensional string array for rows
-     * @param columns String array of titles, is expected to be the same length as the rows
+     * Generate a string table, displaying data in a neat way as a string.
+     * @param rows Two dimensional string array for rows IE. String[rows][columns]
+     * @param columns String array of titles, is expected to be the same length as columns in rows
      * @return String Array containing the table
      */
     static String[] generateTable(String[][] rows, String[] columns){
