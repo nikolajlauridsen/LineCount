@@ -32,7 +32,7 @@ public class FileTable extends JPanel {
      * Create a panel containing a table
      * @param files CodeFiles to generate table for
      */
-    public FileTable(CodeFile[] files){
+    public FileTable(CodeFile[] files) throws ArrayIndexOutOfBoundsException{
         // Set values
         this.files = files;
         this.columns = columnNames.length;

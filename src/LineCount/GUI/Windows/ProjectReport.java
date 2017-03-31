@@ -3,6 +3,7 @@ package LineCount.GUI.Windows;
 import LineCount.FileOperations.Files.CodeFile;
 import LineCount.FileOperations.Files.ReportFile;
 import LineCount.FileOperations.Parsing.ParserChooser;
+import LineCount.GUI.Elements.ErrorPanel;
 import LineCount.GUI.Elements.FileTable;
 import LineCount.Utils.Config;
 
@@ -43,7 +44,11 @@ class ProjectReport extends JFrame{
         // hidden until everything is done processing
         this.files = getCodeFiles(files, root, parsers);
 
-        this.add(new ReportPanel());
+        try {
+            this.add(new ReportPanel());
+        } catch (ArrayIndexOutOfBoundsException e){
+            this.add(new ErrorPanel("Please pick one or more files."));
+        }
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(Config.IMAGE_NAME)));
         // Hide the frame till the very end
         this.setVisible(true);
@@ -62,20 +67,7 @@ class ProjectReport extends JFrame{
          * Calls the initializer method in a try block
          * since errors might occur
          */
-        ReportPanel(){
-            try {
-                init();
-            } catch (Exception e){
-                // TODO: Close the window if an error occurs
-                e.printStackTrace();
-            }
-        }
-
-        /**
-         * Initializes the GUI, creating and positioning the GUI objects
-         * @throws Exception If you try to generate a report from an empty File Array
-         */
-        private void init() throws Exception{
+        ReportPanel() throws ArrayIndexOutOfBoundsException{
             this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
             // --------- Create the GUI objects ---------
@@ -132,6 +124,7 @@ class ProjectReport extends JFrame{
             this.add(fileTable);
             this.add(buttonBox);
             this.add(Box.createRigidArea(smallPadding));
+
         }
 
         /**
