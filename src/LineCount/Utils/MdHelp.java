@@ -43,12 +43,12 @@ public interface MdHelp {
      * @return Markdown list as a string
      */
     static String generateList(String[] items){
-        String stringList = "";
+        StringBuilder stringList = new StringBuilder();
         for(String item: items){
-            stringList += "* " + item + "\n";
+            stringList.append("* ").append(item).append("\n");
         }
 
-        return stringList;
+        return stringList.toString();
     }
 
     /**
@@ -73,25 +73,25 @@ public interface MdHelp {
         }
 
         ArrayList<String> table = new ArrayList<>();
-        String header, rowString;
+        StringBuilder headerBuilder, rowBuilder;
 
         // Create header
-        header = "|";
+        headerBuilder = new StringBuilder("|");
         for (int i = 0; i < columns.length; i++){
-            header += addPadding(columns[i], columnWidths[i]+2) + "|";
+            headerBuilder.append(addPadding(columns[i], columnWidths[i] + 2)).append("|");
         }
-        table.add(header);
+        table.add(headerBuilder.toString());
 
         // Create header devider
-        table.add(StringHelp.getDevider(columnWidths));
+        table.add(StringHelp.getDivider(columnWidths));
 
         // Create rows
         for (String[] row : rows){
-            rowString = "|";
+            rowBuilder = new StringBuilder("|");
             for (int i = 0; i < row.length; i++){
-                rowString += addPadding(row[i], columnWidths[i]+2) + "|";
+                rowBuilder.append(addPadding(row[i], columnWidths[i] + 2)).append("|");
             }
-            table.add(rowString);
+            table.add(rowBuilder.toString());
         }
 
         return table.toArray(new String[0]);

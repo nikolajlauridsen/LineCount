@@ -38,17 +38,17 @@ public interface StringHelp {
     /**
      * Get a row divider for a string table
      * @param widths Arrary of desired widths, each integer in the array should correspond to a column width
-     * @return
+     * @return A divider for dividing rows in a table
      */
-    static String getDevider(int[] widths){
-        String devider = "|";
-        for(int i = 0; i < widths.length; i++){
-            for(int n = 0; n < widths[i]+2; n++){ // Note that it loops two additional times, expecting
-                devider += "-";                   // the cells to be padded with one char on each time
+    static String getDivider(int[] widths){
+        StringBuilder divider = new StringBuilder("|");
+        for (int width : widths) {
+            for (int n = 0; n < width + 2; n++) { // Note that it loops two additional times, expecting
+                divider.append("-");                   // the cells to be padded with one char on each time
             }
-            devider += "|";
+            divider.append("|");
         }
-        return devider;
+        return divider.toString();
     }
 
 
@@ -86,27 +86,29 @@ public interface StringHelp {
         }
 
         ArrayList<String> table = new ArrayList<>();
-        String header, rowString;
+        StringBuilder headerBuilder, rowBuilder;
 
         // Create header
-        header = "|";
+        headerBuilder = new StringBuilder("|");
         for (int i = 0; i < columns.length; i++){
-            header += addPadding(columns[i], columnWidths[i]+2) + "|";
+            headerBuilder.append(addPadding(columns[i], columnWidths[i] + 2)).append("|");
         }
-        int tableWidth = header.length();
-        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);
-        table.add(header);
+        int tableWidth = headerBuilder.length();
+        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);  // Add top border
+        table.add(headerBuilder.toString()); // Add title row
 
         // Create rows
         for (String[] row : rows){
-            rowString = "|";
+            table.add(getDivider(columnWidths));  // Add a divider, splitting the rows
+
+            // Build the row.
+            rowBuilder = new StringBuilder("|");
             for (int i = 0; i < row.length; i++){
-                rowString += addPadding(row[i], columnWidths[i]+2) + "|";
+                rowBuilder.append(addPadding(row[i], columnWidths[i] + 2)).append("|");
             }
-            table.add(getDevider(columnWidths));
-            table.add(rowString);
+            table.add(rowBuilder.toString());  // Add it
         }
-        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);
+        table.add(cornerChar + repeat("-", tableWidth-2) + cornerChar);  // Add bottom border
 
         return table.toArray(new String[0]);
     }
