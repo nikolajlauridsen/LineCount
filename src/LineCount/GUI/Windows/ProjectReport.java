@@ -63,7 +63,9 @@ class ProjectReport extends JFrame{
          * since errors might occur
          */
         ReportPanel(){
-            try {init();} catch (Exception e){
+            try {
+                init();
+            } catch (Exception e){
                 // TODO: Close the window if an error occurs
                 e.printStackTrace();
             }

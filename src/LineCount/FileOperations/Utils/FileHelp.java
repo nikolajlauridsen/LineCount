@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 public interface FileHelp {
 
+
     /**
      * Read multiple files off the hard drive in one go.
      * @param pathArray String[] array of paths to files as strings

@@ -24,6 +24,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
     private JButton addButton;
     private JButton removeButton;
 
+
     /**
      * Creates an empty FilePicker.
      */
@@ -101,6 +102,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
          this.add(addedScrollPane, c);
     }
 
+
     /**
      * Add a file to selectable files
      * @param path to file
@@ -108,6 +110,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
     public void addPath(String path){
         removedListModel.addElement(path);
     }
+
 
     /**
      * Clear out both the selectable files list and the selected files list,
@@ -119,6 +122,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         addedListModel.clear();
         removedListModel.clear();
     }
+
 
     /**
      * Get all paths the user has selected, uses a common root, to resolve the
@@ -161,6 +165,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         }
     }
 
+
     /**
      * Listens to the + button (the add button)
      */
@@ -191,6 +196,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
 
         }
     }
+
 
     /**
      * Listens to the - button (the remove button)

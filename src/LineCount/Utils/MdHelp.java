@@ -61,8 +61,8 @@ public interface MdHelp {
      */
     static String[] generateTable(String[][] rows, String[] columns){
         int[] columnWidths = new int[columns.length];
-        // Find the widest row in each column and assign
-        // it's width to that
+
+        // Find the widest row in each column and assign it's width to that
         for(int i = 0; i < columns.length; i++){
             columnWidths[i] = columns[i].length();
             for(String[] row: rows){

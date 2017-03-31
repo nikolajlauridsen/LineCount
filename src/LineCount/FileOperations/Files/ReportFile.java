@@ -11,7 +11,8 @@ import java.util.Date;
 import static LineCount.Utils.StringHelp.getPercentageString;
 
 /**
- * A project report file, can be save as either .txt file or .md
+ * A project report file, for saving ProjectReport output to hard drive
+ * can be save as either .txt file or .md
  */
 public class ReportFile {
 
@@ -47,10 +48,10 @@ public class ReportFile {
 
     /**
      * A report object representing a report to be saved to the harddrive
-     * @param _files an array of codefiles to generate the report on.
+     * @param files an array of codefiles to generate the report on.
      */
-    public ReportFile(CodeFile[] _files){
-        this.files = _files;
+    public ReportFile(CodeFile[] files){
+        this.files = files;
 
         // Calculate totals for the entire project
         int total_code = 0;
@@ -66,8 +67,8 @@ public class ReportFile {
 
         // Generate strings displaying project folder and amount of files
         this.timeStamp = "Report saved: " + dateFormat.format(new Date().getTime());
-        this.projectFolder = "Project folder: " + files[0].getRootDir();
-        nFilesString += files.length;
+        this.projectFolder = "Project folder: " + this.files[0].getRootDir();
+        nFilesString += this.files.length;
 
         // Create row for single rowed project overview table
         this.tallyRows = new String[1][];
@@ -112,7 +113,7 @@ public class ReportFile {
     /**
      * Save the report in the markdown format
      * @param path desired path for the resulting file, should have a .md extension
-     * @throws IOException
+     * @throws IOException if access to hard drive is denied
      */
     public void saveMarkDownReport(Path path) throws IOException {
         // Create a generic TextFile object
@@ -140,7 +141,7 @@ public class ReportFile {
     /**
      * Save the report as a plaintext file
      * @param path desire path for the resulting file, should have a .txt exension
-     * @throws IOException
+     * @throws IOException if access to hard drive is denied
      */
     public void saveTxtReport(Path path) throws IOException{
         // Create a generic text file

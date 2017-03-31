@@ -3,6 +3,9 @@ package LineCount.FileOperations.Parsing;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * FileParser for parsing code files, able to match lines as either comment or whitespace.
+ */
 public class FileParser {
     private Pattern commentPattern;
     private Pattern whitespacePattern = Pattern.compile("^\\s*?$");
@@ -38,10 +41,7 @@ public class FileParser {
 
     public Boolean testWhitespace(String line){
         Matcher matcher = this.whitespacePattern.matcher(line);
-        if(matcher.matches()){
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 
     /**

@@ -136,7 +136,7 @@ public class CodeFile extends TextFile{
     }
 
     /**
-     * @return int acmount of comments
+     * @return int amount of comments
      */
     public int getCommentCount(){
         return this.commentCount;

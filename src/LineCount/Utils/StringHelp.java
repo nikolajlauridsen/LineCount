@@ -3,6 +3,8 @@ package LineCount.Utils;
 import java.util.ArrayList;
 
 public interface StringHelp {
+
+
     /**
      * repeat a string
      * function is taken from http://stackoverflow.com/questions/1235179/simple-way-to-repeat-a-string-in-java
@@ -15,6 +17,7 @@ public interface StringHelp {
         // Every char is initiated as \0 (all bits flipped to zero)
         return new String(new char[count]).replace("\0", str);
     }
+
 
     /**
      * Padd a string with whitespace to a desired length
@@ -31,21 +34,42 @@ public interface StringHelp {
         return paddedString;
     }
 
+
+    /**
+     * Get a row divider for a string table
+     * @param widths Arrary of desired widths, each integer in the array should correspond to a column width
+     * @return
+     */
     static String getDevider(int[] widths){
         String devider = "|";
         for(int i = 0; i < widths.length; i++){
-            for(int n = 0; n < widths[i]+2; n++){
-                devider += "-";
+            for(int n = 0; n < widths[i]+2; n++){ // Note that it loops two additional times, expecting
+                devider += "-";                   // the cells to be padded with one char on each time
             }
             devider += "|";
         }
         return devider;
     }
 
+
+    /**
+     * Return a string showing the percentage difference between two numbers displaying the part
+     * and percentages: IE. 50, 200 would return "50 (25.0%)"
+     * @param part to show
+     * @param total the total
+     * @return percentage string in the following format "50 (25.0%)"
+     */
     static String getPercentageString(int part, int total){
         return String.format("%d (%.1f%%)", part, ((double)part/(double)total)*100);
     }
 
+
+    /**
+     * Generate a string table, displaying various
+     * @param rows Two dimensional string array for rows
+     * @param columns String array of titles, is expected to be the same length as the rows
+     * @return String Array containing the table
+     */
     static String[] generateTable(String[][] rows, String[] columns){
         Character cornerChar = '+';
 

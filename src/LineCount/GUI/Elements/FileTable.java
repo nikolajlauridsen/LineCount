@@ -19,6 +19,7 @@ public class FileTable extends JPanel {
             "Whitespace",
             "Total"
     };
+
     private CodeFile[] files;
     private int columns;
 
@@ -32,9 +33,14 @@ public class FileTable extends JPanel {
      * @param files CodeFiles to generate table for
      */
     public FileTable(CodeFile[] files){
+        // Set values
         this.files = files;
         this.columns = columnNames.length;
-        try { Init(); } catch (Exception e){
+
+        // Run the initializer
+        try {
+            Init();
+        } catch (Exception e){
             e.printStackTrace();
         }
     }

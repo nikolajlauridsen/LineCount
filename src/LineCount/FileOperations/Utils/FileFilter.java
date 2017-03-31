@@ -89,7 +89,7 @@ public class FileFilter{
         }
 
         StringBuilder builder = new StringBuilder();
-        // Add the beginning
+        // Start the expression
         // note that any root directory is ignored
         builder.append("^[\\s\\S]*");
 
@@ -120,6 +120,7 @@ public class FileFilter{
             }
 
         }
+        // Close the expression
         builder.append("$");
 
         return builder.toString();
