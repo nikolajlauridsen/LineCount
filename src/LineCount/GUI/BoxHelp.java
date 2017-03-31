@@ -19,6 +19,14 @@ public interface BoxHelp {
         return box;
     }
 
+    static Component centerJustify(Component comp){
+        Box box = Box.createHorizontalBox();
+        box.add(Box.createHorizontalGlue());
+        box.add(comp);
+        box.add(Box.createHorizontalGlue());
+        return box;
+    }
+
     /**
      * Pad a gui component horizontally, applies padding to both sides
      * @param comp Component to be padded

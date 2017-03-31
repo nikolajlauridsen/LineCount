@@ -47,7 +47,7 @@ class ProjectReport extends JFrame{
         try {
             this.add(new ReportPanel());
         } catch (ArrayIndexOutOfBoundsException e){
-            this.add(new ErrorPanel("Please pick one or more files."));
+            this.add(new ErrorPanel("Please add one or more files."));
         }
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(Config.IMAGE_NAME)));
         // Hide the frame till the very end

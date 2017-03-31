@@ -112,4 +112,22 @@ public interface StringHelp {
 
         return table.toArray(new String[0]);
     }
+
+    /**
+     * Get an exceptions StackTrack as a string
+     * @param throwable Exception to convert
+     * @return String of StackTrace
+     */
+    static String errorToString(Throwable throwable){
+
+        StringBuilder trace = new StringBuilder(throwable.toString() + "\n");
+
+        for (StackTraceElement element: throwable.getStackTrace()){
+            trace.append("\tat ");
+            trace.append(element.toString());
+            trace.append("\n");
+        }
+
+        return trace.toString();
+    }
 }
