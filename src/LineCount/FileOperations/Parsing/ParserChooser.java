@@ -1,10 +1,9 @@
 package LineCount.FileOperations.Parsing;
 
+import LineCount.GUI.Windows.ErrorFrame;
 import com.esotericsoftware.yamlbeans.YamlReader;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -60,8 +59,7 @@ public class ParserChooser {
                     System.out.println(model.commentRegex);
                     parsers.add(new FileParser(model));
                 } catch (YamlReader.YamlReaderException e){
-                    // TODO: Add dialog windows displaying error
-                    System.out.println("Invalid yaml file");
+                    new ErrorFrame(e);
                 }
             }
 
