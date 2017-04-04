@@ -5,6 +5,7 @@ package LineCount.Utils;
  */
 public interface Config {
     String IMAGE_NAME = "list.png";
+    String FILEPARSER_PATH = "fileparsers.yml";
     String AUTHOR_EMAIL = "nikolajlauridsenn@gmail.com";
     String PROJECT_HUB = "https://github.com/nikolajlauridsen/LineCount";
 }
