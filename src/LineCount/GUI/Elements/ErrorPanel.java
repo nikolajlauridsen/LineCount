@@ -1,5 +1,7 @@
 package LineCount.GUI.Elements;
 
+import LineCount.Utils.Config;
+
 import javax.swing.*;
 
 import java.awt.*;
@@ -30,17 +32,24 @@ public class ErrorPanel extends JPanel {
     public ErrorPanel(Exception exception){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-
         JTextArea textArea = new JTextArea();
         textArea.setText(errorToString(exception));
+        textArea.setLineWrap(true);
         textArea.setEditable(false);
 
         JScrollPane scrollView = new JScrollPane(textArea);
-        Dimension areaSize = new Dimension(700, 250);
-        scrollView.setPreferredSize(areaSize);
-        scrollView.setMaximumSize(areaSize);
 
-        this.add(new JLabel("An unknown error occurred"));
-        this.add(scrollView);
+        Dimension padding = new Dimension(0, 10);
+        this.add(Box.createRigidArea(padding));
+        this.add(centerJustify(new JLabel("An unknown error occurred")));
+        this.add(Box.createRigidArea(padding));
+        this.add(centerJustify(scrollView));
+        this.add(Box.createRigidArea(padding));
+
+        String authorContact = "Please send the above error message to: " + Config.AUTHOR_EMAIL;
+        String gitContact = "Or post an issue to: " + Config.PROJECT_HUB;
+        this.add(centerJustify(new JLabel(authorContact)));
+        this.add(centerJustify(new JLabel(gitContact)));
+        this.add(Box.createRigidArea(padding));
     }
 }
