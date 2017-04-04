@@ -65,12 +65,10 @@ public class ProjectManager extends JFrame{
             try{
                 this.parsers = new ParserChooser("fileparsers.yml");
             } catch (FileNotFoundException e){
-                JFrame errorFrame = new JFrame("Fileparsers not found error");
-                errorFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-                errorFrame.setSize(500, 200);
-                String errorString = "fileparsers.yml not found, please ensure that it's available";
-                errorFrame.add(new ErrorPanel(errorString));
-                errorFrame.setVisible(true);
+                String errorString = "fileparsers.yml not found, please ensure that it's available\n" +
+                        "Without it, LineCount cannot read comments and all files will have 0 comments\n" +
+                        "If you've lost the file and need to acquire a new one visit:\n" + Config.PROJECT_HUB;
+                new ErrorFrame(errorString);
             }
         }
 
