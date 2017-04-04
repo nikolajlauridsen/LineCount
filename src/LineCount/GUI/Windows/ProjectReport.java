@@ -19,7 +19,7 @@ import static LineCount.FileOperations.Utils.FileHelp.getCodeFiles;
 import static LineCount.GUI.BoxHelp.*;
 
 /**
- * The Project report frame, holds a jpanel displaying statistics about the code project
+ * The Project report frame, holds a JPanel displaying statistics about the code project
  */
 class ProjectReport extends JFrame{
 
@@ -141,7 +141,8 @@ class ProjectReport extends JFrame{
                     }
 
                 } catch (IOException exc){
-                    exc.printStackTrace();
+                    // Display the error to the user
+                    new ErrorFrame(exc);
                 }
             }
         }
