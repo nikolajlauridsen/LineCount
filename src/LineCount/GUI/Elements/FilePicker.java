@@ -143,7 +143,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
     /**
      * Required method for ListSelectionListener, determines what to do when a change
      * occurs in the list
-     * @param e
+     * @param e events create ListSelectionEvent objects
      */
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {

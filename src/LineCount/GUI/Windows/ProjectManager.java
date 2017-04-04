@@ -2,6 +2,7 @@ package LineCount.GUI.Windows;
 
 import LineCount.FileOperations.Parsing.ParserChooser;
 import LineCount.FileOperations.Utils.FileFilter;
+import LineCount.GUI.Elements.ErrorPanel;
 import LineCount.GUI.Elements.FilePicker;
 import LineCount.Utils.Config;
 
@@ -9,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -26,12 +28,18 @@ public class ProjectManager extends JFrame{
      */
     public ProjectManager(){
         this.setTitle("Project Manager");
-        this.add(new ProjectPanel());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(900, 465);
         this.setResizable(false);
-        this.setVisible(true);
         this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource(Config.IMAGE_NAME)));
+
+        try{
+            this.add(new ProjectPanel());
+        } catch (Exception e){
+            this.add(new ErrorPanel(e));
+        }
+
+        this.setVisible(true);
     }
 
     /**
@@ -45,14 +53,25 @@ public class ProjectManager extends JFrame{
         private Path projectDir;
         private Path[] filePaths;
         private final FilePicker filePicker = new FilePicker();
-        private final ParserChooser parsers;
+        private ParserChooser parsers;
 
         /**
-         * Expects fileparsers.yml to be available
+         * ProjectPanel constructor
+         * @throws Exception if something goes wrong during initiation of the GUI
          */
-        ProjectPanel(){
-            this.parsers = new ParserChooser("fileparsers.yml");
+        ProjectPanel() throws Exception{
             Init();
+
+            try{
+                this.parsers = new ParserChooser("fileparsers.yml");
+            } catch (FileNotFoundException e){
+                JFrame errorFrame = new JFrame("Fileparsers not found error");
+                errorFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                errorFrame.setSize(500, 200);
+                String errorString = "fileparsers.yml not found, please ensure that it's available";
+                errorFrame.add(new ErrorPanel(errorString));
+                errorFrame.setVisible(true);
+            }
         }
 
         /**

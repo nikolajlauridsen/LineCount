@@ -2,6 +2,7 @@ package LineCount.FileOperations.Parsing;
 
 import com.esotericsoftware.yamlbeans.YamlReader;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class ParserChooser {
      * Takes path to the config file as a string
      * @param configPath String path to file
      */
-    public ParserChooser(String configPath){
+    public ParserChooser(String configPath) throws Exception{
         this.parsers = readParsers(configPath);
 
     }
@@ -43,10 +44,9 @@ public class ParserChooser {
      * @param path String path to the config file
      * @return Array of FileParsers defined in the yaml file
      */
-    private FileParser[] readParsers(String path) {
+    private FileParser[] readParsers(String path) throws Exception {
         // Create temporary arraylist for storing the FileParsers
         ArrayList<FileParser> parsers = new ArrayList<>();
-        try {
             YamlReader reader = new YamlReader(new FileReader(path));
             while (true) {
                 try {
@@ -64,9 +64,6 @@ public class ParserChooser {
                     System.out.println("Invalid yaml file");
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         return parsers.toArray(new FileParser[0]);
     }
