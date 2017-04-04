@@ -50,7 +50,7 @@ public class FileFilter{
                 System.out.println("Regex generated: " + pattern);
                 // Compile & add to filter list
                 filter.add(Pattern.compile(pattern));
-            } catch (CommentError e){
+            } catch (InvalidGlobError e){
                 System.out.println("Comment found/empty line, skipping");
             }
 
@@ -80,11 +80,11 @@ public class FileFilter{
      * @param glob String glob to be parsed
      * @return String regex string
      */
-    private String parseGlob(String glob) throws CommentError{
+    private String parseGlob(String glob) throws InvalidGlobError {
         // If the glob is either empty or a comment trow a commentError
         Matcher whitespace = this.ignorePattern.matcher(glob);
         if (whitespace.matches()){
-            throw new CommentError("Glob is either a comment or a empty line");
+            throw new InvalidGlobError("Glob is either a comment or a empty line");
         }
 
         StringBuilder builder = new StringBuilder();
@@ -128,9 +128,9 @@ public class FileFilter{
     /**
      * Add a glob to the filter list
      * @param glob String glob to be added (EX: 'out/*')
-     * @throws CommentError if the globs is a comment or just whitespace
+     * @throws InvalidGlobError if the globs is a comment or just whitespace
      */
-    public void addGlob(String glob) throws CommentError{
+    public void addGlob(String glob) throws InvalidGlobError {
         this.filter.add(Pattern.compile(parseGlob(glob)));
     }
 
