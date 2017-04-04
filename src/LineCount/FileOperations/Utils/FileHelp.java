@@ -15,7 +15,9 @@ public interface FileHelp {
     /**
      * Read multiple files off the hard drive in one go.
      * @param pathArray String[] array of paths to files as strings
-     * @return CodeFile[] array of codefile objects containing the file contents, statistics and more
+     * @param root Path to the root of the project
+     * @param parsers ParserChooser for handing to the CodeFiles
+     * @return CodeFile array with a CodeFile object for each of the paths in the pathArray
      */
     static CodeFile[] getCodeFiles(Path[] pathArray, Path root, ParserChooser parsers){
         CodeFile[] fileArray = new CodeFile[pathArray.length];

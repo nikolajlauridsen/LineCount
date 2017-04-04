@@ -117,8 +117,10 @@ public class FilePicker extends JPanel implements ListSelectionListener {
      * effectively resetting the FilePicker
      */
     public void emptyLists(){
+        // Clear list selections
         addedList.setSelectedIndex(-1);
         removedList.setSelectedIndex(-1);
+        // Clear the lists themselves
         addedListModel.clear();
         removedListModel.clear();
     }

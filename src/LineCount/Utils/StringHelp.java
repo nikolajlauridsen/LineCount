@@ -119,10 +119,12 @@ public interface StringHelp {
      * @return String of StackTrace
      */
     static String errorToString(Throwable throwable){
-
+        // Create a new string builder and add the error type
         StringBuilder trace = new StringBuilder(throwable.toString() + "\n");
 
+        // Go through all the trace elements and append them to the string builder
         for (StackTraceElement element: throwable.getStackTrace()){
+            // Add a tab + at as well to mimic printStackTrace
             trace.append("\tat ");
             trace.append(element.toString());
             trace.append("\n");

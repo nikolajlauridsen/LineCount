@@ -17,6 +17,7 @@ public class ErrorPanel extends JPanel {
 
     /**
      * Display a custom message and no StackTrace().
+     * Is compatible with the newline character \n
      * @param message Error message to display to the user.
      */
     public ErrorPanel(String message){

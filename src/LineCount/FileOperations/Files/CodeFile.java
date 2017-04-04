@@ -25,6 +25,7 @@ public class CodeFile extends TextFile{
      * Constructor which reads the content and assigns variables
      * @param absPath absolute path to the file
      * @param root path to codeproject root folder
+     * @param parsers ParserChooser containing parsers
      */
     public CodeFile(Path absPath, Path root, ParserChooser parsers){
         // Path info
@@ -166,7 +167,6 @@ public class CodeFile extends TextFile{
 
 
     /**
-     *
      * @return int # of lines of code
      */
     public int getCodeCount(){

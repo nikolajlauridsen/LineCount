@@ -16,6 +16,7 @@ public class ParserChooser {
     /**
      * Takes path to the config file as a string
      * @param configPath String path to file
+     * @throws Exception throws exception if parsers file can't be located/read
      */
     public ParserChooser(String configPath) throws Exception{
         this.parsers = readParsers(configPath);

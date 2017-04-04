@@ -19,6 +19,11 @@ public interface BoxHelp {
         return box;
     }
 
+    /**
+     * Align a component to the center of the parent
+     * @param comp component to allow
+     * @return Box containign horizontal glue and the component
+     */
     static Component centerJustify(Component comp){
         Box box = Box.createHorizontalBox();
         box.add(Box.createHorizontalGlue());
