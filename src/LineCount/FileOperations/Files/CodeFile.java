@@ -3,6 +3,7 @@ package LineCount.FileOperations.Files;
 
 import LineCount.FileOperations.Parsing.FileParser;
 import LineCount.FileOperations.Parsing.ParserChooser;
+import LineCount.GUI.Windows.ErrorFrame;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -35,7 +36,7 @@ public class CodeFile extends TextFile{
         try{
             load(absPath);
         } catch (IOException e){
-            e.printStackTrace();
+            new ErrorFrame(e);
         }
 
         // Fill out commentCount, lineCount and whiteSpace
@@ -61,6 +62,7 @@ public class CodeFile extends TextFile{
         }
     }
 
+
     /**
      * Read the extension of a filepath
      * @param path String absPath to file
@@ -78,6 +80,7 @@ public class CodeFile extends TextFile{
         }
     }
 
+
     /**
      * Read the filename off a absPath
      * @param path String absPath to file
@@ -93,6 +96,7 @@ public class CodeFile extends TextFile{
         }
     }
 
+
     /**
      * Get the absolute path to the file
      * @return String absPath to file
@@ -100,6 +104,7 @@ public class CodeFile extends TextFile{
     public String getAbsPath(){
         return this.absPath.toString();
     }
+
 
     /**
      * Get the relative path of the file from the root directiory
@@ -109,9 +114,15 @@ public class CodeFile extends TextFile{
         return root.relativize(this.absPath).toString();
     }
 
+
+    /**
+     * Get the root directory of the project the file belongs to
+     * @return Path to root directory as a string
+     */
     public String getRootDir(){
         return this.root.toString();
     }
+
 
     /**
      * @return String name of file including extension
@@ -119,6 +130,7 @@ public class CodeFile extends TextFile{
     public String getFileName(){
         return readFilename(this.absPath.toString());
     }
+
 
     /**
      * Return the extension of the file as a string (without the .)
@@ -128,12 +140,14 @@ public class CodeFile extends TextFile{
         return readExtension(this.absPath.toString());
     }
 
+
     /**
      * @return int amount of lines
      */
     public int getLineCount(){
         return this.lineCount;
     }
+
 
     /**
      * @return int amount of comments
@@ -142,12 +156,14 @@ public class CodeFile extends TextFile{
         return this.commentCount;
     }
 
+
     /**
      * @return int amount of whitespace
      */
     public int getWhiteSpace(){
         return this.whiteSpace;
     }
+
 
     /**
      *
