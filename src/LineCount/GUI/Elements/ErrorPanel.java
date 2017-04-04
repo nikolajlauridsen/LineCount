@@ -5,6 +5,7 @@ import LineCount.Utils.Config;
 import javax.swing.*;
 
 import java.awt.*;
+import java.util.StringTokenizer;
 
 import static LineCount.GUI.BoxHelp.centerJustify;
 import static LineCount.Utils.StringHelp.errorToString;
@@ -21,7 +22,21 @@ public class ErrorPanel extends JPanel {
     public ErrorPanel(String message){
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(Box.createVerticalGlue());
-        this.add(centerJustify(new JLabel(message)));
+
+        if(message.contains("\n")){
+            StringTokenizer lineSpitter = new StringTokenizer(message, "\n", false);
+
+            while (lineSpitter.hasMoreTokens()){
+                JLabel label = new JLabel(lineSpitter.nextToken());
+                label.setAlignmentX(CENTER_ALIGNMENT);
+                this.add(label);
+            }
+        } else {
+            JLabel label = new JLabel(message);
+            label.setAlignmentX(CENTER_ALIGNMENT);
+            this.add(centerJustify(label));
+        }
+
         this.add(Box.createVerticalGlue());
     }
 
