@@ -132,6 +132,7 @@ class ProjectReport extends JFrame{
          */
         class saveListener implements ActionListener{
             public void actionPerformed(ActionEvent e){
+                // TODO: Only create ReportFile once.
                 ReportFile reportFile = new ReportFile(files);
                 try {
                     if (formatPicker.getSelectedIndex() == 0){

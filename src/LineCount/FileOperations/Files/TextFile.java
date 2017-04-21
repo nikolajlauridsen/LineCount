@@ -51,6 +51,7 @@ public class TextFile {
      * @throws IOException if desired save location is invalid
      */
     public void save(Path path) throws IOException{
+        // Use a try with resource to ensure the file isn't left hanging
         try(BufferedWriter writer = Files.newBufferedWriter(path, this.charset)){
             for (String line: this.getContent()){
                 writer.write(line+"\n");

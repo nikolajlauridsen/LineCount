@@ -33,7 +33,7 @@ public class CodeFile extends TextFile{
         this.root = root;
         this.parser = parsers.getParser(this.getExtension());
 
-        // content and statistics
+        // Read content
         try{
             load(absPath);
         } catch (IOException e){

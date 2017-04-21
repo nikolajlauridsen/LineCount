@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,7 +20,7 @@ public class FileFilter{
 
     private final Character ast = '*';
     private final Character folderChar = '/';
-    private final Character[] escaped = {'.', '-', '+', '[', ']', '(', ')', '\\'};
+    private final List<Character> escaped = Arrays.asList('.', '-', '+', '[', ']', '(', ')', '\\');
     private final Pattern ignorePattern = Pattern.compile("^[\\s]*[#]?");
 
     /**
@@ -102,26 +103,23 @@ public class FileFilter{
                 // Skip it if it's the first character
                 // since the regex already starts with "ignore all"
                 if(i != 0) builder.append("[\\s\\S]*");
-            }
-            else if (c == this.folderChar){
+            } else if (c == this.folderChar){
                 // If it's a folder delimiter char add a backslash
                 // Since backslash is used as escape character in both regex and java
                 // four backslashes is needed two for java and two for regex
                 builder.append("\\\\");
-            }
-            else if (Arrays.asList(this.escaped).contains(c)){
+            } else if (this.escaped.contains(c)){
                 // If the char is a special char in regex it needs to be escaped with a \
                 builder.append("\\");
                 builder.append(c);
-            }
-            else{
+            } else{
                 builder.append(c);
             }
 
         }
+
         // Close the expression
         builder.append("$");
-
         return builder.toString();
     }
 
