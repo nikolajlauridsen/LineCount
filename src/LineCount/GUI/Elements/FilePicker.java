@@ -176,7 +176,9 @@ public class FilePicker extends JPanel implements ListSelectionListener {
         public void actionPerformed(ActionEvent e){
             int selectedIndex = removedList.getSelectedIndex();
 
+            // Add the element to addedList, and remove it from the removed list
             addedListModel.addElement(removedList.getSelectedValue());
+            // If nothing is selected on the added list select the first element
             if (addedList.getSelectedIndex() < 0){
                 addedList.setSelectedIndex(0);
             }
@@ -208,6 +210,7 @@ public class FilePicker extends JPanel implements ListSelectionListener {
             int index = addedList.getSelectedIndex();
 
             removedListModel.addElement(addedList.getSelectedValue());
+            // If nothing is chosen in the removed list, set selection to the first element
             if (removedList.getSelectedIndex() < 0){
                 removedList.setSelectedIndex(0);
             }
